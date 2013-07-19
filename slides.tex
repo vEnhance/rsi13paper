@@ -8,7 +8,7 @@
 \usepackage{colortbl}
 \title[Maps in $\mathcal B_{\text{BS}}$]{Diagrammatic Computation of Morphisms Between Bott-Samelson Bimodules via Libedinsky's Light Leaves}
 \subtitle[RSI 2013]{Research Science Institute 2013}
-\author{Evan Chen}
+\author[Evan Chen]{Evan Chen \\ Under the Direction of \\ Francisco Unda \\ Massachusetts Institute of Technology}
 
 \usetheme{UNLTheme}
 \setbeamercovered{dynamic}
@@ -142,34 +142,26 @@
 	\maketitle
 \end{frame}
 
-\begin{frame}
-	\frametitle{Algebraic Nonsense}
-	The focus of the project is computations involving graphical representation of certain maps, largely \alert{ignoring the algebraic background}.
-	\par
-	But if you're curious\dots
-	\begin{itemize}
-		\ii Once upon a time, in a land far far away, there was a Coxeter ring $R = \RR[\alpha_s, \alpha_t]$ acted on by the corresponding Coxeter system $(\mathcal W, \mathcal S)$ with $\mathcal S = \left\{ s,t \right\}$.
-		\ii Then there were Bott-Samelson bimodules given by the tensor product $B_s = R \otimes_{R^s} R$, where $R^s$ is $s$-invariant.
-		\ii There are maps between these modules, which can be represented graphically.
-	\end{itemize}
-\end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Description of the Diagrams}
-	%We consider an category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below.  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
+	This project involves computations of certain maps which can be represented with diagrams.
+\end{frame}
 
+\begin{frame}[fragile]
 	Diagrams are \alert{planar graphs} such that:
 	\begin{enumerate}
-		\ii Vertices may lie on top/bottom but not on sides.
+		\ii Vertices may lie on top/bottom boundaries but not on sides.
 		\ii Each vertex has degree $1$ or $3$.
 		\ii Connected components colored either $s$ (blue) or $t$ (red).
+		\ii Graphs may be deformed continuously.
 	\end{enumerate}
 	% At each end, the vertices give a sequence of $s$ (blue) and $t$ (red).
 	% The vertices on the boundary are by convention not explicitly shown, but are nonetheless labelled $s$ or $t$ for blue or red, respectively.
 	\begin{figure}[ht]
 		\centering
 		\begin{asy}
-		size(3cm);
+		size(2.718cm);
 		real xmax=7;
 		real ymax=5;
 		draw( (xmax,ymax)--(xmax,-ymax)--(-xmax,-ymax)--(-xmax,ymax)--cycle );
@@ -185,55 +177,34 @@
 		label("$s$", (-5,-ymax), dir(270));
 		label("$s$", (5,-ymax), dir(270));
 		\end{asy}
-		\caption{An example of a diagram in $\DD$.}
+		\caption{An example of a diagram a possible diagram.}
 	\end{figure}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Permitted Operations on the Graphs}
-	\begin{enumerate}
-		\addtocounter{enumi}{-1}
-		\ii (Isotropy) Diagrams can be continuously deformed.
-		\ii (Associativity) $\barbell{assoc_horiz} = \barbell{assoc_vert}$.
-		\ii (Contraction) $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.
-		\ii (The Needle) $\barbell{needle} = \barbell{zero} = 0$.
-		\ii (Barbell-Forcing)
-		\begin{enumerate}[(a)]
-			\ii $\barbell{barbell_blue}\barbell{alpha_blue} + \barbell{alpha_blue} \barbell{barbell_blue} = 2 \barbell{break_blue}$, and the similar equation for red.
-			\ii $\barbell{alpha_red}\barbell{barbell_blue} = -x\barbell{break_red} + \barbell{barbell_blue}\barbell{alpha_red} + x \barbell{barbell_red}\barbell{alpha_blue}$.
-			\ii $\barbell{alpha_blue}\barbell{barbell_red} = -y\barbell{break_blue} + \barbell{barbell_red}\barbell{alpha_blue} + y \barbell{barbell_blue}\barbell{alpha_red}$.
-		\end{enumerate}
-	\end{enumerate}
-\end{frame}
+%\begin{frame}
+%	\frametitle{Permitted Operations on the Graphs}
+%	\begin{enumerate}
+%		\addtocounter{enumi}{-1}
+%		\ii (Isotropy) Diagrams can be continuously deformed.
+%		\ii (Associativity) $\barbell{assoc_horiz} = \barbell{assoc_vert}$.
+%		\ii (Contraction) $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.
+%		\ii (The Needle) $\barbell{needle} = \barbell{zero} = 0$.
+%		\ii (Barbell-Forcing)
+%		\begin{enumerate}[(a)]
+%			\ii $\barbell{barbell_blue}\barbell{alpha_blue} + \barbell{alpha_blue} \barbell{barbell_blue} = 2 \barbell{break_blue}$, and the similar equation for red.
+%			\ii $\barbell{alpha_red}\barbell{barbell_blue} = -x\barbell{break_red} + \barbell{barbell_blue}\barbell{alpha_red} + x \barbell{barbell_red}\barbell{alpha_blue}$.
+%			\ii $\barbell{alpha_blue}\barbell{barbell_red} = -y\barbell{break_blue} + \barbell{barbell_red}\barbell{alpha_blue} + y \barbell{barbell_blue}\barbell{alpha_red}$.
+%		\end{enumerate}
+%	\end{enumerate}
+%\end{frame}
 
 \begin{frame}[fragile]
 	\frametitle{Light Leaves}
-	\only<1>{
 	\begin{itemize}
 		\ii Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.
 		\ii Take any binary string $\ul b$ of length $n$.
 		\ii Each choice of $\ul b$ will correspond to a diagram, based on a certain set of rules.
 	\end{itemize}
-	}	
-	\only<2>{
-	Read $\ul b$ from left to right.  Mark bits as up or down.
-
-	\begin{minipage}[t]{0.40\textwidth}
-		For a $1$:
-		\begin{itemize}
-			\ii If OK, draw arc, mark both down.
-			\ii Else, mark up.
-		\end{itemize}
-	\end{minipage}
-	\begin{minipage}[t]{0.50\textwidth}
-		For a $0$:
-		\begin{itemize}
-			\ii If OK, draw an arc, mark prev.\ down, this up.
-			\ii Else, create ``stub''.
-		\end{itemize}
-	\end{minipage}
-	%Finally, join any bits which are up at the end of the process to the opposite end.  
-	}
 	\begin{figure}[ht]
 		\centering
 		\begin{asy}
@@ -331,6 +302,237 @@
 		\caption{An example of composing two maps.}
 	\end{figure}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Special Case}
+	\begin{enumerate}
+		\ii $\ul r = \underbrace{s\dots s}_{\text{$n$ $s$'s}}$.
+		\pause \par This case turns out to be trivial.
+		\pause
+		\ii $\ul r = \underbrace{stst\dots}_{\text{$n$ characters}}$.
+		\par This case has some interesting properties but is not as trivial.
+	\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Barbells, Fences and Pastures}
+	\begin{definition}
+		\begin{itemize}
+			\ii A \emph{barbell} is a tree not touching the boundaries.
+			\ii A \emph{fence} is a contiguous path which from top to bottom.
+			\ii The diagram is divided by these fences into \emph{pastures}.
+		\end{itemize}
+	\end{definition}
+	\begin{figure}[ht]
+		\centering
+		\begin{asy}
+			size(3cm);
+			real h = 0.7;
+			pen s = blue, t = red + dashed + 0.6;
+			pen dot_s = blue, dot_t = red;
+			int n = 10;
+
+			picture one;
+			draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+			draw(one, (3,0)--(3,h/2)..((3+7)/2.0,h*4)..(7,h/2)--(7,0), t);
+			draw(one, (2,0)--(2,h/2)..((2+8)/2.0,h*6)..(8,h/2)--(8,0), s);
+			draw(one, (1,0)--(1,h/2)..((1+9)/2.0,h*8)..(9,h/2)--(9,0), t);
+			draw(one, (5,0)--(5,h), t);
+			dot(one, (5,h), dot_t);
+			draw(one,(0,0)--(0,9*h), s);
+
+			picture two;
+			draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+			draw(two, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+			draw(two, (0,0)--(0,h/2)..((0+6)/2.0,h*6)..(6,h/2)--(6,0), s);
+			draw(two, (3,0)--(3,h), t);
+			dot(two, (3,h), dot_t);
+			draw(two, (7,0)--(7,h), t);
+			dot(two, (7,h), dot_t);
+			draw(two, (9,0)--(9,h), t);
+			dot(two, (9,h), dot_t);
+			draw(two,(8,0)--(8,7*h), s);
+
+			add(one); add(reflect((0,0),(1,0))*two);
+			draw((-1,0)--(10,0));
+		\end{asy}
+		\caption{Two blue barbells with a very twisted fence, which creates two pastures.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Bubbles and Caterpillars}
+	\begin{definition}
+		\begin{itemize}
+			\ii A \emph{bubble} is a bounded face in a diagram.
+			\ii A \emph{caterpillar} is a connected set of bubbles.
+		\end{itemize}
+	\end{definition}
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(8cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 11;
+
+		picture one;
+		draw(one, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+		draw(one, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
+		draw(one, (8,0)--(8,h/2)..((8+10)/2.0,h*2)..(10,h/2)--(10,0), s);
+		draw(one, (1,0)--(1,h), t);
+		dot(one, (1,h), dot_t);
+		draw(one, (2,0)--(2,h), t);
+		dot(one, (2,h), dot_t);
+		draw(one, (5,0)--(5,h), t);
+		dot(one, (5,h), dot_t);
+		draw(one, (7,0)--(7,h), t);
+		dot(one, (7,h), dot_t);
+		draw(one, (9,0)--(9,h), t);
+		dot(one, (9,h), dot_t);
+		dot(one, (6, h/2), dot_s);
+		dot(one, (8, h/2), dot_s);
+
+		picture two;
+		draw(two, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+		draw(two, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+		draw(two, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
+		draw(two, (8,0)--(8,h/2)..((8+10)/2.0,h*2)..(10,h/2)--(10,0), s);
+		draw(two, (1,0)--(1,h), t);
+		dot(two, (1,h), dot_t);
+		draw(two, (2,0)--(2,h), t);
+		dot(two, (2,h), dot_t);
+		draw(two, (5,0)--(5,h), t);
+		dot(two, (5,h), dot_t);
+		draw(two, (7,0)--(7,h), t);
+		dot(two, (7,h), dot_t);
+		draw(two, (9,0)--(9,h), t);
+		dot(two, (9,h), dot_t);
+		dot(two, (6, h/2), dot_s);
+		dot(two, (8, h/2), dot_s);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(11,0));
+	\end{asy}
+	\caption{A blue bubble with two red barbells, and a caterpillar with three bubbles.}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Bubble Lemma}
+	Suppose $\ul r = stst\dots$.
+
+	\begin{lemma}[Bubble Lemma]
+		Every bubble contains either a single caterpillar or a single barbell.
+	\end{lemma}
+	\begin{figure}[ht]
+		\centering
+		\begin{asy}
+		size(3cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 7;
+
+		picture one;
+		draw(one, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(one, (3,0)--(3,h/2)..((3+5)/2.0,h*2)..(5,h/2)--(5,0), t);
+		draw(one, (0,0)--(0,h/2)..((0+6)/2.0,h*6)..(6,h/2)--(6,0), s);
+		draw(one, (2,0)--(2,h), s);
+		dot(one, (2,h), dot_s);
+		draw(one, (4,0)--(4,h), s);
+		dot(one, (4,h), dot_s);
+		dot(one, (3, h/2), dot_t);
+
+		picture two;
+		draw(two, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(two, (3,0)--(3,h/2)..((3+5)/2.0,h*2)..(5,h/2)--(5,0), t);
+		draw(two, (0,0)--(0,h/2)..((0+6)/2.0,h*6)..(6,h/2)--(6,0), s);
+		draw(two, (2,0)--(2,h), s);
+		dot(two, (2,h), dot_s);
+		draw(two, (4,0)--(4,h), s);
+		dot(two, (4,h), dot_s);
+		dot(two, (3, h/2), dot_t);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(7,0));
+		\end{asy}
+		\caption{A bubble with a caterpillar inside it}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+
+	\begin{theorem}[Pasture Theorem]
+		 If pastures are labelled $0, 1, \dots, N$ then:
+		\begin{itemize}
+			\ii Pastures $1$ through $N-1$ must contain caterpillars attached to fences.
+			\ii Pasture $N$ is either empty or contains a single caterpillar.
+		\end{itemize}
+	\end{theorem}
+
+	\begin{figure}[ht]
+		\centering
+		\begin{asy}
+			size(3cm);
+real h = 0.7;
+pen s = blue, t = red + dashed + 0.6;
+pen dot_s = blue, dot_t = red;
+int n = 9;
+
+picture one;
+draw(one, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+draw(one, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+draw(one, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
+draw(one, (3,0)--(3,h), t);
+dot(one, (3,h), dot_t);
+draw(one, (7,0)--(7,h), t);
+dot(one, (7,h), dot_t);
+draw(one,(0,0)--(0,5*h), s);
+draw(one,(5,0)--(5,5*h), t);
+dot(one, (5, h/2), dot_t);
+
+picture two;
+draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+draw(two, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+draw(two, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
+draw(two, (3,0)--(3,h), t);
+dot(two, (3,h), dot_t);
+draw(two, (7,0)--(7,h), t);
+dot(two, (7,h), dot_t);
+draw(two,(0,0)--(0,5*h), s);
+draw(two,(5,0)--(5,5*h), t);
+dot(two, (5, h/2), dot_t);
+
+add(one); add(reflect((0,0),(1,0))*two);
+draw((-1,0)--(9,0));
+		\end{asy}
+		\caption{An attached caterpillar and a single caterpillar (each are singletons.)}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Implications}
+	\[ \text{Bubble Lemma} + \text{Pasture Theorem} = \quad :{)} \]
+\end{frame}
+
+\begin{frame}
+	\frametitle{Acknowledgements}
+	Thank you to the following individuals and organizations:
+	\begin{itemize}
+		\ii Mr. Francisco Unda for daily mentorship.
+		\ii Prof. Ben Elias for providing the project and meeting to discuss it.
+		\ii Dr. Tanya Khovanova and MIT Math for organizing Math RSI.
+		\ii CEE and MIT for hosting the RSI 2013.
+		\ii Antoni Rangachev for his advice both in this paper and presentation.
+	\end{itemize}
+\end{frame}
+
 
 
 \end{document}

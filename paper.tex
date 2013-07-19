@@ -261,7 +261,8 @@ This motivates the main objective of study.
 In this question, we will consider only maps with the same top, and we will also work \emph{modulo lower terms}.  This means that any map which has a component that touches either the top or bottom boundary exactly once will be treated as zero.  In that case, using the operations described in section \ref{sec:prelim_genrel}, we can reduce every map to simply multiplying by a polynomial on the left.  The goal is to then compute these polynomials using some combinatorial formula.
 
 
-\section{Notations}
+\section{Definitions and Notations}
+\subsection{Notations for Strings}
 For each positive integer $n$, let us define for convenience the strings
 \[ \SS_n \defeq \underbrace{s \dots s}_{\text{$n$ $s$'s}} \] 
 and the ``alternating'' string
@@ -274,14 +275,174 @@ and the ``alternating'' string
 \]
 By the way, let $\BB_n$ denote the set of binary strings of length $n$.
 
-Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the appropriate map formed by a single application of the light leaves.  
-Additionally, let $\Top_{\ul r} \ul b$ denote the top of the map $\MM_{\ul r}(\ul b)$.
-
-Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  Recall that we are abusing notation in such products, and will simply refer to the map $g \mapsto fg$ as $f$ from this point on
-
-If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
-
 Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
+
+\subsection{Definitions for Maps and Diagram}
+Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the appropriate map (or its associated diagram;
+we will refer to maps and their associated diagrams interchangably) formed by a single application of the light leaves.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r} \ul b$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
+
+Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  (Recall that we are abusing notation in such products, and will simply refer to the map $g \mapsto fg$ as $f$ from this point on.)  Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
+
+Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(4cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 5;
+
+		picture one;
+		draw(one, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+		draw(one, (1,0)--(1,h), t);
+		dot(one, (1,h), dot_t);
+		draw(one, (3,0)--(3,h), t);
+		dot(one, (3,h), dot_t);
+		draw(one, (4,0)--(4,h), s);
+		dot(one, (4,h), dot_s);
+
+		picture two;
+		draw(two, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(two, (0,0)--(0,h/2)..((0+4)/2.0,h*4)..(4,h/2)--(4,0), s);
+		draw(two, (2,0)--(2,h), s);
+		dot(two, (2,h), dot_s);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(5,0));
+	\end{asy}
+	\caption{A full-map with base $ststs$, hence with five anchors.  The top is $\varnothing$.}
+\end{figure}
+
+\subsection{Nomenclature for Certain Structures in Diagrams}
+Let us make a few convenient definitions.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(5cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 10;
+
+		picture one;
+		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+		draw(one, (3,0)--(3,h/2)..((3+7)/2.0,h*4)..(7,h/2)--(7,0), t);
+		draw(one, (2,0)--(2,h/2)..((2+8)/2.0,h*6)..(8,h/2)--(8,0), s);
+		draw(one, (1,0)--(1,h/2)..((1+9)/2.0,h*8)..(9,h/2)--(9,0), t);
+		draw(one, (5,0)--(5,h), t);
+		dot(one, (5,h), dot_t);
+		draw(one,(0,0)--(0,9*h), s);
+
+		picture two;
+		draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+		draw(two, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+		draw(two, (0,0)--(0,h/2)..((0+6)/2.0,h*6)..(6,h/2)--(6,0), s);
+		draw(two, (3,0)--(3,h), t);
+		dot(two, (3,h), dot_t);
+		draw(two, (7,0)--(7,h), t);
+		dot(two, (7,h), dot_t);
+		draw(two, (9,0)--(9,h), t);
+		dot(two, (9,h), dot_t);
+		draw(two,(8,0)--(8,7*h), s);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(10,0));
+	\end{asy}
+	\caption{Two blue barbells with a very twisted fence, which creates two pastures.}
+\end{figure}
+
+\begin{definition*}
+	A connected component which (i) is a tree, and (ii) does not touch the top or bottom boundaries is called a \emph{barbell}.
+\end{definition*}
+Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$, which evaluates as $\alpha_s$.  Similarly, every red barbell is simply $\barbell{barbell_red} = \alpha_t$.
+
+\begin{definition*}
+	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}, which will be numbered from left to right as $0$, $1$, \dots, $k$, where $k$ is the number of fences.
+\end{definition*}
+
+We remind the reader that we are working modulo lower terms; any map which contains a ``half fence'' (i.e. a connected component which touches a boundary exactly once) is not considered.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(4cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 4;
+
+		picture one;
+		draw(one, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+		draw(one, (1,0)--(1,h), t);
+		dot(one, (1,h), dot_t);
+		draw(one, (2,0)--(2,h), t);
+		dot(one, (2,h), dot_t);
+
+		picture two;
+		draw(two, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+		draw(two, (1,0)--(1,h), t);
+		dot(two, (1,h), dot_t);
+		draw(two, (2,0)--(2,h), t);
+		dot(two, (2,h), dot_t);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(4,0));
+	\end{asy}
+	\caption{A blue bubble with two barbells inside it.}
+\end{figure}
+
+\begin{definition*}
+	A \emph{bubble} is a bounded face alongside with any components contained within it, which are its contents.  It may be connected to a fence, in which case we call it \emph{attached}.
+\end{definition*}
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(6cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 7;
+
+		picture one;
+		draw(one, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+		draw(one, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+		draw(one, (1,0)--(1,h), t);
+		dot(one, (1,h), dot_t);
+		draw(one, (3,0)--(3,h), t);
+		dot(one, (3,h), dot_t);
+		draw(one, (5,0)--(5,h), t);
+		dot(one, (5,h), dot_t);
+		dot(one, (2, h/2), dot_s);
+		dot(one, (4, h/2), dot_s);
+
+		picture two;
+		draw(two, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+		draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+		draw(two, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+		draw(two, (1,0)--(1,h), t);
+		dot(two, (1,h), dot_t);
+		draw(two, (3,0)--(3,h), t);
+		dot(two, (3,h), dot_t);
+		draw(two, (5,0)--(5,h), t);
+		dot(two, (5,h), dot_t);
+		dot(two, (2, h/2), dot_s);
+		dot(two, (4, h/2), dot_s);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(7,0));
+	\end{asy}
+	\caption{A caterpillar made of three bubbles}
+\end{figure}
+
+\begin{definition*}
+	A \emph{caterpillar} is any connected collection of bubbles.
+\end{definition*}
+
 
 \section{One-Color Case: Characterizing $\MM_{\SS_n}(\ul a, \ul b)$}
 In this section we provide a complete characterization for the $\MM_{\SS_n}(\ul a, \ul b)$.  The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
@@ -366,36 +527,22 @@ This lets us state our main result for this section.
 \begin{proof}
 	We will only consider the case where $\Top \ul a = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.
 
-	Number the ``vertices'' on the bottom boundary of from $1$ to $n$, from left to right.  
+	Number the anchors $1$, $2$, $\dots$ from left to right.
 
-	For a map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the points on the bottom boundary it touches.  Note that the antennae always form a contiguous sequence of integers, by construction.
+	For a half-map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the anchors which it touches.  Note that the antennae always form a single contiguous sequence of anchors.
 
 	Now, we observe that for each $1 \le i \le n-1$, we have that $\ul a^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component.
 
-	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because the two antenna combine to form an empty face.  Furthermore, it is easy to see that any faces must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
+	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$ to obtain a full-map.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because the two antenna combine to form an empty bubble.  Furthermore, it is easy to see that any bubbles must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
 
 	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  Each of its antennae then feels a distinct component.  Hence, it unites $k$ different components into one.
 
-	The formula then follows directly from counting the number of connected components, because each component can be contracted into a single $\alpha_s$ term (a barbell), and there are no other structures possible.
+	The formula then follows directly from counting the number of connected components, because each component can be contracted into a single barbell, since any acyclic connected component is merely a tree.
 \end{proof}
-
-
 
 \section{The Caterpillar Theorem}
 \label{sec:caterpillar}
-We turn our attention to the case of $\ul r = \AA_n$.  Let us make a few definitions before proceeding.
-
-Consider a composition of two maps $\MM_{\AA_n}( \ul a, \ul b)$ and the associated diagram $D$.  Let us make a few convenient definitions for the graphical structures.
-\begin{definition*}
-	A \emph{pocket} is a face, and its \emph{contents} are the connected components inside that face.
-\end{definition*}
-\begin{definition*}
-	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}, which will be numbered from left to right as $0$, $1$, \dots, $M$.
-\end{definition*}
-
-
-
-
+We now turn our attention to the case of $\ul r = \AA_n$.  
 
 \section{Conclusion}
 % The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
