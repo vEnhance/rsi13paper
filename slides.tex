@@ -1,0 +1,336 @@
+% This is slides.tex. Compile me using ``make slides.pdf''.
+
+\documentclass[pdf]{beamer}
+\mode<presentation>{}                % change the theme here
+
+%% preamble {{{1
+\usepackage{rsislidepacks}
+\usepackage{colortbl}
+\title[Maps in $\mathcal B_{\text{BS}}$]{Diagrammatic Computation of Morphisms Between Bott-Samelson Bimodules via Libedinsky's Light Leaves}
+\subtitle[RSI 2013]{Research Science Institute 2013}
+\author{Evan Chen}
+
+\usetheme{UNLTheme}
+\setbeamercovered{dynamic}
+
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{asymptote}
+
+
+% For code
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny,
+	keywordstyle=\bfseries,
+	title=\lstname,
+	showstringspaces=false,
+	frame=single}
+
+
+% Small commands
+\newcommand{\myqed}{\textsc{Q.e.d.}}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+\renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\hrulebar}{
+  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  \par\nointerlineskip \vspace{\baselineskip}
+}
+\def\half{\frac{1}{2}}
+
+%More commands and math operators
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator{\lcm}{lcm}
+
+%Convenient Environments
+\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup}
+
+%Inequalities
+\newcommand{\cycsum}{\sum_{\text{cyc}}}
+\newcommand{\symsum}{\sum_{\text{sym}}}
+\newcommand{\cycprod}{\prod_{\text{cyc}}}
+\newcommand{\symprod}{\prod_{\text{sym}}}
+
+%From H113 "Introduction to Abstract Algebra" at UC Berkeley
+\def\CC{\mathbb C}
+\def\FF{\mathbb F}
+\def\NN{\mathbb N}
+\def\QQ{\mathbb Q}
+\def\RR{\mathbb R}
+\def\ZZ{\mathbb Z}
+\newcommand{\normal}{\trianglelefteq}
+\newcommand{\charin}{\text{ char }}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Syl}{Syl}
+
+%From Kiran Kedlaya's "Geometry Unbound"
+\def\abs#1{\lvert #1 \rvert}
+\def\norm#1{\lVert #1 \rVert}
+\def\dang{\measuredangle} %% Directed angle
+\def\line#1{\overleftrightarrow{#1}}
+\def\ray#1{\overrightarrow{#1}} 
+\def\seg#1{\overline{#1}}
+\def\arc#1{\wideparen{#1}}
+
+%From M275 "Topology" at SJSU
+\newcommand{\id}{\text{id}}
+\newcommand{\taking}[1]{\stackrel{#1}{\longrightarrow}}
+\newcommand{\inv}{^{-1}}
+
+%From M170 "Introduction to Graph Theory" at SJSU
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\defeq}{\stackrel{\text{def}}{=}}
+
+%From the USAMO .tex filse
+\def\st{^{\text{st}}}
+\def\nd{^{\text{nd}}}
+\def\rd{^{\text{rd}}}
+\def\th{^{\text{th}}}
+\def\dg{^\circ}
+\def\be{\begin{enumerate}}
+\def\bee{\begin{enumerate} \ii}
+\def\ee{\end{enumerate}}
+\def\bi{\begin{itemize}}
+\def\bii{\begin{itemize} \ii}
+\def\ei{\end{itemize}}
+\def\ii{\item}
+
+%Asy commands
+\begin{asydef}
+	import olympiad;
+	import cse5;
+	pointpen = black;
+	pathpen = black;
+	pathfontpen = black;
+	anglepen = black;
+	anglefontpen = black;
+\end{asydef}
+
+% }}}
+% RSI Specific macros
+\theoremstyle{definition}
+\newtheorem{op}{Operation}
+\newcommand{\dobarbell}[2]{
+	\vcenter{\hbox{%
+		\includegraphics[scale=#1]{barbell/#2.pdf}
+	}}
+}
+\newcommand{\barbell}[1]{
+	\mathchoice%
+	{\dobarbell{1.6}{#1}}
+	{\dobarbell{1.2}{#1}}
+	{\dobarbell{0.9}{#1}}
+	{\dobarbell{0.9}{#1}}
+}
+
+\def\DD{\mathcal D}
+\def\ul#1{\underline{#1}}
+\begin{document}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}
+	\frametitle{Algebraic Nonsense}
+	The focus of the project is computations involving graphical representation of certain maps, largely \alert{ignoring the algebraic background}.
+	\par
+	But if you're curious\dots
+	\begin{itemize}
+		\ii Once upon a time, in a land far far away, there was a Coxeter ring $R = \RR[\alpha_s, \alpha_t]$ acted on by the corresponding Coxeter system $(\mathcal W, \mathcal S)$ with $\mathcal S = \left\{ s,t \right\}$.
+		\ii Then there were Bott-Samelson bimodules given by the tensor product $B_s = R \otimes_{R^s} R$, where $R^s$ is $s$-invariant.
+		\ii There are maps between these modules, which can be represented graphically.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Description of the Diagrams}
+	%We consider an category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below.  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
+
+	Diagrams are \alert{planar graphs} such that:
+	\begin{enumerate}
+		\ii Vertices may lie on top/bottom but not on sides.
+		\ii Each vertex has degree $1$ or $3$.
+		\ii Connected components colored either $s$ (blue) or $t$ (red).
+	\end{enumerate}
+	% At each end, the vertices give a sequence of $s$ (blue) and $t$ (red).
+	% The vertices on the boundary are by convention not explicitly shown, but are nonetheless labelled $s$ or $t$ for blue or red, respectively.
+	\begin{figure}[ht]
+		\centering
+		\begin{asy}
+		size(3cm);
+		real xmax=7;
+		real ymax=5;
+		draw( (xmax,ymax)--(xmax,-ymax)--(-xmax,-ymax)--(-xmax,ymax)--cycle );
+		pair apex = (0,2);
+		path arc = (5,-5)..(2,0)..apex..(-2,0)..(-5,-5);
+		draw(arc, blue);
+		dot(apex, blue);
+		draw(apex--(0,ymax), blue);
+		draw(-apex--(0,-ymax), red);
+		dot(-apex, red);
+		label("$s$", (0,ymax), dir(90));
+		label("$t$", (0,-ymax), dir(270));
+		label("$s$", (-5,-ymax), dir(270));
+		label("$s$", (5,-ymax), dir(270));
+		\end{asy}
+		\caption{An example of a diagram in $\DD$.}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Permitted Operations on the Graphs}
+	\begin{enumerate}
+		\addtocounter{enumi}{-1}
+		\ii (Isotropy) Diagrams can be continuously deformed.
+		\ii (Associativity) $\barbell{assoc_horiz} = \barbell{assoc_vert}$.
+		\ii (Contraction) $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.
+		\ii (The Needle) $\barbell{needle} = \barbell{zero} = 0$.
+		\ii (Barbell-Forcing)
+		\begin{enumerate}[(a)]
+			\ii $\barbell{barbell_blue}\barbell{alpha_blue} + \barbell{alpha_blue} \barbell{barbell_blue} = 2 \barbell{break_blue}$, and the similar equation for red.
+			\ii $\barbell{alpha_red}\barbell{barbell_blue} = -x\barbell{break_red} + \barbell{barbell_blue}\barbell{alpha_red} + x \barbell{barbell_red}\barbell{alpha_blue}$.
+			\ii $\barbell{alpha_blue}\barbell{barbell_red} = -y\barbell{break_blue} + \barbell{barbell_red}\barbell{alpha_blue} + y \barbell{barbell_blue}\barbell{alpha_red}$.
+		\end{enumerate}
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Light Leaves}
+	\only<1>{
+	\begin{itemize}
+		\ii Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.
+		\ii Take any binary string $\ul b$ of length $n$.
+		\ii Each choice of $\ul b$ will correspond to a diagram, based on a certain set of rules.
+	\end{itemize}
+	}	
+	\only<2>{
+	Read $\ul b$ from left to right.  Mark bits as up or down.
+
+	\begin{minipage}[t]{0.40\textwidth}
+		For a $1$:
+		\begin{itemize}
+			\ii If OK, draw arc, mark both down.
+			\ii Else, mark up.
+		\end{itemize}
+	\end{minipage}
+	\begin{minipage}[t]{0.50\textwidth}
+		For a $0$:
+		\begin{itemize}
+			\ii If OK, draw an arc, mark prev.\ down, this up.
+			\ii Else, create ``stub''.
+		\end{itemize}
+	\end{minipage}
+	%Finally, join any bits which are up at the end of the process to the opposite end.  
+	}
+	\begin{figure}[ht]
+		\centering
+		\begin{asy}
+		size(10cm);
+		real h = 0.7;
+		pen s = blue, t = red;
+		int n = 14;
+		draw(currentpicture, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+		draw(currentpicture, (2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+		draw(currentpicture, (5,0)--(5,h/2)..((5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
+		draw(currentpicture, (4,0)--(4,h/2)..((4+8)/2.0,h*4)..(8,h/2)--(8,0), t);
+		draw(currentpicture, (8,0)--(8,h/2)..((8+9)/2.0,h*1)..(9,h/2)--(9,0), t);
+		draw(currentpicture, (11,0)--(11,h/2)..((11+13)/2.0,h*2)..(13,h/2)--(13,0), t);
+		draw(currentpicture, (1,0)--(1,h), t);dot(currentpicture, (1,h), t);
+		draw(currentpicture, (7,0)--(7,h), s);dot(currentpicture, (7,h), s);
+		draw(currentpicture, (12,0)--(12,h), s);dot(currentpicture, (12,h), s);
+		draw(currentpicture,(9,0)--(9,5*h), t);
+		draw(currentpicture,(10,0)--(10,5*h), s);
+		dot(currentpicture, (2, h/2), s);
+		dot(currentpicture, (8, h/2), t);
+		dot(currentpicture, (9, h/2), t);
+		label(currentpicture, "1", (0,-1.5h), dir(90));
+		label(currentpicture, "s", (0,-0.8*h), dir(90));
+		label(currentpicture, "0", (1,-1.5h), dir(90));
+		label(currentpicture, "t", (1,-0.8*h), dir(90));
+		label(currentpicture, "0", (2,-1.5h), dir(90));
+		label(currentpicture, "s", (2,-0.8*h), dir(90));
+		label(currentpicture, "1", (3,-1.5h), dir(90));
+		label(currentpicture, "s", (3,-0.8*h), dir(90));
+		label(currentpicture, "1", (4,-1.5h), dir(90));
+		label(currentpicture, "t", (4,-0.8*h), dir(90));
+		label(currentpicture, "1", (5,-1.5h), dir(90));
+		label(currentpicture, "s", (5,-0.8*h), dir(90));
+		label(currentpicture, "1", (6,-1.5h), dir(90));
+		label(currentpicture, "s", (6,-0.8*h), dir(90));
+		label(currentpicture, "0", (7,-1.5h), dir(90));
+		label(currentpicture, "s", (7,-0.8*h), dir(90));
+		label(currentpicture, "0", (8,-1.5h), dir(90));
+		label(currentpicture, "t", (8,-0.8*h), dir(90));
+		label(currentpicture, "0", (9,-1.5h), dir(90));
+		label(currentpicture, "t", (9,-0.8*h), dir(90));
+		label(currentpicture, "1", (10,-1.5h), dir(90));
+		label(currentpicture, "s", (10,-0.8*h), dir(90));
+		label(currentpicture, "1", (11,-1.5h), dir(90));
+		label(currentpicture, "t", (11,-0.8*h), dir(90));
+		label(currentpicture, "0", (12,-1.5h), dir(90));
+		label(currentpicture, "s", (12,-0.8*h), dir(90));
+		label(currentpicture, "1", (13,-1.5h), dir(90));
+		label(currentpicture, "t", (13,-0.8*h), dir(90));
+		\end{asy}
+		\caption{An example of light leaves}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Problem Statement}
+	Two maps can be composed by placing one on top of the other.  Then, operations may be applied to simplify the diagram.
+
+	The goal of the project is to \alert{compute the product} (or otherwise deduce information about it) using \alert{only the binary strings}.
+	\begin{figure}[ht]
+		\centering
+		\begin{asy}
+		size(4cm);
+		real h = 0.7;
+		pen s = blue, t = red;
+		int n = 7;
+
+		picture one;
+		draw(one, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
+		draw(one, (1,0)--(1,h), t);
+		dot(one, (1,h), t);
+		draw(one, (2,0)--(2,h), t);
+		dot(one, (2,h), t);
+		draw(one, (5,0)--(5,h), s);
+		dot(one, (5,h), s);
+		draw(one,(6,0)--(6,4*h), t);
+		dot(one, (6, h/2), t);
+
+		picture two;
+		draw(two, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+		draw(two, (1,0)--(1,h), t);
+		dot(two, (1,h), t);
+		draw(two, (2,0)--(2,h), t);
+		dot(two, (2,h), t);
+		draw(two, (4,0)--(4,h), t);
+		dot(two, (4,h), t);
+		draw(two, (5,0)--(5,h), s);
+		dot(two, (5,h), s);
+		draw(two,(6,0)--(6,4*h), t);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(7,0));
+		\end{asy}
+		\caption{An example of composing two maps.}
+	\end{figure}
+\end{frame}
+
+
+\end{document}

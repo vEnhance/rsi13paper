@@ -1,0 +1,396 @@
+% This is paper.tex
+
+\section{Introduction}
+We study a class of maps between Bott-Samelson bimodules.  These maps are represented by certain types of diagrams, as described in section \ref{sec:prelim_map}.  The maps are composed by juxtaposition.
+
+Given a sequence of consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libednisky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
+
+Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:prelim_probstate}.  
+% TODO change this
+We then do a bunch of nonsense.
+
+\section{Preliminaries}
+\label{sec:prelim}
+% \subsection{Coxeter Rings, and the Bott-Samelson Bimodules}
+Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be unit vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then each $v \in V$ is reflected via the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  In particular, $s(\alpha_s) = -\alpha_s$ and $t(\alpha_t) = -\alpha_t$.  Furthermore, we see that there exist fixed constants $x$ and $y$ such that
+\begin{align*}
+	s(\alpha_t) &= \alpha_t + x \alpha_s \\
+	t(\alpha_s) &= \alpha_s + y \alpha_t
+\end{align*}
+Now we define the \emph{Coxeter ring} by $R = \RR[\alpha_s, \alpha_t]$.  Then $W$ acts on $R$ by precisely the same algorithm as described above.
+
+Let $R^s$ be the subring of $R$ which is invariant under $s$.  Define $R^t$ similarly.  Then a \emph{Bott-Samelson bimodule} is a bimodule of the form
+\[ R \otimes_{R^{i_1}} R \otimes_{R^{i_2}} R \otimes_{R^{i_3}} \dots \otimes_{R^{i_n}} R \]
+where each $R^i$ is either $R^s$ or $R^t$.   Elements of such a bimodule will be written in the form $f_0 \mid f_1 \mid \dots \mid f_n$, where $f_i \in R$.
+
+We will consider maps between these bimodules that preserve left and right actions; that is, we consider the maps $\sigma$ such that
+\begin{equation}
+	\sigma(rx) = r\sigma(x) \quad\text{and}\quad \sigma(xr) = \sigma(x)r \quad\text{for every $r \in R$ and $x \in \text{Dom } \sigma$}.
+	\label{eq:respect}
+\end{equation}
+These maps can be represented using diagrammatics, as below.
+
+\subsection{Diagrammatics of Maps}
+\label{sec:prelim_map}
+\newcommand{\DD}{\mathcal D}
+Certain maps between Bott-Samleson bimodules can be described in terms of diagrams.  We take a detour and first describe the appearance of such diagrams; in the subsequent section we will explain their algebraic meaning.  A reader who is not interested in this context can simply accept on faith the relations specified in section \ref{sec:prelim_genrel}.
+
+Consider a category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below.  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
+
+The diagrams may be described as planar graphs, not necessarily connected, drawn in a rectangle, with the following properties.
+\begin{enumerate}[(i)]
+	\ii Vertices may lie on the upper or lower boundary, but not on the left or right boundary.
+	\ii Each vertex has degree $1$ or $3$.
+	\ii Each connected component is colored either blue or red.
+\end{enumerate}
+The vertices on the boundary are by convention not explicitly shown, but are nonetheless labelled $s$ or $t$ for blue or red, respectively.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	size(6cm);
+	real xmax=7;
+	real ymax=5;
+	draw( (xmax,ymax)--(xmax,-ymax)--(-xmax,-ymax)--(-xmax,ymax)--cycle );
+	pair apex = (0,2);
+	path arc = (5,-5)..(2,0)..apex..(-2,0)..(-5,-5);
+	draw(arc, blue);
+	dot(apex, blue);
+	draw(apex--(0,ymax), blue);
+	draw(-apex--(0,-ymax), red + dashed + 0.6);
+	dot(-apex, red);
+	label("$s$", (0,ymax), dir(90));
+	label("$t$", (0,-ymax), dir(270));
+	label("$s$", (-5,-ymax), dir(270));
+	label("$s$", (5,-ymax), dir(270));
+	\end{asy}
+	\caption{An example of a possible diagram.}
+	\label{fig:example_diagram}
+\end{figure}
+
+The elements of $\DD$ by simply adding corresponding coefficients.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels coincide, and is $0$ otherwise.
+
+In \cite{basispf}, Khovanova and Elias show that all such maps can be expressed as a linear combination of these diagrams.
+
+\subsection{Algebraic Context}
+The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by simply transcribing the tensor products to take.  For example, a map with bottom $stt$ and top $s$ represents a map from $R \stimes R \ttimes R \ttimes R$ to $R \stimes R$.  An unlabelled domain corresponds to $R$.
+
+Let us hasten to introduce one final definition.
+\begin{definition*}
+	The \emph{Demazure operator} $\partial_s$ is given by $f \mapsto \frac{f - sf}{\alpha_s}$.
+\end{definition*}
+
+With this, we can now describe the ``primitive'' maps for blue lines in table \ref{tab:prim_maps}.  The corresponding equations hold for red in $t$.
+
+\begin{table}[ht]
+	\[
+	\begin{array}{rll}
+		\text{Map} & \text{Modules} & \text{Description} \\[1em]
+		\barbell{half_top} & R \stimes R \to R & 1 \mid 1 \mapsto 1 \\[1em]
+		\barbell{half_bot} & R \to R \ttimes R & 1 \mapsto \half \left( 1 \mid \alpha_s + \alpha_s \mid 1 \right) \\[1em]
+		\barbell{tri_down} & R \stimes R \to R \stimes R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \mid 1 \\[1em]
+		\barbell{tri_up} & R \stimes R \stimes R \to R \stimes R & 1 \mid g \mid 1 \mapsto \partial_s(g) \mid 1 \\[1em]
+		\barbell{id} & R \stimes R \to R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \\[1em]
+	\end{array}
+	\]
+	\caption{Describing the maps.}
+	\label{tab:prim_maps}
+\end{table}
+
+Note that the descriptions are sufficient to determine outputs for all values because these morphisms respect left and right actions, as prescribed in \eqref{eq:respect}.
+
+Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the map in figure \ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
+
+Henceforth we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
+
+Subsequently, for any polynomial $f \in R$ we will abuse notation and refer to the map $x \mapsto fx$ by simply $f$.  In particular, one can easily verify that $\barbell{barbell_blue}$ represents $\alpha_s$.  Note that this is \emph{not} in general the same as $x \mapsto xf$ because $x$ may belong to some bimodule rather than to $R$.  Phrased diagrammatically, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \barbell{barbell_blue}\barbell{alpha_blue} = \alpha_s$, for instance.
+
+\subsection{Operations for Diagrammatics}
+\label{sec:prelim_genrel}
+From the algebraic context given above, one can derive the following relationships, which are here encoded completely graphically.  These rules are sufficient to compute the maps we are interested in.
+
+\setcounter{op}{-1}
+\begin{op}[Isotropy] If two diagrams can be continuously deformed into each other (in the topological sense), then they are equivalent.  \end{op}
+\begin{op}[Associativity] We have $\barbell{assoc_horiz} = \barbell{assoc_vert}$ and the similar equation for red.  \end{op}
+\begin{op}[Contraction] We have $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$ and the similar equation for red.  \end{op}
+\begin{op}[The Needle] We have $\barbell{needle} = 0$.  Similarly, the red needle yields zero.  \end{op}
+\begin{remark*} Using contraction and the above, one can show that the diagram $\barbell{zero}$ is zero as well. In fact, in general, \emph{any} map which contains a ``closed'' and empty region is the zero map.  \end{remark*}
+\begin{op}[Barbell-Forcing Rules]
+	We have the following three equalities:
+	\begin{enumerate}[(a)]
+		\ii $\barbell{barbell_blue}\barbell{alpha_blue} + \barbell{alpha_blue} \barbell{barbell_blue} = 2 \barbell{break_blue}$, and the similar equation for red.
+		\ii $\barbell{alpha_red}\barbell{barbell_blue} = -x\barbell{break_red} + \barbell{barbell_blue}\barbell{alpha_red} + x \barbell{barbell_red}\barbell{alpha_blue}$.
+		\ii $\barbell{alpha_blue}\barbell{barbell_red} = -y\barbell{break_blue} + \barbell{barbell_red}\barbell{alpha_blue} + y \barbell{barbell_blue}\barbell{alpha_red}$.
+	\end{enumerate}
+\end{op}
+
+Furthermore, one can again verify that $\barbell{barbell_blue}$, when on the far left, is simply $\alpha_s$.
+
+
+\subsection{Libedinsky's Light Leaves}
+\label{sec:prelim_lightleave}
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	size(10cm);
+	real h = 0.7;
+	pen s = blue, t = dashed + red + 0.6;
+	int n = 14;
+	draw(currentpicture, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+	draw(currentpicture, (2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+	draw(currentpicture, (5,0)--(5,h/2)..((5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
+	draw(currentpicture, (4,0)--(4,h/2)..((4+8)/2.0,h*4)..(8,h/2)--(8,0), t);
+	draw(currentpicture, (8,0)--(8,h/2)..((8+9)/2.0,h*1)..(9,h/2)--(9,0), t);
+	draw(currentpicture, (11,0)--(11,h/2)..((11+13)/2.0,h*2)..(13,h/2)--(13,0), t);
+	draw(currentpicture, (1,0)--(1,h), t);dot(currentpicture, (1,h), red);
+	draw(currentpicture, (7,0)--(7,h), s);dot(currentpicture, (7,h), s);
+	draw(currentpicture, (12,0)--(12,h), s);dot(currentpicture, (12,h), s);
+	draw(currentpicture,(9,0)--(9,5*h), t);
+	draw(currentpicture,(10,0)--(10,5*h), s);
+	dot(currentpicture, (2, h/2), blue);
+	dot(currentpicture, (8, h/2), red);
+	dot(currentpicture, (9, h/2), red);
+	label(currentpicture, "1", (0,-1.5h), dir(90));
+	label(currentpicture, "s", (0,-0.8*h), dir(90));
+	label(currentpicture, "0", (1,-1.5h), dir(90));
+	label(currentpicture, "t", (1,-0.8*h), dir(90));
+	label(currentpicture, "0", (2,-1.5h), dir(90));
+	label(currentpicture, "s", (2,-0.8*h), dir(90));
+	label(currentpicture, "1", (3,-1.5h), dir(90));
+	label(currentpicture, "s", (3,-0.8*h), dir(90));
+	label(currentpicture, "1", (4,-1.5h), dir(90));
+	label(currentpicture, "t", (4,-0.8*h), dir(90));
+	label(currentpicture, "1", (5,-1.5h), dir(90));
+	label(currentpicture, "s", (5,-0.8*h), dir(90));
+	label(currentpicture, "1", (6,-1.5h), dir(90));
+	label(currentpicture, "s", (6,-0.8*h), dir(90));
+	label(currentpicture, "0", (7,-1.5h), dir(90));
+	label(currentpicture, "s", (7,-0.8*h), dir(90));
+	label(currentpicture, "0", (8,-1.5h), dir(90));
+	label(currentpicture, "t", (8,-0.8*h), dir(90));
+	label(currentpicture, "0", (9,-1.5h), dir(90));
+	label(currentpicture, "t", (9,-0.8*h), dir(90));
+	label(currentpicture, "1", (10,-1.5h), dir(90));
+	label(currentpicture, "s", (10,-0.8*h), dir(90));
+	label(currentpicture, "1", (11,-1.5h), dir(90));
+	label(currentpicture, "t", (11,-0.8*h), dir(90));
+	label(currentpicture, "0", (12,-1.5h), dir(90));
+	label(currentpicture, "s", (12,-0.8*h), dir(90));
+	label(currentpicture, "1", (13,-1.5h), dir(90));
+	label(currentpicture, "t", (13,-0.8*h), dir(90));
+	\end{asy}
+	\caption{An example of light leaves.}
+	\label{fig:lightleaf_example}
+\end{figure}
+
+Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any any binary string $\ul b$ of length $n$, we can construct a diagram based on a series of rules.
+
+Each bit of $\ul b$ is read from left to right in order and designated either up or down.  We say that a bit $x$ is an \emph{open neighbor} of $y$ if $x$ is marked up, $x$ and $y$ have the same color, and there are no other bits marked up between $x$ and $y$.
+\begin{itemize}
+	\ii If the bit is a $1$:
+	\begin{itemize}
+		\ii If the current bit has an open neighbor, then draw an arc joining the two bits, and mark both bits as down.
+		\ii Otherwise, designate the current bit as up.
+	\end{itemize}
+	\ii If the bit is $0$:
+	\begin{itemize}
+		\ii If the current bit has an open neighbor, then draw an arc joining the two bits, mark the previous bit as down, and the current bit as up.
+		\ii Otherwise, create a ``stub'', i.e. a single vertex of degree one, and mark the current bit as down.
+	\end{itemize}
+\end{itemize}
+Finally, join any bits which are up at the end of the process to the opposite end.  An example of such a light leaf is shown in figure \ref{fig:lightleaf_example}.
+
+These light leaves are interesting because, in the seventh chapter of \cite{span}, it is shown that these light leaves for a ``basis'' in the sense that all maps may be expressed using those generated by light leaves (modulo lower terms).
+
+\subsection{Problem Statement}
+\label{sec:prelim_probstate}
+Recall that maps are multiplied by simply placing them on top of each other.  The operations are then applied to simplify the product.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+	size(4cm);
+	real h = 0.7;
+	pen s = blue, t = red + dashed + 0.6;
+	pen dot_s = blue, dot_t = red;
+	int n = 7;
+
+	picture one;
+	draw(one, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+	draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
+	draw(one, (1,0)--(1,h), t);
+	dot(one, (1,h), dot_t);
+	draw(one, (2,0)--(2,h), t);
+	dot(one, (2,h), dot_t);
+	draw(one, (5,0)--(5,h), s);
+	dot(one, (5,h), dot_s);
+	draw(one,(6,0)--(6,4*h), t);
+	dot(one, (6, h/2), dot_t);
+
+	picture two;
+	draw(two, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
+	draw(two, (1,0)--(1,h), t);
+	dot(two, (1,h), dot_t);
+	draw(two, (2,0)--(2,h), t);
+	dot(two, (2,h), dot_t);
+	draw(two, (4,0)--(4,h), t);
+	dot(two, (4,h), dot_t);
+	draw(two, (5,0)--(5,h), s);
+	dot(two, (5,h), dot_s);
+	draw(two,(6,0)--(6,4*h), t);
+
+	add(one); add(reflect((0,0),(1,0))*two);
+	draw((-1,0)--(7,0));
+	\end{asy}
+	\caption{An example of composing two maps, 1001100 and 1001001.}
+\end{figure}
+
+\begin{definition*}
+	A map is \emph{idempotent} if multiplying it with itself returns the original graph.
+\end{definition*}
+Colloquially, $m^2=m$ if and only if $m$ is idempotent.
+
+Fix an $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ will be an idempotent.  This motivates us to construct potential idempotents by taking two light leaves whose top sequences are identical, and composing $A$ upside-down with $B$.  If $AB=1$, then this will yield an idempotent.
+
+This motivates the main objective of study.
+\begin{ques*}
+	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with the same top, can one determine their product based on $\ul a$ and $\ul b$?
+\end{ques*}
+
+In this question, we will consider only maps with the same top, and we will also work \emph{modulo lower terms}.  This means that any map which has a component that touches either the top or bottom boundary exactly once will be treated as zero.  In that case, using the operations described in section \ref{sec:prelim_genrel}, we can reduce every map to simply multiplying by a polynomial on the left.  The goal is to then compute these polynomials using some combinatorial formula.
+
+
+\section{Notations}
+For each positive integer $n$, let us define for convenience the strings
+\[ \SS_n \defeq \underbrace{s \dots s}_{\text{$n$ $s$'s}} \] 
+and
+\[
+	\AA_n \defeq
+	\begin{cases}
+		\underbrace{sts\dots s}_{\text{$n$ letters}} & \text{if } n \equiv 1 \pmod{2} \\
+		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2} \\
+	\end{cases}.
+\]
+By the way, let $\BB_n$ denote the set of binary strings of length $n$.
+
+Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the appropriate map formed by a single application of the light leaves.  
+Additionally, let $\Top_{\ul r} \ul b$ denote the top of the map $\MM_{\ul r}(\ul b)$.
+
+Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  Recall that we are abusing notation in such products, and will simply refer to the map $g \mapsto fg$ as $f$ from this point on
+
+If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
+
+Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
+
+\section{One-Color Case: Characterizing $\MM_{\SS_n}(\ul a, \ul b)$}
+In this section we provide a complete characterization for the $\MM_{\SS_n}(\ul a, \ul b)$.  The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
+
+First, we need a criteria to determine the top.  Fortunately, this is extremely easy.
+\begin{definition*}
+	For a binary string $\ul b$, let $\pi_1(\ul b)$ denote the number of $1$'s in $\ul b$, and $\pi_0(\ul b)$ the number of $0$'s.
+\end{definition*}
+\begin{proposition}
+	For any $\ul b$ of length $n$, \[
+		\Top_{\SS_n} \ul b =
+		\begin{cases}
+			\varnothing & \text{if } \pi_1(\ul b) \equiv 0 \pmod{2} \\
+			s & \text{if } \pi_1(\ul b) \equiv 1 \pmod{2} \\
+		\end{cases}.
+		\]
+\end{proposition}
+\begin{proof}
+	Left as exercise. (It should take about a minute.)
+\end{proof}
+
+Subsequently, we make the following definition.
+\begin{definition*}
+	For a binary string $\ul b$, define the \emph{partial-sum string} of $\ul b$, denoted $\ul b^\ast$, as follows:
+	\[
+		\ul b^\ast [i] = 
+		\begin{cases}
+			1 & \text{if } b[1] + b[2] + \dots + b[i] = equiv 1 \pmod{2} \\
+			0 & \text{otherwise}
+		\end{cases}.
+	\]
+\end{definition*}
+This lets us state our main result for this section.
+\begin{theorem}
+	If $\ul a, \ul b \in \BB_n$ obey $\Top_{\SS_n} \ul a = \Top_{\SS_n} \ul b$, then
+	\[
+		\MM_{\SS_n} \left( \ul a, \ul b \right)
+		=
+		\begin{cases}
+			0 & \text{if } \exists 1 \le i \le n-1: \ul a^\ast[i] = \ul b^\ast[i] = 1 \\
+			\alpha_s^{n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast) - \ul a^\ast[n]} & \text{otherwise}
+		\end{cases}.
+	\]
+\end{theorem}
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+size(7cm);
+real h = 0.7;
+pen s = blue, t = red + dashed + 0.6;
+pen dot_s = blue, dot_t = red;
+int n = 8;
+draw(currentpicture, (0,0)--(0,h/2)..\left( 0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+draw(currentpicture, (1,0)--(1,h/2)..\left( 1+2)/2.0,h*1)..(2,h/2)--(2,0), s);
+draw(currentpicture, (2,0)--(2,h/2)..\left( 2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+draw(currentpicture, (5,0)--(5,h/2)..\left( 5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
+draw(currentpicture, (4,0)--(4,h), s);
+dot(currentpicture, (4,h), dot_s);
+draw(currentpicture, (7,0)--(7,h), s);
+dot(currentpicture, (7,h), dot_s);
+dot(currentpicture, (1, h/2), dot_s);
+dot(currentpicture, (2, h/2), dot_s);
+label(currentpicture, "1", (0,-1.5h), dir(90));
+label(currentpicture, "s", (0,-0.8*h), dir(90));
+label(currentpicture, "0", (1,-1.5h), dir(90));
+label(currentpicture, "s", (1,-0.8*h), dir(90));
+label(currentpicture, "0", (2,-1.5h), dir(90));
+label(currentpicture, "s", (2,-0.8*h), dir(90));
+label(currentpicture, "1", (3,-1.5h), dir(90));
+label(currentpicture, "s", (3,-0.8*h), dir(90));
+label(currentpicture, "0", (4,-1.5h), dir(90));
+label(currentpicture, "s", (4,-0.8*h), dir(90));
+label(currentpicture, "1", (5,-1.5h), dir(90));
+label(currentpicture, "s", (5,-0.8*h), dir(90));
+label(currentpicture, "1", (6,-1.5h), dir(90));
+label(currentpicture, "s", (6,-0.8*h), dir(90));
+label(currentpicture, "0", (7,-1.5h), dir(90));
+label(currentpicture, "s", (7,-0.8*h), dir(90));
+	\end{asy}
+	\caption{It looks hard until you actually draw it.  Then you LOL.}
+\end{figure}
+\begin{proof}
+	We will only consider the case where $\Top \ul a = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.
+
+	Number the ``vertices'' on the bottom boundary of from $1$ to $n$, from left to right.  
+
+	For a map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the points on the bottom boundary it touches.  Note that the antennae always form a contiguous sequence of integers, by construction.
+
+	Now, we observe that for each $1 \le i \le n-1$, we have that $\ul a^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component.
+
+	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel each $k$ times} if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because there can be no other structures inside these faces.  Furthermore, it is easy to see that any faces must be formed in this manner.
+
+	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  Each of its antennae then feels a distinct component.  Hence, it unites $k$ different components into one.
+
+	The formula then follows directly from counting the number of connected components, because each component can be contracted into a single $\alpha_s$ term (a barbell), and there are no other structures possible.
+\end{proof}
+
+
+
+\section{Main Result}
+\label{sec:mainresult}
+%I wish I had one.
+
+\section{Conclusion}
+% The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
+
+\section{Acknowledgments} 
+I offer my sincerest gratitude\footnote{That sounded horribly fake, but really, I mean it.  You guys are the best.  Thank you for a great project.} to my mentor Mr. Francisco Unda for daily mentorship, and Dr. Benjamin Elias for providing the project and for often meeting with me personally to discuss it.
+I further wish to thank the MIT Math Department, and in particular the head mentor Dr. Tanya Khovanova, for organizing the Math RSI, providing individual discussion with each student outside of the mentorship, as well as organizing additional meetings and lectures.
+I also wish to thank my tutor Mr. Antoni Rangachev for his invaluable advice in preparing both this paper and my final presentation.
+Finally, I would like to thank the Center for Excellence in Education and the Research Science Institute for generously providing the facilities for the research.
+
+

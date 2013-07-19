@@ -1,0 +1,43 @@
+% RSI paper template
+
+% This is main.tex
+
+% DO NOT MODIFY this file, except to 
+%  1. Add additional packages or
+%  2. Add macros,
+% if you know what you are doing or are following directions of one of
+% the technical staff.
+
+\documentclass[12pt,titlepage]{article}
+\usepackage{rsipacks}
+\usepackage[numbers]{natbib}
+\input{preamble}
+\doublespacing
+
+\begin{document}
+
+\include{cover}
+
+\begin{singlespace}
+\maketitle
+\end{singlespace}
+
+\begin{abstract}
+\input{abstract}
+\vspace{1in}
+\begin{center}\textbf{Summary}\end{center}
+\input{summary}
+\end{abstract}
+
+\include{paper}
+
+\begin{singlespace}
+%\include{biblio}
+\bibliographystyle{style}
+
+\bibliography{biblio}
+\end{singlespace}
+
+\include{appa}
+
+\end{document}

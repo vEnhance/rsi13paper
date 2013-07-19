@@ -1,0 +1,190 @@
+%% If you need to define macros or include more packages, do all that here.
+%% Otherwise leave this file alone.  DO NOT type your paper text in here.
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{asymptote}
+\usepackage{graphicx}
+\usepackage[english]{babel}
+
+% RSI Specific macros
+\theoremstyle{definition}
+\newtheorem{op}{Operation}
+\newcommand{\dobarbell}[2]{
+	\vcenter{\hbox{\includegraphics[scale=#1]{barbell/#2.pdf}}}
+}
+\newcommand{\barbell}[1]{
+	\mathchoice%
+	{\dobarbell{1.6}{#1}}
+	{\dobarbell{1.2}{#1}}
+	{\dobarbell{0.9}{#1}}
+	{\dobarbell{0.9}{#1}}
+}
+\def\ul#1{\underline{#1}}
+
+\def\stimes{\otimes_{R^s}}
+\def\ttimes{\otimes_{R^t}}
+
+\def\MM{\mathcal M}
+\def\AA{\mathcal A}
+\def\SS{\mathcal S}
+\def\BB{\mathbb B}
+\DeclareMathOperator{\Top}{Top}
+
+
+% For code
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny,
+	keywordstyle=\bfseries,
+	title=\lstname,
+	showstringspaces=false,
+	frame=single}
+\usepackage{paralist}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+%\pgfplotsset{
+%    every axis/.append style={scale only axis,width=0.85\textwidth,},
+%}
+
+
+% Small commands
+\newcommand{\myqed}{\textsc{Q.e.d.}}
+\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
+\renewcommand{\iff}{\Leftrightarrow}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\hrulebar}{
+  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+  \par\nointerlineskip \vspace{\baselineskip}
+}
+\def\half{\frac{1}{2}}
+
+%For use in author command
+\newcommand{\plusemail}[1]{\\ \normalfont \texttt{\mailto{#1}}}
+
+%More commands and math operators
+\DeclareMathOperator{\cis}{cis}
+\DeclareMathOperator{\lcm}{lcm}
+
+%Convenient Environments
+\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
+\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
+\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup}
+
+%Inequalities
+\newcommand{\cycsum}{\sum_{\text{cyc}}}
+\newcommand{\symsum}{\sum_{\text{sym}}}
+\newcommand{\cycprod}{\prod_{\text{cyc}}}
+\newcommand{\symprod}{\prod_{\text{sym}}}
+
+%From H113 "Introduction to Abstract Algebra" at UC Berkeley
+\def\CC{\mathbb C}
+\def\FF{\mathbb F}
+\def\NN{\mathbb N}
+\def\QQ{\mathbb Q}
+\def\RR{\mathbb R}
+\def\ZZ{\mathbb Z}
+\newcommand{\normal}{\trianglelefteq}
+\newcommand{\charin}{\text{ char }}
+\DeclareMathOperator{\sign}{sign}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Inn}{Inn}
+\DeclareMathOperator{\Syl}{Syl}
+
+%From Kiran Kedlaya's "Geometry Unbound"
+\def\abs#1{\lvert #1 \rvert}
+\def\norm#1{\lVert #1 \rVert}
+\def\dang{\measuredangle} %% Directed angle
+\def\line#1{\overleftrightarrow{#1}}
+\def\ray#1{\overrightarrow{#1}} 
+\def\seg#1{\overline{#1}}
+\def\arc#1{\wideparen{#1}}
+
+%From M275 "Topology" at SJSU
+\newcommand{\id}{\text{id}}
+\newcommand{\taking}[1]{\stackrel{#1}{\longrightarrow}}
+\newcommand{\inv}{^{-1}}
+
+%From M170 "Introduction to Graph Theory" at SJSU
+\DeclareMathOperator{\diam}{diam}
+\DeclareMathOperator{\ord}{ord}
+\newcommand{\defeq}{\stackrel{\text{def}}{=}}
+
+%From the USAMO .tex filse
+\def\st{^{\text{st}}}
+\def\nd{^{\text{nd}}}
+\def\rd{^{\text{rd}}}
+\def\th{^{\text{th}}}
+\def\dg{^\circ}
+\def\be{\begin{enumerate}}
+\def\bee{\begin{enumerate} \ii}
+\def\ee{\end{enumerate}}
+\def\bi{\begin{itemize}}
+\def\bii{\begin{itemize} \ii}
+\def\ei{\end{itemize}}
+\def\ii{\item}
+
+%Asy commands
+\begin{asydef}
+	import olympiad;
+	import cse5;
+	pointpen = black;
+	pathpen = black;
+	pathfontpen = black;
+	anglepen = black;
+	anglefontpen = black;
+\end{asydef}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma} 
+\newtheorem{conjecture}[theorem]{Conjecture} 
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+%Starred versions
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{lemma*}{Lemma}
+\newtheorem*{conjecture*}{Conjecture}
+\newtheorem*{corollary*}{Corollary}
+\newtheorem*{proposition*}{Proposition}
+
+%Def-style theorems
+\theoremstyle{definition}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{fact}[theorem]{Fact}
+
+\newtheorem{algorithm}{Algorithm}
+\newtheorem{answer}{Answer}
+\newtheorem{case}{Case}
+\newtheorem{note}{Note}
+\newtheorem{remark}{Remark}
+\newtheorem{ques}{Question}
+%Examples, exercises, problems
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newtheorem{problem}{Problem}
+\newtheorem{joke}{Joke}
+
+\newtheorem*{algorithm*}{Algorithm}
+\newtheorem*{answer*}{Answer}
+\newtheorem*{case*}{Case}
+\newtheorem*{claim*}{Claim}
+\newtheorem*{definition*}{Definition}
+\newtheorem*{example*}{Example}
+\newtheorem*{exercise*}{Exercise}
+\newtheorem*{fact*}{Fact}
+\newtheorem*{note*}{Note}
+\newtheorem*{joke*}{Joke}
+\newtheorem*{problem*}{Problem}
+\newtheorem*{ques*}{Question}
+\newtheorem*{remark*}{Remark}
+

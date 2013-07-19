@@ -1,0 +1,10 @@
+*
+!*.tex
+!barbell
+!barbell/*.asy
+!barbell/*.pdf
+!UNL.*
+!*.sty
+!style.bst
+!.gitignore
+!*.bib
