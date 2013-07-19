@@ -6,6 +6,7 @@ We study a class of maps between Bott-Samelson bimodules.  These maps are repres
 Given a sequence of consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libednisky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
 
 Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:prelim_probstate}.  
+
 % TODO change this
 We then do a bunch of nonsense.
 
@@ -263,7 +264,7 @@ In this question, we will consider only maps with the same top, and we will also
 \section{Notations}
 For each positive integer $n$, let us define for convenience the strings
 \[ \SS_n \defeq \underbrace{s \dots s}_{\text{$n$ $s$'s}} \] 
-and
+and the ``alternating'' string
 \[
 	\AA_n \defeq
 	\begin{cases}
@@ -299,7 +300,7 @@ First, we need a criteria to determine the top.  Fortunately, this is extremely 
 		\]
 \end{proposition}
 \begin{proof}
-	Left as exercise. (It should take about a minute.)
+	Straightforward induction on $n$.  
 \end{proof}
 
 Subsequently, we make the following definition.
@@ -308,7 +309,7 @@ Subsequently, we make the following definition.
 	\[
 		\ul b^\ast [i] = 
 		\begin{cases}
-			1 & \text{if } b[1] + b[2] + \dots + b[i] = equiv 1 \pmod{2} \\
+			1 & \text{if } b[1] + b[2] + \dots + b[i] \equiv 1 \pmod{2} \\
 			0 & \text{otherwise}
 		\end{cases}.
 	\]
@@ -328,37 +329,37 @@ This lets us state our main result for this section.
 \begin{figure}[ht]
 	\centering
 	\begin{asy}
-size(7cm);
-real h = 0.7;
-pen s = blue, t = red + dashed + 0.6;
-pen dot_s = blue, dot_t = red;
-int n = 8;
-draw(currentpicture, (0,0)--(0,h/2)..\left( 0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
-draw(currentpicture, (1,0)--(1,h/2)..\left( 1+2)/2.0,h*1)..(2,h/2)--(2,0), s);
-draw(currentpicture, (2,0)--(2,h/2)..\left( 2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
-draw(currentpicture, (5,0)--(5,h/2)..\left( 5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
-draw(currentpicture, (4,0)--(4,h), s);
-dot(currentpicture, (4,h), dot_s);
-draw(currentpicture, (7,0)--(7,h), s);
-dot(currentpicture, (7,h), dot_s);
-dot(currentpicture, (1, h/2), dot_s);
-dot(currentpicture, (2, h/2), dot_s);
-label(currentpicture, "1", (0,-1.5h), dir(90));
-label(currentpicture, "s", (0,-0.8*h), dir(90));
-label(currentpicture, "0", (1,-1.5h), dir(90));
-label(currentpicture, "s", (1,-0.8*h), dir(90));
-label(currentpicture, "0", (2,-1.5h), dir(90));
-label(currentpicture, "s", (2,-0.8*h), dir(90));
-label(currentpicture, "1", (3,-1.5h), dir(90));
-label(currentpicture, "s", (3,-0.8*h), dir(90));
-label(currentpicture, "0", (4,-1.5h), dir(90));
-label(currentpicture, "s", (4,-0.8*h), dir(90));
-label(currentpicture, "1", (5,-1.5h), dir(90));
-label(currentpicture, "s", (5,-0.8*h), dir(90));
-label(currentpicture, "1", (6,-1.5h), dir(90));
-label(currentpicture, "s", (6,-0.8*h), dir(90));
-label(currentpicture, "0", (7,-1.5h), dir(90));
-label(currentpicture, "s", (7,-0.8*h), dir(90));
+		size(7cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 8;
+		draw(currentpicture, (0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+		draw(currentpicture, (1,0)--(1,h/2)..((1+2)/2.0,h*1)..(2,h/2)--(2,0), s);
+		draw(currentpicture, (2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+		draw(currentpicture, (5,0)--(5,h/2)..((5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
+		draw(currentpicture, (4,0)--(4,h), s);
+		dot(currentpicture, (4,h), dot_s);
+		draw(currentpicture, (7,0)--(7,h), s);
+		dot(currentpicture, (7,h), dot_s);
+		dot(currentpicture, (1, h/2), dot_s);
+		dot(currentpicture, (2, h/2), dot_s);
+		label(currentpicture, "1", (0,-1.5h), dir(90));
+		label(currentpicture, "s", (0,-0.8*h), dir(90));
+		label(currentpicture, "0", (1,-1.5h), dir(90));
+		label(currentpicture, "s", (1,-0.8*h), dir(90));
+		label(currentpicture, "0", (2,-1.5h), dir(90));
+		label(currentpicture, "s", (2,-0.8*h), dir(90));
+		label(currentpicture, "1", (3,-1.5h), dir(90));
+		label(currentpicture, "s", (3,-0.8*h), dir(90));
+		label(currentpicture, "0", (4,-1.5h), dir(90));
+		label(currentpicture, "s", (4,-0.8*h), dir(90));
+		label(currentpicture, "1", (5,-1.5h), dir(90));
+		label(currentpicture, "s", (5,-0.8*h), dir(90));
+		label(currentpicture, "1", (6,-1.5h), dir(90));
+		label(currentpicture, "s", (6,-0.8*h), dir(90));
+		label(currentpicture, "0", (7,-1.5h), dir(90));
+		label(currentpicture, "s", (7,-0.8*h), dir(90));
 	\end{asy}
 	\caption{It looks hard until you actually draw it.  Then you LOL.}
 \end{figure}
@@ -371,7 +372,7 @@ label(currentpicture, "s", (7,-0.8*h), dir(90));
 
 	Now, we observe that for each $1 \le i \le n-1$, we have that $\ul a^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component.
 
-	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel each $k$ times} if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because there can be no other structures inside these faces.  Furthermore, it is easy to see that any faces must be formed in this manner.
+	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because the two antenna combine to form an empty face.  Furthermore, it is easy to see that any faces must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
 
 	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  Each of its antennae then feels a distinct component.  Hence, it unites $k$ different components into one.
 
@@ -380,9 +381,21 @@ label(currentpicture, "s", (7,-0.8*h), dir(90));
 
 
 
-\section{Main Result}
-\label{sec:mainresult}
-%I wish I had one.
+\section{The Caterpillar Theorem}
+\label{sec:caterpillar}
+We turn our attention to the case of $\ul r = \AA_n$.  Let us make a few definitions before proceeding.
+
+Consider a composition of two maps $\MM_{\AA_n}( \ul a, \ul b)$ and the associated diagram $D$.  Let us make a few convenient definitions for the graphical structures.
+\begin{definition*}
+	A \emph{pocket} is a face, and its \emph{contents} are the connected components inside that face.
+\end{definition*}
+\begin{definition*}
+	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}, which will be numbered from left to right as $0$, $1$, \dots, $M$.
+\end{definition*}
+
+
+
+
 
 \section{Conclusion}
 % The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
