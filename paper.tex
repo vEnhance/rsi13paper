@@ -7,10 +7,11 @@ Given a sequence of consisting of the letters $s$ and $t$ of length $n$, as well
 
 Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:prelim_probstate}.  
 
-% TODO change this
-We then do a bunch of nonsense.
+TODO: Add road map once I figure out what results I actually have
 
 \section{Preliminaries and Definitions}
+NOTE: If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dotted for readability.
+
 \subsection{An Extended Introduction}
 \label{sec:prelim}
 % \subsection{Coxeter Rings, and the Bott-Samelson Bimodules}
@@ -126,7 +127,7 @@ From the algebraic context given above, one can derive the following relationshi
 	\end{enumerate}
 \end{op}
 
-Furthermore, one can again verify that $\barbell{barbell_blue}$, when on the far left, is simply $\alpha_s$.
+% Furthermore, one can again verify that $\barbell{barbell_blue}$, when on the far left, is simply $\alpha_s$.
 
 
 \subsubsection{Libedinsky's Light Leaves}
@@ -259,7 +260,7 @@ This motivates the main objective of study.
 	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with the same top, can one determine their product based on $\ul a$ and $\ul b$?
 \end{ques*}
 
-Further details on the evaluation of these maps are detailed in section \ref{sec:explain_poly_eval}, but before that we need to introduce certain definitions for clarity.
+Further details on the evaluation of these maps are detailed in section \ref{sec:prelim_explain_poly_eval}, but before that we need to introduce certain definitions for clarity.
 
 % In this question, we will consider only maps with the same top, and we will also work \emph{modulo lower terms}.  This means that any map which has a component that touches either the top or bottom boundary exactly once will be treated as zero.  In that case, using the operations described in section \ref{sec:prelim_genrel}, we can reduce every map to simply multiplying by a polynomial on the left.  The goal is to then compute these polynomials using some combinatorial formula.
 
@@ -366,10 +367,13 @@ Let us make a few convenient definitions.
 Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$, which evaluates as $\alpha_s$.  Similarly, every red barbell is simply $\barbell{barbell_red} = \alpha_t$.
 
 \begin{definition*}
-	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}, which will be numbered from left to right as $0$, $1$, \dots, $k$, where $k$ is the number of fences.
+	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}, which will be numbered from left to right as $0$, $1$, \dots, $k$, where $k$ is the number of fences.  
+\end{definition*}
+\begin{definition*}
+	A component is called \emph{attached} if it is connected to a fence.  Otherwise, it is \emph{free}.  By convention, any attached components belong to the pasture to the left of the associated fence.
 \end{definition*}
 
-We remind the reader that we are working modulo lower terms; any map which contains a ``half fence'' (i.e. a connected component which touches a boundary exactly once) is not considered.
+% We remind the reader that we are working modulo lower terms; any map which contains a ``half fence'' (i.e. a connected component which touches a boundary exactly once) is not considered.
 
 \begin{figure}[ht]
 	\centering
@@ -401,7 +405,7 @@ We remind the reader that we are working modulo lower terms; any map which conta
 \end{figure}
 
 \begin{definition*}
-	A \emph{bubble} is a bounded face alongside with any components contained within it, which are its \emph{contents}.  
+	A \emph{bubble} is a bounded face alongside with any components contained within it, which are its \emph{contents}.  The color of the bubble is the color of the edges which form the bounded face.
 \end{definition*}
 
 \begin{figure}[ht]
@@ -446,15 +450,35 @@ We remind the reader that we are working modulo lower terms; any map which conta
 \end{figure}
 
 \begin{definition*}
-	A \emph{caterpillar} is any connected collection of bubbles.
+	A \emph{caterpillar} is any connected component for which each edge belongs to some bubble (in the caterpillar).  The \emph{size} of the caterpillar is the number of bubbles it is composed of.
 \end{definition*}
 
+Notice that every free component can be expressed as a collection of caterpillars joined by edges.  Furthermore, every attached component can be described as a free component attached by edges to a fence.
 
 \subsection{Representations of Maps as Polynomials}
-% TODO actually do this
+\label{sec:prelim_explain_poly_eval}
 
+In order to study these maps as algebraic structures, we wish to consider full-maps as polynomials in $\RR[x,y][\alpha_s,\alpha_t]$.  Hence, we establish the following conventions:
+\begin{enumerate}
+	\ii The map $x \mapsto fx$ will be abbreviated as $f$ from this point forward.  
+	\par Note that, in particular, $\barbell{barbell_blue} = \alpha_s$.  Furthermore, one can check that, say, $\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}\barbell{alpha_blue} = \alpha_s^2 \alpha_t$.  
+	Please note that $x \mapsto xf$ does not get a similar abbreviation.  So, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \alpha_s$.
+	\ii We will work \emph{modulo lower terms}.  That is, any map which contains a connected component that touches any boundary only once (total) is considered zero.  So, for example, $\barbell{break_blue} = 0$.
+\end{enumerate}
+Henceforth, we will refer to diagrams and their associated polynomials interchangeably.
 
-\section{One-Color Case: Characterizing $\MM_{\SS_n}(\ul a, \ul b)$}
+One can verify that, using the barbell-forcing rules, we can recursively move all barbells to the right, and any ``broken'' walls are reduced to zero, or are contracted.  Hence, any full-diagram can be reduced to linear combinations of maps of the form $x \mapsto \alpha_s^m \alpha_t^n x$.  In other words, every full diagram can be represented as a polynomial in $\RR[x,y][\alpha_s,\alpha_t]$.
+
+In fact, we can even show that, with this new convention, that the following identity holds for every $f$:
+\begin{equation}
+	\barbell{alpha_blue} f = \partial_s(f) \barbell{break_blue} + s(f) \barbell{alpha_blue}
+	\label{eq:barbell_break}
+\end{equation}
+where $\partial_s$ is the Demazure operator defined in section \ref{sec:prelim_genrel}.
+
+The problem statement then becomes to compute the polynomial $\MM_{\ul r}(\ul a, \ul b)$ with a formula in terms of $\ul r$, $\ul a$, $\ul b$.
+
+\section{A Complete Characterization of the One-Color Case}
 In this section we provide a complete characterization for the $\MM_{\SS_n}(\ul a, \ul b)$.  The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
 
 First, we need a criteria to determine the top.  Fortunately, this is extremely easy.
@@ -550,8 +574,7 @@ This lets us state our main result for this section.
 	The formula then follows directly from counting the number of connected components, because each component can be contracted into a single barbell, since any acyclic connected component is merely a tree.
 \end{proof}
 
-\section{Constraints on the Diagrammatics in the Alternating Case}
-\label{sec:caterpillar}
+\section{Constraints in the Alternating Case}
 We now turn our attention to the case of $\ul r = \AA_n$.
 
 In this section we will show several results which show that the possible outputs of a map with base $\AA_n$ are extremely restricted.  We present them below, before providing proofs of each.
@@ -559,9 +582,19 @@ In this section we will show several results which show that the possible output
 	Consider a bubble in a full-diagram with base $\AA_n$.  The contents of the bubble are either a barbell or a caterpillar.
 \end{lemma}
 \begin{corollary}[Caterpillar Corollary]
-	A caterpillar in a full-diagram with base $\AA_n$ evaluates as 
-\end{corollary}<++>
+	Any caterpillar in a full-diagram with base $\AA_n$ evaluates in the form $x^my^n\alpha_s$ if it is blue, or $x^my^n\alpha_t$ is red.
+\end{corollary}
+\begin{theorem}[Pasture Theorem]
+	Consider a full-diagram with $N+1$ pastures with base $\AA_n$, numbered $0$, $1$, \dots, $N$, where $N \ge 1$.  Then
+	\begin{enumerate}[(i)]
+		\ii Pastures $1$ to $N-1$ contain no free components and at most one attached component.
+		\ii Pasture $N$ contains at most one free component, either a caterpillar or a barbell.
+	\end{enumerate}
+\end{theorem}
 
+TODO: Work out details of the proofs.
+
+\section{A Recursion for the Alternating Case}
 
 \section{Conclusion}
 % The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.

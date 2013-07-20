@@ -28,7 +28,8 @@ void draw_break(picture pic = currentpicture, real h = 0.4, pen p = currentpen) 
 }
 
 void sketch(picture pic = currentpicture) {
-	draw(pic, unitcircle, linetype(new real[] {0.1,1.3}) + black);
+	// draw(pic, unitcircle, linetype(new real[] {0.1,1.3}) + black);
+	draw(pic, unitcircle, dotted + black);
 }
 
 picture face;
