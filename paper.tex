@@ -3,7 +3,7 @@
 \section{Introduction}
 We study a class of maps between Bott-Samelson bimodules.  These maps are represented by certain types of diagrams, as described in section \ref{sec:prelim_map}.  The maps are composed by juxtaposition.
 
-Given a sequence of consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libednisky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
+Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libednisky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
 
 Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:prelim_probstate}.  
 
@@ -12,7 +12,7 @@ TODO: Add road map once I figure out what results I actually have
 \section{Preliminaries and Definitions}
 NOTE: If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
-\subsection{An Extended Introduction}
+\subsection{An Extended Background}
 \label{sec:prelim}
 % \subsection{Coxeter Rings, and the Bott-Samelson Bimodules}
 Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be unit vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then each $v \in V$ is reflected via the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  In particular, $s(\alpha_s) = -\alpha_s$ and $t(\alpha_t) = -\alpha_t$.  Furthermore, we see that there exist fixed constants $x$ and $y$ such that
@@ -23,8 +23,8 @@ Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting o
 Now we define the \emph{Coxeter ring} by $R = \RR[\alpha_s, \alpha_t]$.  Then $W$ acts on $R$ by precisely the same algorithm as described above.
 
 Let $R^s$ be the subring of $R$ which is invariant under $s$.  Define $R^t$ similarly.  Then a \emph{Bott-Samelson bimodule} is a bimodule of the form
-\[ R \otimes_{R^{i_1}} R \otimes_{R^{i_2}} R \otimes_{R^{i_3}} \dots \otimes_{R^{i_n}} R \]
-where each $R^i$ is either $R^s$ or $R^t$.   Elements of such a bimodule will be written in the form $f_0 \mid f_1 \mid \dots \mid f_n$, where $f_i \in R$.
+\[ R \otimes_{R^{i_1}} R \otimes_{R^{i_2}} R \otimes_{R^{i_3}} \dots \otimes_{R^{i_n}} R, \]
+where each $i_j$ is either $s$ or $t$.   Elements of such a bimodule will be written in the form $f_0 \mid f_1 \mid \dots \mid f_n$, where $f_i \in R$.
 
 We will consider maps between these bimodules that preserve left and right actions; that is, we consider the maps $\sigma$ such that
 \begin{equation}
@@ -71,9 +71,11 @@ The vertices on the boundary are by convention not explicitly shown, but are non
 	\label{fig:example_diagram}
 \end{figure}
 
-The elements of $\DD$ by simply adding corresponding coefficients.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels coincide, and is $0$ otherwise.
+An example of such a diagram is shown in figure \ref{fig:example_diagram}.
 
-In \cite{basispf}, Khovanova and Elias show that all such maps can be expressed as a linear combination of these diagrams.
+The elements of $\DD$ can be added by simply adding corresponding coefficients.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels on the bottom of the first coincide with those on the top of the second.  Otherwise, the product is $0$.
+
+In \cite{basispf}, Khovanov and Elias show that all such maps can be expressed as a linear combination of these diagrams.
 
 \subsubsection{Algebraic Context}
 The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by simply transcribing the tensor products to take.  For example, a map with bottom $stt$ and top $s$ represents a map from $R \stimes R \ttimes R \ttimes R$ to $R \stimes R$.  An unlabelled domain corresponds to $R$.
@@ -83,7 +85,7 @@ Let us hasten to introduce one final definition.
 	The \emph{Demazure operator} $\partial_s$ is given by $f \mapsto \frac{f - sf}{\alpha_s}$.
 \end{definition*}
 
-With this, we can now describe the ``primitive'' maps for blue lines in table \ref{tab:prim_maps}.  The corresponding equations hold for red in $t$.
+With this, we can now describe the ``primitive'' maps for blue lines in Table~\ref{tab:prim_maps}.  The corresponding equations hold for red in $t$.
 
 \begin{table}[ht]
 	\[
@@ -186,7 +188,7 @@ From the algebraic context given above, one can derive the following relationshi
 	\label{fig:lightleaf_example}
 \end{figure}
 
-Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any any binary string $\ul b$ of length $n$, we can construct a diagram based on a series of rules.
+Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any binary string $\ul b$ of length $n$, we can construct a diagram based on a series of rules.
 
 Each bit of $\ul b$ is read from left to right in order and designated either up or down.  We say that a bit $x$ is an \emph{open neighbor} of $y$ if $x$ is marked up, $x$ and $y$ have the same color, and there are no other bits marked up between $x$ and $y$.
 \begin{itemize}
@@ -207,7 +209,7 @@ These light leaves are interesting because, in the seventh chapter of \cite{span
 
 \subsubsection{Problem Statement}
 \label{sec:prelim_probstate}
-Recall that maps are multiplied by simply placing them on top of each other.  The operations are then applied to simplify the product.
+Recall that maps are multiplied by simply placing them on top of each other.  The operations are then applied to simplify the product.  An example is shown in figure \ref{fig:example_compose}.
 
 \begin{figure}[ht]
 	\centering
@@ -246,6 +248,7 @@ Recall that maps are multiplied by simply placing them on top of each other.  Th
 	draw((-1,0)--(7,0));
 	\end{asy}
 	\caption{An example of composing two maps, 1001100 and 1001001.}
+	\label{fig:example_compose}
 \end{figure}
 
 \begin{definition*}
@@ -277,7 +280,7 @@ and the ``alternating'' string
 		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2} \\
 	\end{cases}.
 \]
-Similarly, let $\AA_n'$ denote $AA_n$, except with the roles of $s$ and $t$ switched.  Note that $\AA_0 = \AA_0' = \varnothing$.
+Similarly, let $\AA_n'$ denote $\AA_n$, except with the roles of $s$ and $t$ switched.  Note that $\AA_0 = \AA_0' = \varnothing$.
 
 In general, a string of $s$'s and $t$'s will be referred to as an \emph{expression}.  In the case where there are no consecutive identical characters (e.g. $\AA_n$), we will refer to them as \emph{reduced expressions}.
 
@@ -293,6 +296,8 @@ Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul 
 Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
 
 Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.  Furthermore, the line on which the anchors lie will be called the \emph{anchorline}.
+
+An example of a full-map with base $\AA_5$ is given in figure \ref{fig:example_full_map}.
 
 \begin{figure}[ht]
 	\centering
@@ -322,6 +327,7 @@ Recall that the light leaves are based off a sequence of vertices at the bottom 
 		draw((-1,0)--(5,0));
 	\end{asy}
 	\caption{A full-map with base $ststs$, hence with five anchors.  The top is $\varnothing$.}
+	\label{fig:example_full_map}
 \end{figure}
 
 % We will now abuse notation further and refer even to components by polynomials, when the map is left alone.  For example, $\barbell{alpha_blue}\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}$ might be referred interchangeably with $\barbell{alpha_blue} \alpha_s^2 \alpha_t$.  Note that, even though we may write $\barbell{alpha_blue} = 1$, we still have $\barbell{alpha_blue} \alpha_s^2\alpha_t \neq \alpha_s^2\alpha_t$, because we strictly require left multiplication as the accepted convention.
@@ -363,12 +369,13 @@ Let us make a few convenient definitions.
 		draw((-1,0)--(10,0));
 	\end{asy}
 	\caption{Two blue barbells with a very twisted fence, which creates two pastures.}
+	\label{fig:def_barbell_fence}
 \end{figure}
 
 \begin{definition*}
 	A connected component which (i) is a tree, and (ii) does not touch the top or bottom boundaries is called a \emph{barbell}.
 \end{definition*}
-Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$, which evaluates as $\alpha_s$.  Similarly, every red barbell is simply $\barbell{barbell_red} = \alpha_t$.
+Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$, which we will see later evaluates as $\alpha_s$.  Similarly, every red barbell is simply $\barbell{barbell_red} = \alpha_t$.
 
 \begin{definition*}
 	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}, which will be numbered from left to right as $0$, $1$, \dots, $k$, where $k$ is the number of fences.  
@@ -376,6 +383,9 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 \begin{definition*}
 	A component is called \emph{attached} if it is connected to a fence.  Otherwise, it is \emph{free}.  By convention, any attached components belong to the pasture to the left of the associated fence.
 \end{definition*}
+An example of a fence complete with two barbells is given in figure \ref{fig:def_barbell_fence}.
+
+Next, we name some recurrent characters in our work.
 
 % We remind the reader that we are working modulo lower terms; any map which contains a ``half fence'' (i.e. a connected component which touches a boundary exactly once) is not considered.
 
@@ -406,6 +416,7 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 		draw((-1,0)--(4,0));
 	\end{asy}
 	\caption{A blue bubble with two barbells inside it.}
+	\label{fig:def_bubble}
 \end{figure}
 
 \begin{definition*}
@@ -414,6 +425,8 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 \begin{definition*}
 	We say that the bubble $B$ \emph{holds} a component $c$ if $c$ is inside $B$, but there is no other bubble $B'$ inside $B$ which contains $c$.  
 \end{definition*}
+
+An example of a bubble is given in figure~\ref{fig:def_bubble}.
 
 \begin{figure}[ht]
 	\centering
@@ -454,14 +467,13 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 		draw((-1,0)--(7,0));
 	\end{asy}
 	\caption{A caterpillar made of three bubbles}
+	\label{fig:def_caterpillar}
 \end{figure}
 
 \begin{definition*}
 	A \emph{caterpillar} consists of a free component and the contents of any bubbles it contains.  A caterpillar \emph{holds} a component if some bubble of the caterpillar holds it.
 \end{definition*}
-\begin{remark*}
-	Notice that any barbell or bubble is a special case of a caterpillar.
-\end{remark*}
+An example of a caterpillar is given in figure~\ref{fig:def_caterpillar}.  Notice that any barbell or bubble is a special case of a caterpillar.
 
 
 \subsection{Representations of Maps as Polynomials}
@@ -525,7 +537,7 @@ This lets us state our main result for this section.
 		\MM_{\SS_n} \left( \ul a, \ul b \right)
 		=
 		\begin{cases}
-			0 & \text{if } \exists 1 \le i \le n-1: \ul a^\ast[i] = \ul b^\ast[i] = 1 \\
+			0 & \text{if }\ \exists 1 \le i \le n-1:\ \ul a^\ast[i] = \ul b^\ast[i] = 1 \\
 			\alpha_s^{n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast) - \ul a^\ast[n]} & \text{otherwise}
 		\end{cases}.
 	\]
@@ -566,9 +578,10 @@ This lets us state our main result for this section.
 		label(currentpicture, "s", (7,-0.8*h), dir(90));
 	\end{asy}
 	\caption{A half-map with base $\SS_8$.}
+	\label{fig:pf_trivial_theorem_example}
 \end{figure}
 \begin{proof}
-	We will only consider the case where $\Top \ul a = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.
+	We will only consider the case where $\Top \ul a = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.  See figure \ref{fig:pf_trivial_theorem_example} for a example of such a map.
 
 	Number the anchors $1$, $2$, $\dots$ from left to right.
 
@@ -584,8 +597,6 @@ This lets us state our main result for this section.
 \end{proof}
 
 \section{Counting Maps}
-TODO: Write up / prove the formula for number of maps from $A$ to $B$.
-
 For each expression $\ul T$ and $\ul r$, we give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul T$.  One can check that, by construction, $\Top(\ul b)$ is always a reduced expression.
 
 \begin{definition*}
@@ -594,14 +605,13 @@ For each expression $\ul T$ and $\ul r$, we give a formula for the number of bin
 For example, $R(sststttts) = ststs$.
 
 \begin{theorem}
-	Let $\ul r$ be an expression of length $t$, and suppose $R(\ul r) = \AA_n$.
+	Let $\ul r$ be an expression of length $\ell$, and suppose $R(\ul r) = \AA_n$.
 	\begin{enumerate}
-		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{t-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r}(\ul b)$.
-		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{t-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r}(\ul b)$.
+		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r}(\ul b)$.
+		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r}(\ul b)$.
 	\end{enumerate}
 \end{theorem}
 
-TODO: Add proof.  
 
 \section{Constraints in the Alternating Case}
 We now turn our attention to the case of $\ul r = \AA_n$.
@@ -625,49 +635,12 @@ In this section we will show several results which show that the possible output
 \end{theorem}
 
 \subsection{Proof of the Bubble Theorem}
-% We prove theorem \ref{thm:bubble}.
 
-\begin{figure}[ht]
-	\centering
-	\begin{asy}
-		size(5cm);
-		real h = 0.7;
-		pen s = blue, t = red + dashed + 0.6;
-		pen dot_s = blue, dot_t = red;
-		int n = 8;
-
-		picture one;
-		draw(one, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
-		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
-		draw(one, (0,0)--(0,h/2)..((0+7)/2.0,h*7)..(7,h/2)--(7,0), s);
-		draw(one, (2,0)--(2,h), s);
-		dot(one, (2,h), dot_s);
-		draw(one, (5,0)--(5,h), s);
-		dot(one, (5,h), dot_s);
-
-		picture two;
-		draw(two, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
-		draw(two, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
-		draw(two, (0,0)--(0,h/2)..((0+7)/2.0,h*7)..(7,h/2)--(7,0), s);
-		draw(two, (2,0)--(2,h), s);
-		dot(two, (2,h), dot_s);
-		draw(two, (5,0)--(5,h), s);
-		dot(two, (5,h), dot_s);
-
-		add(one); add(reflect((0,0),(1,0))*two);
-		draw((-1,0)--(8,0));
-	\end{asy}
-	\caption{The bubble theorem is not true for non-alternating sequences.}
-\end{figure}
 Consider a bubble $B$ and assume without loss of generality that it is blue.  First, we verify that $B$ is nonempty.  Take any pair of blue anchors on the boundary of $B$.  Then there must be a red point between these two anchors, and it follows that there exists a component of red color inside the bubble, and hence at least one caterpillar.
 
 Now we verify that there is at most one caterpillar.  Clearly any caterpillars held in the bubble must be red.  Now assume on the contrary that there are at least two caterpillars.  
 
 TODO: Finish this.  
-% We claim there exists a blue anchor which is not contained inside any bubble.
-%Consider the portion of the anchorline which is in the on or inside $B$, and view it as a collection of intervals in $\RR$.  Let us call this set $S \subset \RR$.  For every red bubble, color red the portion of $S$ which is contained inside it or on the boundary, and call this collection $R \subset S$.  Two bubbles are connected if the portion of $S$ they mark touches, even at an endpoint\footnote{But the converse is not true}.  Since there are at least two caterpillars, there must thus be two intervals in $R$, generated by bubbles from different caterpillars, with no red color between them.  (Otherwise, all the red bubbles are connected and are hence part of a single caterpillar.) Since the endpoints of all intervals in $R$ are red anchors, we obtain a blue anchor that is not contained in any red bubble.  
-
-% Because the caterpillars are disjoint and not contained in each other, it is possible to draw a path in the plane such that each caterpillar is on one side of this path.  
 
 \subsection{Proof of the Caterpillar Theorem}
 We will now derive the Caterpillar Theorem as a consequence of the Bubble Theorem.  
@@ -683,10 +656,10 @@ First, a few definitions for this section only.
 	We perform induction on the size of the caterpillar. 
 	If there are no bubbles, then the caterpillar is simply a barbell (because it is a tree, which contracts to a barbell).
 	This is the base step.
-	For the inductive step, consider an arbitrary bubble.  Inside it is exactly one caterpillar, say $c$, by the Bubble Theorem.  Because the caterpillar has nesting level $0$, that caterpillar is merely a barbell, and hence is either $\alpha_s$ or $\alpha_t$.
-	Applying the barbell-forcing rule of equation \eqref{eq:barbell_break} generates two terms; one of them is zero because it creates a new empty bubble, and one of them is one of $\left\{ x,y \right\}$ times the same diagram with the cycle cut open and the contents removed.  The inductive hypothesis now applies directly, and this completes the induction.
+	For the inductive step, consider an arbitrary bubble.  Inside it is exactly one caterpillar, say $c$, by the Bubble Theorem.  Because the original caterpillar has nesting level $0$, we deduce $c$ is merely a barbell, and hence is either $\alpha_s$ or $\alpha_t$.
+	Applying the barbell-forcing rule of equation \eqref{eq:barbell_break} generates two terms.  One of them is zero because it creates a new empty bubble. The other the original diagram with the cycle cut open and the contents removed, multiplied by one of $\left\{ x,y \right\}$.  The inductive hypothesis now applies directly, and this completes the first induction.
 
-	Now suppose a caterpillar has nesting level $k \ge 1$.  We simply apply the exact same induction on the size as before.  The only modification is that, instead of a barbell, we have a caterpillar with nesting level strictly less than $k$.  However, these caterpillars all evaluate as a polynomial again of the form $x^my^n \alpha_s$ or $x^my^n\alpha_t$, by the outer inductive hypothesis.  So applying equation \eqref{eq:barbell_break} in the same manner completes this induction as well.
+	Now suppose a caterpillar has nesting level $k \ge 1$.  We simply apply the exact same induction on size as before.  The only modification is that, instead of a barbell, we have a caterpillar with nesting level strictly less than $k$.  However, these caterpillars all evaluate as a polynomial again of the form $x^my^n \alpha_s$ or $x^my^n\alpha_t$, by the outer inductive hypothesis.  So applying equation \eqref{eq:barbell_break} in the same manner completes this induction as well.
 \end{proof}
 
 \subsection{Proof of the Pasture Theorem}
