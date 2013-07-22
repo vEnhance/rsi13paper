@@ -10,7 +10,7 @@ Because the technical description of the problem statement is quite involved, we
 TODO: Add road map once I figure out what results I actually have
 
 \section{Preliminaries and Definitions}
-NOTE: If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dotted for readability.
+NOTE: If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
 \subsection{An Extended Introduction}
 \label{sec:prelim}
@@ -277,7 +277,11 @@ and the ``alternating'' string
 		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2} \\
 	\end{cases}.
 \]
-Let $\BB_n$ denote the set of binary strings of length $n$.
+Similarly, let $\AA_n'$ denote $AA_n$, except with the roles of $s$ and $t$ switched.  Note that $\AA_0 = \AA_0' = \varnothing$.
+
+In general, a string of $s$'s and $t$'s will be referred to as an \emph{expression}.  In the case where there are no consecutive identical characters (e.g. $\AA_n$), we will refer to them as \emph{reduced expressions}.
+
+Next, let $\BB_n$ denote the set of binary strings of length $n$.
 
 Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
 
@@ -285,10 +289,10 @@ Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and
 Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the appropriate map (or its associated diagram;
 we will refer to maps and their associated diagrams interchangably) formed by a single application of the light leaves.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r} \ul b$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
 
-Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  % (Recall that we are abusing notation in such products, and will simply refer to the map $g \mapsto fg$ as $f$ from this point on.)  
+Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  
 Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
 
-Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.
+Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.  Furthermore, the line on which the anchors lie will be called the \emph{anchorline}.
 
 \begin{figure}[ht]
 	\centering
@@ -405,7 +409,10 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 \end{figure}
 
 \begin{definition*}
-	A \emph{bubble} is a bounded face alongside with any components contained within it, which are its \emph{contents}.  The color of the bubble is the color of the edges which form the bounded face.
+	A \emph{bubble} is a bounded face alongside with any components contained within it.  The \emph{color} of the bubble is the color of the edges which form the bounded face.  
+\end{definition*}
+\begin{definition*}
+	We say that the bubble $B$ \emph{holds} a component $c$ if $c$ is inside $B$, but there is no other bubble $B'$ inside $B$ which contains $c$.  
 \end{definition*}
 
 \begin{figure}[ht]
@@ -450,10 +457,12 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 \end{figure}
 
 \begin{definition*}
-	A \emph{caterpillar} is any connected component for which each edge belongs to some bubble (in the caterpillar).  The \emph{size} of the caterpillar is the number of bubbles it is composed of.
+	A \emph{caterpillar} consists of a free component and the contents of any bubbles it contains.  A caterpillar \emph{holds} a component if some bubble of the caterpillar holds it.
 \end{definition*}
+\begin{remark*}
+	Notice that any barbell or bubble is a special case of a caterpillar.
+\end{remark*}
 
-Notice that every free component can be expressed as a collection of caterpillars joined by edges.  Furthermore, every attached component can be described as a free component attached by edges to a fence.
 
 \subsection{Representations of Maps as Polynomials}
 \label{sec:prelim_explain_poly_eval}
@@ -467,7 +476,7 @@ In order to study these maps as algebraic structures, we wish to consider full-m
 \end{enumerate}
 Henceforth, we will refer to diagrams and their associated polynomials interchangeably.
 
-One can verify that, using the barbell-forcing rules, we can recursively move all barbells to the right, and any ``broken'' walls are reduced to zero, or are contracted.  Hence, any full-diagram can be reduced to linear combinations of maps of the form $x \mapsto \alpha_s^m \alpha_t^n x$.  In other words, every full diagram can be represented as a polynomial in $\RR[x,y][\alpha_s,\alpha_t]$.
+One can verify that, using the barbell-forcing rules, we can recursively move all barbells to the left, and any ``broken'' walls are reduced to zero, or are contracted.  Hence, any full-diagram can be reduced to linear combinations of maps of the form $x \mapsto \alpha_s^m \alpha_t^n x$.  In other words, every full diagram can be represented as a polynomial in $\RR[x,y][\alpha_s,\alpha_t]$.
 
 In fact, we can even show that, with this new convention, that the following identity holds for every $f$:
 \begin{equation}
@@ -479,7 +488,7 @@ where $\partial_s$ is the Demazure operator defined in section \ref{sec:prelim_g
 The problem statement then becomes to compute the polynomial $\MM_{\ul r}(\ul a, \ul b)$ with a formula in terms of $\ul r$, $\ul a$, $\ul b$.
 
 \section{A Complete Characterization of the One-Color Case}
-In this section we provide a complete characterization for the $\MM_{\SS_n}(\ul a, \ul b)$.  The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
+In this section we provide a complete characterization for the $\MM_{\SS_n}(\ul a, \ul b)$.  % The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
 
 First, we need a criteria to determine the top.  Fortunately, this is extremely easy.
 \begin{definition*}
@@ -574,27 +583,119 @@ This lets us state our main result for this section.
 	The formula then follows directly from counting the number of connected components, because each component can be contracted into a single barbell, since any acyclic connected component is merely a tree.
 \end{proof}
 
+\section{Counting Maps}
+TODO: Write up / prove the formula for number of maps from $A$ to $B$.
+
+For each expression $\ul T$ and $\ul r$, we give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul T$.  One can check that, by construction, $\Top(\ul b)$ is always a reduced expression.
+
+\begin{definition*}
+	Let $R(\ul r)$ denote the $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
+\end{definition*}
+For example, $R(sststttts) = ststs$.
+
+\begin{theorem}
+	Let $\ul r$ be an expression of length $t$, and suppose $R(\ul r) = \AA_n$.
+	\begin{enumerate}
+		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{t-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r}(\ul b)$.
+		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{t-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r}(\ul b)$.
+	\end{enumerate}
+\end{theorem}
+
+TODO: Add proof.  
+
 \section{Constraints in the Alternating Case}
 We now turn our attention to the case of $\ul r = \AA_n$.
 
 In this section we will show several results which show that the possible outputs of a map with base $\AA_n$ are extremely restricted.  We present them below, before providing proofs of each.
-\begin{lemma}[Bubble Lemma]
-	Consider a bubble in a full-diagram with base $\AA_n$.  The contents of the bubble are either a barbell or a caterpillar.
-\end{lemma}
-\begin{corollary}[Caterpillar Corollary]
+\begin{theorem}[Bubble Theorem]
+	Consider a bubble in a full-diagram with base $\AA_n$.  The bubble holds exactly one caterpillar.
+	\label{thm:bubble}
+\end{theorem}
+\begin{theorem}[Caterpillar Theorem]
 	Any caterpillar in a full-diagram with base $\AA_n$ evaluates in the form $x^my^n\alpha_s$ if it is blue, or $x^my^n\alpha_t$ is red.
-\end{corollary}
+	\label{thm:caterpillar}
+\end{theorem}
 \begin{theorem}[Pasture Theorem]
-	Consider a full-diagram with $N+1$ pastures with base $\AA_n$, numbered $0$, $1$, \dots, $N$, where $N \ge 1$.  Then
+	Consider a full-diagram with $N+1$ pastures (numbered $0$, $1$, \dots, $N$) with base $\AA_n$ and top $T$.  Suppose further that $N \ge 1$ (or equivalently, $T \neq \varnothing$).  Then:
 	\begin{enumerate}[(i)]
-		\ii Pastures $1$ to $N-1$ contain no free components and at most one attached component.
-		\ii Pasture $N$ contains at most one free component, either a caterpillar or a barbell.
+		\ii Pastures $1$ through $N-1$ contain either nothing or a free component.
+		\ii Pasture $N$ contains nothing if $T[N] \neq \AA_n[n]$, and contains a single caterpillar otherwise.
 	\end{enumerate}
+	\label{thm:pasture}
 \end{theorem}
 
-TODO: Work out details of the proofs.
+\subsection{Proof of the Bubble Theorem}
+% We prove theorem \ref{thm:bubble}.
+
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(5cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 8;
+
+		picture one;
+		draw(one, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
+		draw(one, (0,0)--(0,h/2)..((0+7)/2.0,h*7)..(7,h/2)--(7,0), s);
+		draw(one, (2,0)--(2,h), s);
+		dot(one, (2,h), dot_s);
+		draw(one, (5,0)--(5,h), s);
+		dot(one, (5,h), dot_s);
+
+		picture two;
+		draw(two, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(two, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
+		draw(two, (0,0)--(0,h/2)..((0+7)/2.0,h*7)..(7,h/2)--(7,0), s);
+		draw(two, (2,0)--(2,h), s);
+		dot(two, (2,h), dot_s);
+		draw(two, (5,0)--(5,h), s);
+		dot(two, (5,h), dot_s);
+
+		add(one); add(reflect((0,0),(1,0))*two);
+		draw((-1,0)--(8,0));
+	\end{asy}
+	\caption{The bubble theorem is not true for non-alternating sequences.}
+\end{figure}
+Consider a bubble $B$ and assume without loss of generality that it is blue.  First, we verify that $B$ is nonempty.  Take any pair of blue anchors on the boundary of $B$.  Then there must be a red point between these two anchors, and it follows that there exists a component of red color inside the bubble, and hence at least one caterpillar.
+
+Now we verify that there is at most one caterpillar.  Clearly any caterpillars held in the bubble must be red.  Now assume on the contrary that there are at least two caterpillars.  
+
+TODO: Finish this.  
+% We claim there exists a blue anchor which is not contained inside any bubble.
+%Consider the portion of the anchorline which is in the on or inside $B$, and view it as a collection of intervals in $\RR$.  Let us call this set $S \subset \RR$.  For every red bubble, color red the portion of $S$ which is contained inside it or on the boundary, and call this collection $R \subset S$.  Two bubbles are connected if the portion of $S$ they mark touches, even at an endpoint\footnote{But the converse is not true}.  Since there are at least two caterpillars, there must thus be two intervals in $R$, generated by bubbles from different caterpillars, with no red color between them.  (Otherwise, all the red bubbles are connected and are hence part of a single caterpillar.) Since the endpoints of all intervals in $R$ are red anchors, we obtain a blue anchor that is not contained in any red bubble.  
+
+% Because the caterpillars are disjoint and not contained in each other, it is possible to draw a path in the plane such that each caterpillar is on one side of this path.  
+
+\subsection{Proof of the Caterpillar Theorem}
+We will now derive the Caterpillar Theorem as a consequence of the Bubble Theorem.  
+
+First, a few definitions for this section only.
+\begin{definition*}
+	Consider a caterpillar $C$ in a full-diagram with base $\AA_n$.  Define the \emph{nesting level} of the caterpillar as the largest integer $n$ for which there exists caterpillars $C = C_0$, $C_1$, $C_2$, $\dots$, $C_n$ such that $C_i$ holds $C_{i+1}$ for each $i=0,1,\dots,n-1$.  Define the \emph{size} of the caterpillar to be the number of bubbles it contains.
+\end{definition*}
+
+\begin{proof}[Proof of Theorem \ref{thm:caterpillar}]
+	The proof is by double induction.  First we will consider caterpillars with nesting level $0$.  
+
+	We perform induction on the size of the caterpillar. 
+	If there are no bubbles, then the caterpillar is simply a barbell (because it is a tree, which contracts to a barbell).
+	This is the base step.
+	For the inductive step, consider an arbitrary bubble.  Inside it is exactly one caterpillar, say $c$, by the Bubble Theorem.  Because the caterpillar has nesting level $0$, that caterpillar is merely a barbell, and hence is either $\alpha_s$ or $\alpha_t$.
+	Applying the barbell-forcing rule of equation \eqref{eq:barbell_break} generates two terms; one of them is zero because it creates a new empty bubble, and one of them is one of $\left\{ x,y \right\}$ times the same diagram with the cycle cut open and the contents removed.  The inductive hypothesis now applies directly, and this completes the induction.
+
+	Now suppose a caterpillar has nesting level $k \ge 1$.  We simply apply the exact same induction on the size as before.  The only modification is that, instead of a barbell, we have a caterpillar with nesting level strictly less than $k$.  However, these caterpillars all evaluate as a polynomial again of the form $x^my^n \alpha_s$ or $x^my^n\alpha_t$, by the outer inductive hypothesis.  So applying equation \eqref{eq:barbell_break} in the same manner completes this induction as well.
+\end{proof}
+
+\subsection{Proof of the Pasture Theorem}
+TODO
 
 \section{A Recursion for the Alternating Case}
+In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM(\ul a, \ul b)$.
+
+TODO: Write this section.
 
 \section{Conclusion}
 % The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
