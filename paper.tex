@@ -597,7 +597,7 @@ This lets us state our main result for this section.
 \end{proof}
 
 \section{Counting Maps}
-For each expression $\ul T$ and $\ul r$, we give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul T$.  One can check that, by construction, $\Top(\ul b)$ is always a reduced expression.
+We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r} \ul b = \ul T$ for each expression $\ul T$ and $\ul r$.  One can check that, by construction, $\Top \ul b$ is always a reduced expression.
 
 \begin{definition*}
 	Let $R(\ul r)$ denote the $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
@@ -607,10 +607,18 @@ For example, $R(sststttts) = ststs$.
 \begin{theorem}
 	Let $\ul r$ be an expression of length $\ell$, and suppose $R(\ul r) = \AA_n$.
 	\begin{enumerate}
-		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r}(\ul b)$.
-		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r}(\ul b)$.
+		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r} \ul b$.
+		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r} \ul b$.
 	\end{enumerate}
+	\label{thm:count_maps}
 \end{theorem}
+Of course, if $\ul r$ begins with the character $t$, then one can simply reverse the roles of $s$ and $t$ in the above theorem to obtain an analogous formula.
+
+The main idea of the proof is to reduce the problem to the case when $\ell = n$, and then apply induction on $n$.  We fill in the details below.
+
+\begin{proof}[Proof of Theorem \ref{thm:count_maps}]
+	First we will resolve the case where $\ul r = \AA_n$.  This follows basically immediately by induction on $n$.  
+\end{proof}
 
 
 \section{Constraints in the Alternating Case}
@@ -666,16 +674,17 @@ First, a few definitions for this section only.
 TODO
 
 \section{A Recursion for the Alternating Case}
-In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM(\ul a, \ul b)$.
+In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
 
-TODO: Write this section.
 
 \section{Conclusion}
 % The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
 
 \section{Acknowledgments} 
-I offer my sincerest gratitude\footnote{That sounded horribly fake, but really, I mean it.  You guys are the best.  Thank you for a great project.} to my mentor Mr. Francisco Unda for daily mentorship, and Dr. Benjamin Elias for providing the project and for often meeting with me personally to discuss it.
-I further wish to thank the MIT Math Department, and in particular the head mentor Dr. Tanya Khovanova, for organizing the Math RSI, providing individual discussion with each student outside of the mentorship, as well as organizing additional meetings and lectures.
+I offer my sincerest gratitude to my mentor Mr. Francisco Unda for daily mentorship, and Dr. Benjamin Elias for providing the project and for often meeting with me personally to discuss it.
+That sounded horribly fake, but really, I mean it.  You guys are the best.  Thank you for a great project.
+
+I further wish to thank the MIT Math Department, and in particular the head mentor Dr. Tanya Khovanova, for organizing the Math RSI and providing individual discussion with me.
 I also wish to thank my tutor Mr. Antoni Rangachev for his invaluable advice in preparing both this paper and my final presentation.
 Finally, I would like to thank the Center for Excellence in Education and the Research Science Institute for generously providing the facilities for the research.
 
