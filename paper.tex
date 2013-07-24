@@ -10,7 +10,7 @@ Because the technical description of the problem statement is quite involved, we
 TODO: Add road map once I figure out what results I actually have
 
 \section{Preliminaries and Definitions}
-NOTE: If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
+\textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
 \subsection{An Extended Background}
 \label{sec:prelim}
@@ -514,6 +514,7 @@ First, we need a criteria to determine the top.  Fortunately, this is extremely 
 			s & \text{if } \pi_1(\ul b) \equiv 1 \pmod{2} \\
 		\end{cases}.
 		\]
+	\label{prop:s_top}
 \end{proposition}
 \begin{proof}
 	Straightforward induction on $n$.  
@@ -525,7 +526,7 @@ Subsequently, we make the following definition.
 	\[
 		\ul b^\ast [i] = 
 		\begin{cases}
-			1 & \text{if } b[1] + b[2] + \dots + b[i] \equiv 1 \pmod{2} \\
+			1 & \text{if } \ul b[1] + \ul b[2] + \dots + \ul b[i] \equiv 1 \pmod{2} \\
 			0 & \text{otherwise}
 		\end{cases}.
 	\]
@@ -541,6 +542,7 @@ This lets us state our main result for this section.
 			\alpha_s^{n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast) - \ul a^\ast[n]} & \text{otherwise}
 		\end{cases}.
 	\]
+	\label{thm:s_eval}
 \end{theorem}
 \begin{figure}[ht]
 	\centering
@@ -583,11 +585,11 @@ This lets us state our main result for this section.
 \begin{proof}
 	We will only consider the case where $\Top \ul a = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.  See figure \ref{fig:pf_trivial_theorem_example} for a example of such a map.
 
-	Number the anchors $1$, $2$, $\dots$ from left to right.
+	Number the anchors $1$, $2$, \dots from left to right.
 
-	For a half-map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the anchors which it touches.  Note that the antennae always form a single contiguous sequence of anchors.
+	For a half-map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the anchors which it touches.  Note that the antennae of a component always form a single contiguous sequence of anchors.
 
-	Now, we observe that for each $1 \le i \le n-1$, we have that $\ul a^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component.
+	The key observation is that for $1 \le i \le n-1$, we have that $\ul b^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component in $\MM(\ul b)$.  This follows by construction.
 
 	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$ to obtain a full-map.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because the two antenna combine to form an empty bubble.  Furthermore, it is easy to see that any bubbles must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
 
@@ -600,13 +602,13 @@ This lets us state our main result for this section.
 We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r} \ul b = \ul T$ for each expression $\ul T$ and $\ul r$.  One can check that, by construction, $\Top \ul b$ is always a reduced expression.
 
 \begin{definition*}
-	Let $R(\ul r)$ denote the $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
+	Let $R(\ul r)$ denote $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
 \end{definition*}
 For example, $R(sststttts) = ststs$.
 
 \begin{theorem}
 	Let $\ul r$ be an expression of length $\ell$, and suppose $R(\ul r) = \AA_n$.
-	\begin{enumerate}
+	\begin{enumerate}[(i)]
 		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r} \ul b$.
 		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r} \ul b$.
 	\end{enumerate}
@@ -617,9 +619,10 @@ Of course, if $\ul r$ begins with the character $t$, then one can simply reverse
 The main idea of the proof is to reduce the problem to the case when $\ell = n$, and then apply induction on $n$.  We fill in the details below.
 
 \begin{proof}[Proof of Theorem \ref{thm:count_maps}]
-	First we will resolve the case where $\ul r = \AA_n$.  This follows basically immediately by induction on $n$.  
-\end{proof}
+	First we will resolve the case where $\ul r = \AA_n$, so that $\ell = n$ and $2^{\ell-n} = 1$.  This follows by induction on $n$.  The main idea is that, for the binary strings of length $n$, we consider those that end with $1$ and those that end with $0$.  Those that end with a $0$ have the same top when the trailing $0$ is deleted, whilst those with end bit $1$ have a top which differs by one character if the trailing $1$ is deleted.  We simply check that in all eight cases, the binomial coefficients add up to give the new binomial coefficients (via Pascal's identity).  The computation is left to a reader.
 
+	To complete the theorem, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there a $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition \ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$, but with some extra factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
+\end{proof}
 
 \section{Constraints in the Alternating Case}
 We now turn our attention to the case of $\ul r = \AA_n$.
@@ -637,7 +640,7 @@ In this section we will show several results which show that the possible output
 	Consider a full-diagram with $N+1$ pastures (numbered $0$, $1$, \dots, $N$) with base $\AA_n$ and top $T$.  Suppose further that $N \ge 1$ (or equivalently, $T \neq \varnothing$).  Then:
 	\begin{enumerate}[(i)]
 		\ii Pastures $1$ through $N-1$ contain either nothing or a free component.
-		\ii Pasture $N$ contains nothing if $T[N] \neq \AA_n[n]$, and contains a single caterpillar otherwise.
+		\ii Pasture $N$ contains nothing if $T[N] = \AA_n[n]$, and contains a single caterpillar otherwise.
 	\end{enumerate}
 	\label{thm:pasture}
 \end{theorem}
@@ -650,11 +653,11 @@ It's interesting to note that the Bubble Theorem is intuitively very natural.  T
 \begin{proof}[Proof of Theorem \ref{thm:bubble}]
 	Take a bubble $B$ and assume without loss of generality that it is blue.  It is easy to see, by considering two anchors on the boundary of blue, that there is some red anchor inside $B$.  This implies that $B$ has at least one red caterpillar.
 
-	Next, it is easy to verify that all caterpillars held inside $B$ are red, otherwise this contradicts the construction of Libedinsky's light leaves.  Then let $S$ be the set of anchors contained on the boundary of any caterpillars held inside $B$ (in a sense, on the ``outermost'' level).
+	Next, it is easy to verify that all caterpillars held inside $B$ are red, otherwise this contradicts the construction of Libedinsky's light leaves.
 
-	Define a pair of red anchors $u, v \in S$ to be \emph{quasi-connected} if one can draw an arc from $u$ to $v$ contained entirely in one half-map which does not intersect any boundaries of $B$, and furthermore, there is no other pair of red anchors both between $u$ and $v$, inclusive, with this property.
+	Define a pair of red anchors $u, v$, with $u$ to the left of $v$, to be \emph{quasi-connected} if (i) one can draw an arc from $u$ to $v$ contained entirely in one half-map which does not intersect blue lines, and (ii) there is no red anchor $w$ strictly between $u$ and $v$ for which one can draw a similar arc on the same half-map joining $w$ and $v$.
 
-	Now we claim that \textbf{any quasi-connected pair of red anchors is actually joined by a single arc}.  To prove this, take such a quasi-connected pair $u$ and $v$.  Now we'll focus only on the half-map in which the prescribed arc is drawn.  We thus may state that an arc \emph{shields} any anchors between its endpoints.
+	Now we claim that \textbf{any quasi-connected pair of red anchors is actually joined by a single arc}.  To prove this, take such a quasi-connected pair $u$ and $v$.  Now we'll focus only on the half-map in which the prescribed arc is drawn.  We thus may state that an arc \emph{shields} any anchors which lie between its endpoints.
 	
 	\begin{figure}[ht]
 		\centering
@@ -686,12 +689,13 @@ It's interesting to note that the Bubble Theorem is intuitively very natural.  T
 		\caption{Proving the bubble theorem with quasi-connected vertices.}
 		\label{fig:pf_bubble}
 	\end{figure}
-	Because the string is alternating, there exists a blue anchor between $u$ and $v$, say $x$.  Furthermore, there must be some blue arc (of $B$) shielding $u$ and $v$.  By the light-leave construction, there must be some red arc $A$ covering $x$.  If this arc joins $u$ and $v$, then we are done.  Otherwise, it must completely cover either $u$ or $v$ (by quasi-connectedness).  Now we have two cases,
+	Because the string is alternating, we can take a blue anchor $x$ immediately to the left of $v$.  Now, there must be some blue arc shielding $u$ and $v$ (since $u,v$ are inside a blue bubble).  By the light-leave construction, there must be some red arc $A$ covering $x$.  If this arc joins $u$ and $v$, then we are done.  
+	Otherwise, if it has endpoint $v$ then it must completely cover $u$ by condition (ii) of quasi-connectedness; if not, then it must completely cover $v$.  This leads us to two cases.
 	\begin{itemize}
 		\ii If the arc covers exactly one of $u$ or $v$, say $u$, then there must be a blue arc shielding $u$ from $A$.  But then this contradicts the quasi-connectedness, because now it is not possible to join $u$ and $v$ by an arc on this half-map.  This case is illustrated by the left half of figure \ref{fig:pf_bubble}.
-		\ii If the arc covers both $u$ and $v$, then there must be a blue arc which shields both $u$ and $v$, which is itself shielded by $A$.  Then we can repeat the same procedure with this new blue arc.  This case is illustrated by the left half of figure \ref{fig:pf_bubble}.
+		\ii If the arc covers both $u$ and $v$, then there must be a blue arc which shields both $u$ and $v$, which is itself shielded by $A$.  Then we can repeat the same procedure with this new blue arc.  This case is illustrated by the right half of figure \ref{fig:pf_bubble}.
 	\end{itemize}
-	Therefore any pair of quasi-connected anchors must be connected by an arc.  However, it is evident that this implies there is a path of arcs joining any pair of red anchors.  Therefore all red anchors in $S$ must be connected.  So there is a single caterpillar, as desired.
+	Therefore any pair of quasi-connected anchors must be connected by an arc.  However, one can verify that the red anchors in $B$ but not in any other blue bubble are ``connected'' under quasi-connectedness.\footnote{That is, one can follow a sequence of red anchors, each consecutive pair quasi-connected, from any red anchor to any other red anchor.}  Therefore all such red anchors must be connected.  So there is a single caterpillar, as desired.
 \end{proof}
 
 \subsection{Proof of the Caterpillar Theorem}
@@ -709,16 +713,69 @@ First, a few definitions for this section only.
 	If there are no bubbles, then the caterpillar is simply a barbell (because it is a tree, which contracts to a barbell).
 	This is the base step.
 	For the inductive step, consider an arbitrary bubble.  Inside it is exactly one caterpillar, say $c$, by the Bubble Theorem.  Because the original caterpillar has nesting level $0$, we deduce $c$ is merely a barbell, and hence is either $\alpha_s$ or $\alpha_t$.
-	Applying the barbell-forcing rule of equation \eqref{eq:barbell_break} generates two terms.  One of them is zero because it creates a new empty bubble. The other the original diagram with the cycle cut open and the contents removed, multiplied by one of $\left\{ x,y \right\}$.  The inductive hypothesis now applies directly, and this completes the first induction.
+	Applying the barbell-forcing rule of equation \eqref{eq:barbell_break} generates two terms.  One of them is zero because it creates a new empty bubble. The other is the original diagram with the cycle cut open and the contents removed, multiplied by one of $\left\{ x,y \right\}$.  The inductive hypothesis now applies directly, and this completes the first induction.
 
 	Now suppose a caterpillar has nesting level $k \ge 1$.  We simply apply the exact same induction on size as before.  The only modification is that, instead of a barbell, we have a caterpillar with nesting level strictly less than $k$.  However, these caterpillars all evaluate as a polynomial again of the form $x^my^n \alpha_s$ or $x^my^n\alpha_t$, by the outer inductive hypothesis.  So applying equation \eqref{eq:barbell_break} in the same manner completes this induction as well.
 \end{proof}
 
 \subsection{Proof of the Pasture Theorem}
+\begin{figure}[ht]
+	\centering
+	\begin{asy}
+		size(11cm);
+		real h = 0.7;
+		pen s = blue, t = red + dashed + 0.6;
+		pen dot_s = blue, dot_t = red;
+		int n = 6;
+
+		picture before;
+		draw(before, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(before, (2,0)--(2,h), s);
+		dot(before, (2,h), dot_s);
+		draw(before, (5,0)--(5,h), t);
+		dot(before, (5,h), dot_t);
+		draw(before,(0,0)--(0,3*h), s);
+		draw(before,(3,0)--(3,3*h), t);
+		draw(before,(4,0)--(4,3*h), s);
+		dot(before, (3, h/2), dot_t);
+
+		add(before); add(reflect((0,0),(1,0))*before);
+		draw((-1,0)--(6,0));
+
+		picture after;
+		draw(after, (1,0)--(1,h/2)..((1+3)/2.0,h*2)..(3,h/2)--(3,0), t);
+		draw(after, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
+		draw(after, (3,0)--(3,h/2)..((3+7)/2.0,h*4)..(7,h/2)--(7,0), t);
+		draw(after, (0,0)--(0,h/2)..((0+8)/2.0,h*5.5)..(8,h/2)--(8,0), s);
+		draw(after, (2,0)--(2,h), s);
+		dot(after, (2,h), dot_s);
+		draw(after, (5,0)--(5,h), t);
+		dot(after, (5,h), dot_t);
+		dot(after, (3, h/2), dot_t);
+
+		add(shift((9,0)) * after);
+		add(shift((9,0)) * reflect((0,0),(1,0))*after);
+		draw((8,0)--(18,0));
+
+		label("$\to$", (7,0));
+	\end{asy}
+	\caption{In the first diagram, $\ul a = \ul b = 110010$.  In the second, $\ul a' = \ul b' = 110010111$.  Closing the pastures allows us to deduce the Pasture Theorem from the Bubble Theorem.}
+	\label{fig:pf_pasture}
+\end{figure}
+The bubble theorem and the pasture theorem are structurally very similar.  In fact, we will now show a somewhat surprising proof that the Pasture Theorem follows from the Bubble Theorem.
+\begin{proof}[Proof of Theorem \ref{thm:pasture}]
+	Again, let $T$ denote the top, with length $N$.  In the first case, suppose $T[N] \neq \AA_n[n]$; that is, the last characters of $T$ and $\AA_n$ differ.  Then it must be the case that the rightmost anchor is not part of a fence.
+	Now suppose the map arose from $\MM_{\AA_n}(\ul a, \ul b)$.  Let $\ul a'$ be the string formed by appending $N$ $1$'s to $\ul a$, and define $\ul b'$ similarly.  Now consider the map \[ \MM_{\AA_{n+N}} \left( \ul a', \ul b' \right). \]  See figure \ref{fig:pf_pasture} for an example.
+
+	It is easy to verify that the top of this new map is zero.  Now what we have done is enclose the contents of each pasture into bubbles.  The Bubble Theorem tells us that the innermost bubble can have exactly one caterpillar, while the other bubbles must contain only a single caterpillar, which was once a fence.  This implies the Pasture Theorem in the first case.
+
+	The case where $T[N] = \AA_n[n]$ is similar.  We simply append a zero followed by $N$ $1$'s and repeat the same procedure.  The only difference is that the innermost barbell was generated by the $0$ we appended, and thus was not part of the original diagram.
+\end{proof}
 
 
 \section{A Recursion for the Alternating Case}
 In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
+TODO: Write this.
 
 
 \section{Conclusion}
