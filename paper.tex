@@ -1,25 +1,32 @@
 % This is paper.tex
 
 \section{Introduction}
+\textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
+
 We study a class of maps between Bott-Samelson bimodules.  These maps are represented by certain types of diagrams, as described in section \ref{sec:prelim_map}.  The maps are composed by juxtaposition.
+
+TODO: Expand on history, motivation, importance, etc. (meeting Ben on Monday)
 
 Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
 
-Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:prelim_probstate}.  
-
-TODO: Add road map once I figure out what results I actually have
+Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:probstate}.  The results begin by solving the special case of one color completely in section \ref{sec:res_onecolor}.  In section \ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in sections \ref{sec:res_altcase} and \ref{sec:res_altrecurse}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
 
 \section{Preliminaries and Definitions}
-\textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
-
-\subsection{An Extended Background}
 \label{sec:prelim}
+In section \ref{sec:prelim_background}, we provide the background behind the Bott-Samelson bimodules, and the correspondence between these maps and certain diagrams.  We then introduce Libedinsky's light leaves, a basis by which maps can be constructed using binary strings.
+
+In section \ref{sec:prelim_def_notation}, we introduce several definitions which we use throughout the paper.  Next, in section \ref{sec:prelim_explain_poly_eval}, we describe how these maps can be represent as polynomials.  The actual problem statement is then deferred to \ref{sec:probstate}.
+\subsection{An Extended Background}
+\label{sec:prelim_background}
 % \subsection{Coxeter Rings, and the Bott-Samelson Bimodules}
-Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be unit vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then each $v \in V$ is reflected via the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  In particular, $s(\alpha_s) = -\alpha_s$ and $t(\alpha_t) = -\alpha_t$.  Furthermore, we see that there exist fixed constants $x$ and $y$ such that
+Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  In other words, $W$ is the infinite dihedral group with the presentation \[ W = \left<s,t \mid s^2=t^2=1\right>. \] If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then each $v \in V$ is reflected over a hyperplane normal to any $a \in V$ via the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  
+In particular, if $W$ acts on $V$ by this reflection, $s(\alpha_s) = -\alpha_s$ and $t(\alpha_t) = -\alpha_t$.  Furthermore, using the above, we see that there exist fixed constants $x$ and $y$ such that
 \begin{align*}
 	s(\alpha_t) &= \alpha_t + x \alpha_s \\
 	t(\alpha_s) &= \alpha_s + y \alpha_t
 \end{align*}
+Explicitly, $x = \frac{-2(\alpha_s,\alpha_t)}{(\alpha_s, \alpha_s)}$ and $y = \frac{-2(\alpha_t,\alpha_s)}{(\alpha_t,\alpha_t)}$.  Note that $x=y$ if $\left\lvert \alpha_s \right\rvert = \left\lvert \alpha_t \right\rvert$.
+
 Now we define the \emph{Coxeter ring} by $R = \RR[\alpha_s, \alpha_t]$.  Then $W$ acts on $R$ by precisely the same algorithm as described above.
 
 Let $R^s$ be the subring of $R$ which is invariant under $s$.  Define $R^t$ similarly.  Then a \emph{Bott-Samelson bimodule} is a bimodule of the form
@@ -28,7 +35,7 @@ where each $i_j$ is either $s$ or $t$.   Elements of such a bimodule will be wri
 
 We will consider maps between these bimodules that preserve left and right actions; that is, we consider the maps $\sigma$ such that
 \begin{equation}
-	\sigma(rx) = r\sigma(x) \quad\text{and}\quad \sigma(xr) = \sigma(x)r \quad\text{for every $r \in R$ and $x \in \text{Dom } \sigma$}.
+	\sigma(rx) = r\sigma(x) \quad\text{and}\quad \sigma(xr) = \sigma(x)r \quad\text{for every $r \in R$ and $x \in \text{Domain } \sigma$}.
 	\label{eq:respect}
 \end{equation}
 These maps can be represented using diagrammatics, as below.
@@ -36,7 +43,7 @@ These maps can be represented using diagrammatics, as below.
 \subsubsection{Diagrammatics of Maps}
 \label{sec:prelim_map}
 \newcommand{\DD}{\mathcal D}
-Certain maps between Bott-Samleson bimodules can be described in terms of diagrams.  We take a detour and first describe the appearance of such diagrams; in the subsequent section we will explain their algebraic meaning.  A reader who is not interested in this context can simply accept on faith the relations specified in section \ref{sec:prelim_genrel}.
+Certain maps between Bott-Samelson bimodules can be described in terms of diagrams.  We take a detour and first describe the appearance of such diagrams; in the subsequent section we will explain their algebraic meaning.  A reader who is not interested in this context can simply accept on faith the relations specified in section \ref{sec:prelim_genrel}.
 
 Consider a category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below.  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
 
@@ -78,21 +85,21 @@ The elements of $\DD$ can be added by simply adding corresponding coefficients. 
 In \cite{basispf}, Khovanov and Elias show that all such maps can be expressed as a linear combination of these diagrams.
 
 \subsubsection{Algebraic Context}
-The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by simply transcribing the tensor products to take.  For example, a map with bottom $stt$ and top $s$ represents a map from $R \stimes R \ttimes R \ttimes R$ to $R \stimes R$.  An unlabelled domain corresponds to $R$.
+The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by simply transcribing the tensor products to take -- for example, a map with bottom $stt$ and top $s$ represents a map from $R \stimes R \ttimes R \ttimes R$ to $R \stimes R$.  An unlabelled domain corresponds to $R$.
 
 Let us hasten to introduce one final definition.
 \begin{definition*}
-	The \emph{Demazure operator} $\partial_s$ is given by $f \mapsto \frac{f - sf}{\alpha_s}$.
+	The \emph{Demazure operator} $\partial_s: R \to R$ is given by $\partial_s(f) = \frac{f - sf}{\alpha_s}$.
 \end{definition*}
 
-With this, we can now describe the ``primitive'' maps for blue lines in Table~\ref{tab:prim_maps}.  The corresponding equations hold for red in $t$.
+With this, we can now describe the meanings of each type of vertex (for blue lines) in Table~\ref{tab:prim_maps}.  The corresponding equations hold for red in $t$.
 
 \begin{table}[ht]
 	\[
 	\begin{array}{rll}
 		\text{Map} & \text{Modules} & \text{Description} \\[1em]
 		\barbell{half_top} & R \stimes R \to R & 1 \mid 1 \mapsto 1 \\[1em]
-		\barbell{half_bot} & R \to R \ttimes R & 1 \mapsto \half \left( 1 \mid \alpha_s + \alpha_s \mid 1 \right) \\[1em]
+		\barbell{half_bot} & R \to R \stimes R & 1 \mapsto \half \left( 1 \mid \alpha_s + \alpha_s \mid 1 \right) \\[1em]
 		\barbell{tri_down} & R \stimes R \to R \stimes R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \mid 1 \\[1em]
 		\barbell{tri_up} & R \stimes R \stimes R \to R \stimes R & 1 \mid g \mid 1 \mapsto \partial_s(g) \mid 1 \\[1em]
 		\barbell{id} & R \stimes R \to R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \\[1em]
@@ -106,7 +113,7 @@ Note that the descriptions are sufficient to determine outputs for all values be
 
 Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the map in figure \ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
 
-Henceforth we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
+Henceforth, we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
 
 % Subsequently, for any polynomial $f \in R$ we will abuse notation and refer to the map $x \mapsto fx$ by simply $f$.  In particular, one can easily verify that $\barbell{barbell_blue}$ represents $\alpha_s$.  Note that this is \emph{not} in general the same as $x \mapsto xf$ because $x$ may belong to some bimodule rather than to $R$.  Phrased diagrammatically, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \barbell{barbell_blue}\barbell{alpha_blue} = \alpha_s$, for instance.
 
@@ -203,13 +210,33 @@ Each bit of $\ul b$ is read from left to right in order and designated either up
 		\ii Otherwise, create a ``stub'', i.e. a single vertex of degree one, and mark the current bit as down.
 	\end{itemize}
 \end{itemize}
-Finally, join any bits which are up at the end of the process to the opposite end.  An example of such a light leaf is shown in figure \ref{fig:lightleaf_example}.
+Finally, join any bits which are up at the end of the process to the opposite end.  A map which arises in such a manner is called a \emph{light leaf}.  An example of such a light leaf is shown in figure \ref{fig:lightleaf_example}.
 
-These light leaves are interesting because, in the seventh chapter of \cite{span}, it is shown that these light leaves for a ``basis'' in the sense that all maps may be expressed using those generated by light leaves (modulo lower terms).
+These light leaves are interesting because, in the seventh chapter of \cite{span}, it is shown that these light leaves form a ``basis'' in the sense that all maps may be expressed by compositions of these light leaves.
 
-\subsubsection{Problem Statement}
-\label{sec:prelim_probstate}
-Recall that maps are multiplied by simply placing them on top of each other.  The operations are then applied to simplify the product.  An example is shown in figure \ref{fig:example_compose}.
+\subsection{Definitions and Notations}
+\label{sec:prelim_def_notation}
+\subsubsection{Notations for Strings}
+For each positive integer $n$, let us define for convenience the strings
+\[ \SS_n \defeq \underbrace{s \dots s}_{\text{$n$ $s$'s}} \] 
+and the ``alternating'' string
+\[
+	\AA_n \defeq
+	\begin{cases}
+		\underbrace{sts\dots s}_{\text{$n$ letters}} & \text{if } n \equiv 1 \pmod{2} \\
+		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2} \\
+	\end{cases}.
+\]
+Similarly, let $\AA_n'$ denote $\AA_n$, except with the roles of $s$ and $t$ switched.  Note that $\AA_0 = \AA_0' = \varnothing$.
+
+In general, a string of $s$'s and $t$'s will be referred to as an \emph{expression}.  In the case where there are no consecutive identical characters (e.g. $\AA_n$), we will refer to them as \emph{reduced expressions}.
+
+Next, let $\BB_n$ denote the set of binary strings of length $n$.
+
+Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
+
+\subsubsection{Definitions for Maps and Diagram}
+Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the map (or its associated diagram; we will refer to maps and their associated diagrams interchangably) formed by the light leaves.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r} \ul b$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
 
 \begin{figure}[ht]
 	\centering
@@ -247,52 +274,12 @@ Recall that maps are multiplied by simply placing them on top of each other.  Th
 	add(one); add(reflect((0,0),(1,0))*two);
 	draw((-1,0)--(7,0));
 	\end{asy}
-	\caption{An example of composing two maps, 1001100 and 1001001.}
+	\caption{An example of composing two maps, $\MM_{sttstst}(1001100)$ and $\MM_{sttstst}(1001001)$.}
 	\label{fig:example_compose}
 \end{figure}
 
-\begin{definition*}
-	A map is \emph{idempotent} if multiplying it with itself returns the original graph.
-\end{definition*}
-Colloquially, $m^2=m$ if and only if $m$ is idempotent.
+Two maps $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ with identical tops may be composed by juxtaposing $\MM_{\ul r}(\ul a)$ with a flipped copy of $\MM_{\ul r}(\ul b)$; an example of such a composition is given in Figure~\ref{fig:example_compose}.  We will denote this product by $\MM_{\ul r}(\ul a, \ul b)$. % Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  
 
-Fix an $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ will be an idempotent.  This motivates us to construct potential idempotents by taking two light leaves whose top sequences are identical, and composing $A$ upside-down with $B$.  If $AB=1$, then this will yield an idempotent.
-
-This motivates the main objective of study.
-\begin{ques*}
-	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with the same top, can one determine their product based on $\ul a$ and $\ul b$?
-\end{ques*}
-
-Further details on the evaluation of these maps are detailed in section \ref{sec:prelim_explain_poly_eval}, but before that we need to introduce certain definitions for clarity.
-
-% In this question, we will consider only maps with the same top, and we will also work \emph{modulo lower terms}.  This means that any map which has a component that touches either the top or bottom boundary exactly once will be treated as zero.  In that case, using the operations described in section \ref{sec:prelim_genrel}, we can reduce every map to simply multiplying by a polynomial on the left.  The goal is to then compute these polynomials using some combinatorial formula.
-
-
-\subsection{Definitions and Notations}
-\subsubsection{Notations for Strings}
-For each positive integer $n$, let us define for convenience the strings
-\[ \SS_n \defeq \underbrace{s \dots s}_{\text{$n$ $s$'s}} \] 
-and the ``alternating'' string
-\[
-	\AA_n \defeq
-	\begin{cases}
-		\underbrace{sts\dots s}_{\text{$n$ letters}} & \text{if } n \equiv 1 \pmod{2} \\
-		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2} \\
-	\end{cases}.
-\]
-Similarly, let $\AA_n'$ denote $\AA_n$, except with the roles of $s$ and $t$ switched.  Note that $\AA_0 = \AA_0' = \varnothing$.
-
-In general, a string of $s$'s and $t$'s will be referred to as an \emph{expression}.  In the case where there are no consecutive identical characters (e.g. $\AA_n$), we will refer to them as \emph{reduced expressions}.
-
-Next, let $\BB_n$ denote the set of binary strings of length $n$.
-
-Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
-
-\subsubsection{Definitions for Maps and Diagram}
-Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the appropriate map (or its associated diagram;
-we will refer to maps and their associated diagrams interchangably) formed by a single application of the light leaves.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r} \ul b$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
-
-Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  
 Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
 
 Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.  Furthermore, the line on which the anchors lie will be called the \emph{anchorline}.
@@ -488,7 +475,7 @@ In order to study these maps as algebraic structures, we wish to consider full-m
 \end{enumerate}
 Henceforth, we will refer to diagrams and their associated polynomials interchangeably.
 
-One can verify that, using the barbell-forcing rules, we can recursively move all barbells to the left, and any ``broken'' walls are reduced to zero, or are contracted.  Hence, any full-diagram can be reduced to linear combinations of maps of the form $x \mapsto \alpha_s^m \alpha_t^n x$.  In other words, every full diagram can be represented as a polynomial in $\RR[x,y][\alpha_s,\alpha_t]$.
+One can verify that, using the barbell-forcing rules, we can recursively move all barbells to the left, and any ``broken'' walls are reduced to zero, or are contracted.  Hence, any full-diagram can be reduced to linear combinations of maps of the form $f \mapsto \alpha_s^m \alpha_t^n f$.  In other words, every full diagram can be represented as a polynomial in $\RR[x,y][\alpha_s,\alpha_t]$.
 
 In fact, we can even show that, with this new convention, that the following identity holds for every $f$:
 \begin{equation}
@@ -497,9 +484,44 @@ In fact, we can even show that, with this new convention, that the following ide
 \end{equation}
 where $\partial_s$ is the Demazure operator defined in section \ref{sec:prelim_genrel}.
 
-The problem statement then becomes to compute the polynomial $\MM_{\ul r}(\ul a, \ul b)$ with a formula in terms of $\ul r$, $\ul a$, $\ul b$.
+\subsection{Quantum Numbers}
+A particularly nice sequence of polynomials involved can be defined recursively.  They are termed \emph{two-color quantum numbers}.
+\begin{definition*}[Quantum Numbers]
+	For each integer $n \ge 0$, define two polynomials $[n]_x, [n]_y \in \ZZ[x,y]$ recursively by $[0]_x = [0]_y = 0$, $[1]_x = [1]_y = 1$, $[2]_x = x$, $[2]_y = 2$, and
+	\begin{align*}
+		[2]_x[n]_y = [n+1]_x - [n-1]_x \\
+		[2]_y[n]_x = [n+1]_y - [n-1]_y
+	\end{align*}
+	Finally, $[-n]_x = -[n]_x$ and $[-n]_y = -[n]_y$ for each $n \ge 0$.
+\end{definition*}
+The quantities $[n]_x$ and $[n]_y$ are closely related.  In particular, $[2k+1]_x = [2k+1]_y$ and $[2]_x[2k]_y = [2]_y[2k]_x$ for all integers $k$.
+
+The quantum numbers are relevant to the problem because of the identity
+\begin{equation}
+	s([n]_x\alpha_s + [n-1]_y\alpha_t) = [n]_x\alpha_s + [n+1]_y\alpha_t
+	\label{eq:quantum}
+\end{equation}
+and its analogous form for $t$.  One can verify \eqref{eq:quantum} immediately follows from definitions.  This allows us to recursively compute the polynomial which results from pushing a barbell through multiple alternating fences.  For example, $ststst(\alpha_s) = ststst([1]_x\alpha_s + [0]_y\alpha_t) = [7]_x\alpha_s + [6]_y\alpha_t$.
+
+\section{Problem Statement}
+\label{sec:probstate}
+
+The motivation for this problem arises from the following definition.
+\begin{definition*}
+	A map is \emph{idempotent} if multiplying it with itself returns the original graph.
+\end{definition*}
+Colloquially, $m^2=m$ if and only if $m$ is idempotent.
+
+Fix an $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ will be an idempotent.  This motivates us to construct potential idempotents by taking two light leaves whose top sequences are identical, and composing $A$ upside-down with $B$.  If $AB=1$, then this will yield an idempotent.
+
+This motivates the main objective of study.
+\begin{ques*}
+	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, find a formula for $\MM_{\ul r}(\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.
+\end{ques*}
+Here, we are interested in computing the polynomial which corresponds to this map.
 
 \section{A Complete Characterization of the One-Color Case}
+\label{sec:res_onecolor}
 In this section we provide a complete characterization for the $\MM_{\SS_n}(\ul a, \ul b)$.  % The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
 
 First, we need a criteria to determine the top.  Fortunately, this is extremely easy.
@@ -593,12 +615,11 @@ This lets us state our main result for this section.
 
 	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$ to obtain a full-map.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent antennae, whence the composition of the map is zero because the two antenna combine to form an empty bubble.  Furthermore, it is easy to see that any bubbles must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
 
-	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  Each of its antennae then feels a distinct component.  Hence, it unites $k$ different components into one.
-
-	The formula then follows directly from counting the number of connected components, because each component can be contracted into a single barbell, since any acyclic connected component is merely a tree.
+	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  We claim that there are $n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast)$ trees; this would complete the proof, because each tree contracts to a barbell.  Notice that $\pi_1(\ul a^\ast) + \pi_1(\ul b^\ast)$ counts the number of edges between adjacent anchors ($i$ and $i+1$).  Because there are no cycles, deleting one of these edges increases the number of connected components by exactly one (since all the connected components are trees).  If we delete all such edges, then we obtain $n$ barbells.  Therefore there must have been $n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast)$ trees to begin with, as desired.
 \end{proof}
 
 \section{Counting Maps}
+\label{sec:res_count_maps}
 We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r} \ul b = \ul T$ for each expression $\ul T$ and $\ul r$.  One can check that, by construction, $\Top \ul b$ is always a reduced expression.
 
 \begin{definition*}
@@ -606,25 +627,26 @@ We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul 
 \end{definition*}
 For example, $R(sststttts) = ststs$.
 
-\begin{theorem}
+\begin{proposition}
 	Let $\ul r$ be an expression of length $\ell$, and suppose $R(\ul r) = \AA_n$.
 	\begin{enumerate}[(i)]
 		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r} \ul b$.
 		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r} \ul b$.
 	\end{enumerate}
 	\label{thm:count_maps}
-\end{theorem}
+\end{proposition}
 Of course, if $\ul r$ begins with the character $t$, then one can simply reverse the roles of $s$ and $t$ in the above theorem to obtain an analogous formula.
 
 The main idea of the proof is to reduce the problem to the case when $\ell = n$, and then apply induction on $n$.  We fill in the details below.
 
-\begin{proof}[Proof of Theorem \ref{thm:count_maps}]
+\begin{proof}[Proof of Proposition \ref{thm:count_maps}]
 	First we will resolve the case where $\ul r = \AA_n$, so that $\ell = n$ and $2^{\ell-n} = 1$.  This follows by induction on $n$.  The main idea is that, for the binary strings of length $n$, we consider those that end with $1$ and those that end with $0$.  Those that end with a $0$ have the same top when the trailing $0$ is deleted, whilst those with end bit $1$ have a top which differs by one character if the trailing $1$ is deleted.  We simply check that in all eight cases, the binomial coefficients add up to give the new binomial coefficients (via Pascal's identity).  The computation is left to a reader.
 
-	To complete the theorem, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there a $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition \ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$, but with some extra factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
+	To finish to all cases, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there a $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition \ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$, but with some extra factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
 \end{proof}
 
 \section{Constraints in the Alternating Case}
+\label{sec:res_altcase}
 We now turn our attention to the case of $\ul r = \AA_n$.
 
 In this section we will show several results which show that the possible outputs of a map with base $\AA_n$ are extremely restricted.  We present them below, before providing proofs of each.
@@ -774,19 +796,21 @@ The bubble theorem and the pasture theorem are structurally very similar.  In fa
 
 
 \section{A Recursion for the Alternating Case}
+\label{sec:res_altrecurse}
 In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
-TODO: Write this.
 
+\begin{proposition}
+	BLAH
+	\label{thm:recurse}
+\end{proposition}
 
 \section{Conclusion}
 % The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
 
 \section{Acknowledgments} 
-I offer my sincerest gratitude to my mentor Mr. Francisco Unda for daily mentorship, and Dr. Benjamin Elias for providing the project and for often meeting with me personally to discuss it.
-That sounded horribly fake, but really, I mean it.  You guys are the best.  Thank you for a great project.
+I wish to thank the MIT Math Department for organizing the Math RSI, and in particular the head mentor Dr. Tanya Khovanova (MIT) for providing individual discussion with me.
+I also wish to thank my tutor Mr. Antoni Rangachev (Northeaster University) for his invaluable advice in preparing both this paper and my final presentation.
+I would also like to thank the Center for Excellence in Education and the Research Science Institute, as well as the Massachusetts Institute of Technology, for generously providing the facilities for the research.
 
-I further wish to thank the MIT Math Department, and in particular the head mentor Dr. Tanya Khovanova, for organizing the Math RSI and providing individual discussion with me.
-I also wish to thank my tutor Mr. Antoni Rangachev for his invaluable advice in preparing both this paper and my final presentation.
-Finally, I would like to thank the Center for Excellence in Education and the Research Science Institute for generously providing the facilities for the research.
-
-
+Finally, I offer my sincerest gratitude to my mentor Mr. Francisco Unda (MIT) for daily mentorship, and Professor Benjamin Elias (MIT), for providing the project and for often meeting with me personally to discuss it.
+That sounded horribly fake, but I really mean it.  You guys are the best.  Thank you for a great project.
