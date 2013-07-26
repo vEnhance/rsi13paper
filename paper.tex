@@ -3,23 +3,24 @@
 \section{Introduction}
 \textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
-We study a class of maps between Bott-Samelson bimodules.  These maps are represented by certain types of diagrams, as described in section \ref{sec:prelim_map}.  The maps are composed by juxtaposition.
+We study a class of maps between Bott-Samelson bimodules.  These maps are represented by certain types of diagrams, as described in Section~\ref{sec:prelim_map}.  The maps are composed by juxtaposition.
 
 TODO: Expand on history, motivation, importance, etc. (meeting Ben on Monday)
 
-Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
+Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in Section~\ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
 
-Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:probstate}.  The results begin by solving the special case of one color completely in section \ref{sec:res_onecolor}.  In section \ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in sections \ref{sec:res_altcase} and \ref{sec:res_altcompute}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
+Because the technical description of the problem statement is quite involved, we devote the entirety of Section~\ref{sec:prelim} to preliminaries and defer the actual problem statement to Section~\ref{sec:probstate}.  The results begin by solving the special case of one color completely in Section~\ref{sec:res_onecolor}.  In Section~\ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in Sections~\ref{sec:res_alt_restrict} and \ref{sec:res_alt_compute}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
 
 \section{Preliminaries and Definitions}
 \label{sec:prelim}
-In section \ref{sec:prelim_background}, we provide the background behind the Bott-Samelson bimodules, and the correspondence between these maps and certain diagrams.  We then introduce Libedinsky's light leaves, a basis by which maps can be constructed using binary strings.
+In Section~\ref{sec:prelim_background}, we provide the background behind the Bott-Samelson bimodules, and the correspondence between these maps and certain diagrams.  We then introduce Libedinsky's light leaves, a basis by which maps can be constructed using binary strings.
 
-In section \ref{sec:prelim_def_notation}, we introduce several definitions which we use throughout the paper.  Next, in section \ref{sec:prelim_explain_poly_eval}, we describe how these maps can be represent as polynomials.  The actual problem statement is then deferred to \ref{sec:probstate}.
+In Section~\ref{sec:prelim_def_notation}, we introduce several definitions which we use throughout the paper.  Next, in Section~\ref{sec:prelim_explain_poly_eval}, we describe how these maps can be represent as polynomials.  The actual problem statement is then deferred to \ref{sec:probstate}.
 \subsection{An Extended Background}
 \label{sec:prelim_background}
-% \subsection{Coxeter Rings, and the Bott-Samelson Bimodules}
-Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  In other words, $W$ is the infinite dihedral group with the presentation \[ W = \left<s,t \mid s^2=t^2=1\right>. \] If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then each $v \in V$ is reflected over a hyperplane normal to any $a \in V$ via the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  
+Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  In other words, $W$ is the infinite dihedral group with the presentation \[ W = \left<s,t \mid s^2=t^2=1\right>. \] 
+
+If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then for any $a \in V$, reflection over the hyperplane normal to $a$ can be written explicitly for each $v \in V$ as the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  
 In particular, if $W$ acts on $V$ by this reflection, $s(\alpha_s) = -\alpha_s$ and $t(\alpha_t) = -\alpha_t$.  Furthermore, using the above, we see that there exist fixed constants $x$ and $y$ such that
 \begin{align*}
 	s(\alpha_t) &= \alpha_t + x \alpha_s \\
@@ -43,7 +44,7 @@ These maps can be represented using diagrammatics, as below.
 \subsubsection{Diagrammatics of Maps}
 \label{sec:prelim_map}
 \newcommand{\DD}{\mathcal D}
-Certain maps between Bott-Samelson bimodules can be described in terms of diagrams.  We take a detour and first describe the appearance of such diagrams; in the subsequent section we will explain their algebraic meaning.  A reader who is not interested in this context can simply accept on faith the relations specified in section \ref{sec:prelim_genrel}.
+Certain maps between Bott-Samelson bimodules can be described in terms of diagrams.  We take a detour and first describe the appearance of such diagrams; in the subsequent section we will explain their algebraic meaning.  A reader who is not interested in this context can simply accept on faith the relations specified in Section~\ref{sec:prelim_genrel}.
 
 Consider a category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below.  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
 
@@ -78,7 +79,7 @@ The vertices on the boundary are by convention not explicitly shown, but are non
 	\label{fig:example_diagram}
 \end{figure}
 
-An example of such a diagram is shown in figure \ref{fig:example_diagram}.
+An example of such a diagram is shown in Figure~\ref{fig:example_diagram}.
 
 The elements of $\DD$ can be added by simply adding corresponding coefficients.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels on the bottom of the first coincide with those on the top of the second.  Otherwise, the product is $0$.
 
@@ -111,11 +112,9 @@ With this, we can now describe the meanings of each type of vertex (for blue lin
 
 Note that the descriptions are sufficient to determine outputs for all values because these morphisms respect left and right actions, as prescribed in \eqref{eq:respect}.
 
-Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the map in figure \ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
+Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the map in Figure~\ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
 
 Henceforth, we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
-
-% Subsequently, for any polynomial $f \in R$ we will abuse notation and refer to the map $x \mapsto fx$ by simply $f$.  In particular, one can easily verify that $\barbell{barbell_blue}$ represents $\alpha_s$.  Note that this is \emph{not} in general the same as $x \mapsto xf$ because $x$ may belong to some bimodule rather than to $R$.  Phrased diagrammatically, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \barbell{barbell_blue}\barbell{alpha_blue} = \alpha_s$, for instance.
 
 \subsubsection{Operations for Diagrammatics}
 \label{sec:prelim_genrel}
@@ -210,7 +209,7 @@ Each bit of $\ul b$ is read from left to right in order and designated either up
 		\ii Otherwise, create a ``stub'', i.e. a single vertex of degree one, and mark the current bit as down.
 	\end{itemize}
 \end{itemize}
-Finally, join any bits which are up at the end of the process to the opposite end.  A map which arises in such a manner is called a \emph{light leaf}.  An example of such a light leaf is shown in figure \ref{fig:lightleaf_example}.
+Finally, join any bits which are up at the end of the process to the opposite end.  A map which arises in such a manner is called a \emph{light leaf}.  An example of such a light leaf is shown in Figure~\ref{fig:lightleaf_example}.
 
 These light leaves are interesting because, in the seventh chapter of \cite{span}, it is shown that these light leaves form a ``basis'' in the sense that all maps may be expressed by compositions of these light leaves.
 
@@ -224,8 +223,8 @@ and the ``alternating'' string
 	\AA_n \defeq
 	\begin{cases}
 		\underbrace{sts\dots s}_{\text{$n$ letters}} & \text{if } n \equiv 1 \pmod{2} \\
-		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2} \\
-	\end{cases}.
+		\underbrace{sts\dots t}_{\text{$n$ letters}} & \text{if } n \equiv 0 \pmod{2}. 
+	\end{cases}
 \]
 Similarly, let $\AA_n'$ denote $\AA_n$, except with the roles of $s$ and $t$ switched.  Note that $\AA_0 = \AA_0' = \varnothing$.
 
@@ -236,7 +235,7 @@ Next, let $\BB_n$ denote the set of binary strings of length $n$.
 Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
 
 \subsubsection{Definitions for Maps and Diagram}
-Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the map (or its associated diagram; we will refer to maps and their associated diagrams interchangably) formed by the light leaves.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r} \ul b$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
+Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the map (or its associated diagram; we will refer to maps and their associated diagrams interchangeably) formed by the light leaves.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r}(\ul b)$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
 
 \begin{figure}[ht]
 	\centering
@@ -278,13 +277,13 @@ Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$
 	\label{fig:example_compose}
 \end{figure}
 
-Two maps $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ with identical tops may be composed by juxtaposing $\MM_{\ul r}(\ul a)$ with a flipped copy of $\MM_{\ul r}(\ul b)$; an example of such a composition is given in Figure~\ref{fig:example_compose}.  We will denote this product by $\MM_{\ul r}(\ul a, \ul b)$.  If the two half-maps are not compatible -- i.e. $\Top_{\ul r} \ul a \neq \Top_{\ul r} \ul b$ -- then we will simply treat the product as the zero map.  % Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  
+Two maps $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ with identical tops may be composed by juxtaposing $\MM_{\ul r}(\ul a)$ with a flipped copy of $\MM_{\ul r}(\ul b)$; an example of such a composition is given in Figure~\ref{fig:example_compose}.  We will denote this product by $\MM_{\ul r}(\ul a, \ul b)$.  If the two half-maps are not compatible (that is, $\Top_{\ul r}(\ul a) \neq \Top_{\ul r}(\ul b)$) then we will simply treat the product as the zero map.  
 
 Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
 
-Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.  Furthermore, the line on which the anchors lie will be called the \emph{anchorline}.
+Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.  
 
-An example of a full-map with base $\AA_5$ is given in figure \ref{fig:example_full_map}.
+An example of a full-map with base $\AA_5$ is given in Figure~\ref{fig:example_full_map}.
 
 \begin{figure}[ht]
 	\centering
@@ -316,8 +315,6 @@ An example of a full-map with base $\AA_5$ is given in figure \ref{fig:example_f
 	\caption{A full-map with base $ststs$, hence with five anchors.  The top is $\varnothing$.}
 	\label{fig:example_full_map}
 \end{figure}
-
-% We will now abuse notation further and refer even to components by polynomials, when the map is left alone.  For example, $\barbell{alpha_blue}\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}$ might be referred interchangeably with $\barbell{alpha_blue} \alpha_s^2 \alpha_t$.  Note that, even though we may write $\barbell{alpha_blue} = 1$, we still have $\barbell{alpha_blue} \alpha_s^2\alpha_t \neq \alpha_s^2\alpha_t$, because we strictly require left multiplication as the accepted convention.
 
 \subsubsection{Nomenclature for Certain Structures in Diagrams}
 Let us make a few convenient definitions.
@@ -370,7 +367,7 @@ Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$,
 \begin{definition*}
 	A component is called \emph{attached} if it is connected to a fence.  Otherwise, it is \emph{free}.  By convention, any attached components belong to the pasture to the left of the associated fence.
 \end{definition*}
-An example of a fence complete with two barbells is given in figure \ref{fig:def_barbell_fence}.
+An example of a fence complete with two barbells is given in Figure~\ref{fig:def_barbell_fence}.
 
 Next, we name some recurrent characters in our work.
 
@@ -413,7 +410,7 @@ Next, we name some recurrent characters in our work.
 	We say that the bubble $B$ \emph{holds} a component $c$ if $c$ is inside $B$, but there is no other bubble $B'$ inside $B$ which contains $c$.  
 \end{definition*}
 
-An example of a bubble is given in figure~\ref{fig:def_bubble}.
+An example of a bubble is given in Figure~\ref{fig:def_bubble}.
 
 \begin{figure}[ht]
 	\centering
@@ -460,7 +457,7 @@ An example of a bubble is given in figure~\ref{fig:def_bubble}.
 \begin{definition*}
 	A \emph{caterpillar} consists of a free component and the contents of any bubbles it contains.  A caterpillar \emph{holds} a component if some bubble of the caterpillar holds it.
 \end{definition*}
-An example of a caterpillar is given in figure~\ref{fig:def_caterpillar}.  Notice that any barbell or bubble is a special case of a caterpillar.
+An example of a caterpillar is given in Figure~\ref{fig:def_caterpillar}.  Notice that any barbell or bubble is a special case of a caterpillar.
 
 
 \subsection{Representations of Maps as Polynomials}
@@ -471,7 +468,7 @@ In order to study these maps as algebraic structures, we wish to consider full-m
 	\ii The map $x \mapsto fx$ will be abbreviated as $f$ from this point forward.  
 	\par Note that, in particular, $\barbell{barbell_blue} = \alpha_s$.  Furthermore, one can check that, say, $\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}\barbell{alpha_blue} = \alpha_s^2 \alpha_t$.  
 	Please note that $x \mapsto xf$ does not get a similar abbreviation.  So, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \alpha_s$.
-	\ii We will work \emph{modulo lower terms}.  That is, any map which contains a connected component that touches any boundary only once (total) is considered zero.  So, for example, $\barbell{break_blue} = 0$.
+	\ii We will work \emph{modulo lower terms}.  That is, any map which contains a connected component that touches any boundary only once (total) is considered zero.  So, for example, we have $\barbell{break_blue} = 0$.
 \end{enumerate}
 Henceforth, we will refer to diagrams and their associated polynomials interchangeably.
 
@@ -482,7 +479,7 @@ In fact, we can even show that, with this new convention, that the following ide
 	\barbell{alpha_blue} f = \partial_s(f) \barbell{break_blue} + s(f) \barbell{alpha_blue}
 	\label{eq:barbell_break}
 \end{equation}
-where $\partial_s$ is the Demazure operator defined in section \ref{sec:prelim_genrel}.
+where $\partial_s$ is the Demazure operator defined in Section~\ref{sec:prelim_genrel}.
 
 \subsubsection{Quantum Numbers}
 A particularly nice sequence of polynomials involved can be defined recursively.  They are termed \emph{two-color quantum numbers}.
@@ -503,7 +500,7 @@ The quantum numbers are relevant to the problem because of the identity
 \end{equation}
 and its analogous form for $t$.  One can verify \eqref{eq:quantum} immediately follows from definitions.  This allows us to recursively compute the polynomial which results from pushing a barbell through multiple alternating fences.  For example, $ststst(\alpha_s) = ststst([1]_x\alpha_s + [0]_y\alpha_t) = [7]_x\alpha_s + [6]_y\alpha_t$.
 
-This motivates us to make the following definition, which will be used in section \ref{sec:res_altcompute}.
+This motivates us to make the following definition, which will be used in Section~\ref{sec:res_alt_compute}.
 \begin{definition*}
 	For any reduced expression $\ul r$, we adopt the quantum polynomial $Q_{\ul r}$ by :
 	\[
@@ -518,8 +515,8 @@ This motivates us to make the following definition, which will be used in sectio
 		Q_{\AA_n'} =
 		\begin{cases}
 			[n]_x \alpha_s + [n+1]_y \alpha_t & \text{if $n$ is even} \\
-			[n+1]_x \alpha_s + [n]_y \alpha_t & \text{if $n$ is odd}
-		\end{cases}.
+			[n+1]_x \alpha_s + [n]_y \alpha_t & \text{if $n$ is odd}.
+		\end{cases}
 	\]
 \end{definition*}
 
@@ -539,7 +536,7 @@ Fix an $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the ident
 
 This motivates the main objective of study.
 \begin{ques*}
-	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, find a formula for $\MM_{\ul r}(\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.
+	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with $\Top_{\ul r}(\ul a) = \Top_{\ul r}(\ul b)$, find a formula for $\MM_{\ul r}(\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.
 \end{ques*}
 Here, we are interested in computing the polynomial which corresponds to this map.
 
@@ -553,11 +550,11 @@ First, we need a criteria to determine the top.  Fortunately, this is extremely 
 \end{definition*}
 \begin{proposition}
 	For any $\ul b \in \BB_n$, \[
-		\Top_{\SS_n} \ul b =
+		\Top_{\SS_n}(\ul b) =
 		\begin{cases}
 			\varnothing & \text{if } \pi_1(\ul b) \equiv 0 \pmod{2} \\
-			s & \text{if } \pi_1(\ul b) \equiv 1 \pmod{2} \\
-		\end{cases}.
+			s & \text{if } \pi_1(\ul b) \equiv 1 \pmod{2}.
+		\end{cases}
 		\]
 	\label{prop:s_top}
 \end{proposition}
@@ -572,20 +569,20 @@ Subsequently, we make the following definition.
 		\ul b^\ast [i] = 
 		\begin{cases}
 			1 & \text{if } \ul b[1] + \ul b[2] + \dots + \ul b[i] \equiv 1 \pmod{2} \\
-			0 & \text{otherwise}
-		\end{cases}.
+			0 & \text{otherwise}.
+		\end{cases}
 	\]
 \end{definition*}
 This lets us state our main result for this section.
 \begin{theorem}
-	If $\ul a, \ul b \in \BB_n$ obey $\Top_{\SS_n} \ul a = \Top_{\SS_n} \ul b$, then
+	If $\ul a, \ul b \in \BB_n$ obey $\Top_{\SS_n}(\ul a) = \Top_{\SS_n}(\ul b)$, then
 	\[
 		\MM_{\SS_n} \left( \ul a, \ul b \right)
 		=
 		\begin{cases}
 			0 & \text{if }\ \exists 1 \le i \le n-1:\ \ul a^\ast[i] = \ul b^\ast[i] = 1 \\
-			\alpha_s^{n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast) - \ul a^\ast[n]} & \text{otherwise}
-		\end{cases}.
+			\alpha_s^{n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast) - \ul a^\ast[n]} & \text{otherwise}.
+		\end{cases}
 	\]
 	\label{thm:s_eval}
 \end{theorem}
@@ -628,7 +625,7 @@ This lets us state our main result for this section.
 	\label{fig:pf_trivial_theorem_example}
 \end{figure}
 \begin{proof}
-	We will only consider the case where $\Top \ul a = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.  See figure \ref{fig:pf_trivial_theorem_example} for a example of such a map.
+	We will only consider the case where $\Top(\ul a) = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.  See Figure~\ref{fig:pf_trivial_theorem_example} for a example of such a map.
 
 	Number the anchors $1$, $2$, \dots from left to right.
 
@@ -643,7 +640,7 @@ This lets us state our main result for this section.
 
 \section{Counting Maps}
 \label{sec:res_count_maps}
-We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r} \ul b = \ul T$ for each expression $\ul T$ and $\ul r$.  One can check that, by construction, $\Top \ul b$ is always a reduced expression.
+We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul T$ for each expression $\ul T$ and $\ul r$.  One can check that, by construction, $\Top(\ul b)$ is always a reduced expression.
 
 \begin{definition*}
 	Let $R(\ul r)$ denote $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
@@ -653,8 +650,8 @@ For example, $R(sststttts) = ststs$.
 \begin{proposition}
 	Let $\ul r$ be an expression of length $\ell$, and suppose $R(\ul r) = \AA_n$.
 	\begin{enumerate}[(i)]
-		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r} \ul b$.
-		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r} \ul b$.
+		\ii If $n=2k+1$ is odd, then for each $0 \le m \le k$, there are $2^{\ell-n} \binom{2k}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m}$, $\AA_{2m-1}'$, and $\AA_{2m}'$ as $\Top_{\ul r}(\ul b)$.
+		\ii If $n=2k$ is even, then for each $0 \le m \le k-1$, there are $2^{\ell-n} \binom{2k-1}{m+k}$ binary strings $\ul b$ yielding each of $\AA_{2m+1}$, $\AA_{2m+2}$, $\AA_{2m}'$, and $\AA_{2m+1}'$ as $\Top_{\ul r}(\ul b)$.
 	\end{enumerate}
 	\label{thm:count_maps}
 \end{proposition}
@@ -668,8 +665,8 @@ The main idea of the proof is to reduce the problem to the case when $\ell = n$,
 	To finish to all cases, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there a $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition \ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$, but with some extra factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
 \end{proof}
 
-\section{Constraints in the Alternating Case}
-\label{sec:res_altcase}
+\section{Colorful Lemmata for the Alternating Case}
+\label{sec:res_alt_restrict}
 We now turn our attention to the case of $\ul r = \AA_n$.
 
 In this section we will show several results which show that the possible outputs of a map with base $\AA_n$ are extremely restricted.  We present them below, before providing proofs of each.
@@ -677,23 +674,21 @@ In this section we will show several results which show that the possible output
 	Consider a bubble in a full-diagram with base $\AA_n$.  The bubble holds exactly one caterpillar, whose color is opposite that of the bubble.
 	\label{thm:bubble}
 \end{lemma}
-\begin{theorem}[Caterpillar Theorem]
+\begin{lemma}[Caterpillar Lemma]
 	Any caterpillar in a full-diagram with base $\AA_n$ evaluates in the form $x^my^n\alpha_s$ if it is blue, or $x^my^n\alpha_t$ is red.
 	\label{thm:caterpillar}
-\end{theorem}
-\begin{theorem}[Pasture Theorem]
+\end{lemma}
+\begin{lemma}[Pasture Lemma]
 	Consider a full-diagram with $N+1$ pastures (numbered $0$, $1$, \dots, $N$) with base $\AA_n$ and top $T$.  Suppose further that $N \ge 1$ (or equivalently, $T \neq \varnothing$).  Then:
 	\begin{enumerate}[(i)]
 		\ii Pastures $1$ through $N-1$ contain either nothing or an attached component.
 		\ii Pasture $N$ contains nothing if $T[N] = \AA_n[n]$, and contains a single caterpillar otherwise, with color corresponding to $\AA_n[n]$.
 	\end{enumerate}
 	\label{thm:pasture}
-\end{theorem}
+\end{lemma}
 
 \subsection{Proof of the Bubble Lemma}
-We begin with a proof of the bubble theorem, which is the crux result of the alternating case.  Indeed, both of the subsequent theorems are fairly straightforward consequences of this theorem.
-
-It's interesting to note that the Bubble Lemma is intuitively very natural.  The main difficulty is finding a clean way to handle the special cases generated by the convoluted geometry.
+We begin with a proof of the Bubble Lemma\footnote{I should remark that attempting to construct counterexamples to the Bubble Lemma leads to a far better understanding than trying to read the following proof.}, which is the crux result of the alternating case.  Indeed, both of the subsequent lemmas are fairly straightforward consequences of this one.  
 
 \begin{proof}[Proof of Lemma \ref{thm:bubble}]
 	Take a bubble $B$ and assume without loss of generality that it is blue.  It is easy to see, by considering two anchors on the boundary of blue, that there is some red anchor inside $B$.  This implies that $B$ has at least one red caterpillar.
@@ -731,27 +726,27 @@ It's interesting to note that the Bubble Lemma is intuitively very natural.  The
 			label("$u$", (3,0), dir(-90));
 			label("$v$", (5,0), dir(-90));
 		\end{asy}
-		\caption{Proving the bubble theorem with quasi-connected vertices.}
+		\caption{Proving the bubble lemma with quasi-connected vertices.}
 		\label{fig:pf_bubble}
 	\end{figure}
 	Because the string is alternating, we can take a blue anchor $x$ immediately to the left of $v$.  Now, there must be some blue arc shielding $u$ and $v$ (since $u,v$ are inside a blue bubble).  By the light-leave construction, there must be some red arc $A$ covering $x$.  If this arc joins $u$ and $v$, then we are done.  
 	Otherwise, if it has endpoint $v$ then it must completely cover $u$ by condition (ii) of quasi-connectedness; if not, then it must completely cover $v$.  This leads us to two cases.
 	\begin{itemize}
-		\ii If the arc covers exactly one of $u$ or $v$, say $u$, then there must be a blue arc shielding $u$ from $A$.  But then this contradicts the quasi-connectedness, because now it is not possible to join $u$ and $v$ by an arc on this half-map.  This case is illustrated by the left half of figure \ref{fig:pf_bubble}.
-		\ii If the arc covers both $u$ and $v$, then there must be a blue arc which shields both $u$ and $v$, which is itself shielded by $A$.  Then we can repeat the same procedure with this new blue arc.  This case is illustrated by the right half of figure \ref{fig:pf_bubble}.
+		\ii If the arc covers exactly one of $u$ or $v$, say $u$, then there must be a blue arc shielding $u$ from $A$.  But then this contradicts the quasi-connectedness, because now it is not possible to join $u$ and $v$ by an arc on this half-map.  This case is illustrated by the left half of Figure~\ref{fig:pf_bubble}.
+		\ii If the arc covers both $u$ and $v$, then there must be a blue arc which shields both $u$ and $v$, which is itself shielded by $A$.  Then we can repeat the same procedure with this new blue arc.  This case is illustrated by the right half of Figure~\ref{fig:pf_bubble}.
 	\end{itemize}
 	Therefore any pair of quasi-connected anchors must be connected by an arc.  However, one can verify that the red anchors in $B$ but not in any other blue bubble are ``connected'' under quasi-connectedness.\footnote{That is, one can follow a sequence of red anchors, each consecutive pair quasi-connected, from any red anchor to any other red anchor.}  Therefore all such red anchors must be connected.  So there is a single caterpillar, as desired.
 \end{proof}
 
-\subsection{Proof of the Caterpillar Theorem}
-We will now derive the Caterpillar Theorem as a consequence of the Bubble Lemma.  
+\subsection{Proof of the Caterpillar Lemma}
+We will now derive the Caterpillar Lemma as a consequence of the Bubble Lemma.  
 
 First, a few definitions for this section only.
 \begin{definition*}
 	Consider a caterpillar $C$ in a full-diagram with base $\AA_n$.  Define the \emph{nesting level} of the caterpillar as the largest integer $n$ for which there exists caterpillars $C = C_0$, $C_1$, $C_2$, $\dots$, $C_n$ such that $C_i$ holds $C_{i+1}$ for each $i=0,1,\dots,n-1$.  Define the \emph{size} of the caterpillar to be the number of bubbles it contains.
 \end{definition*}
 
-\begin{proof}[Proof of Theorem \ref{thm:caterpillar}]
+\begin{proof}[Proof of Lemma \ref{thm:caterpillar}]
 	The proof is by double induction.  First we will consider caterpillars with nesting level $0$.  
 
 	We perform induction on the size of the caterpillar. 
@@ -763,7 +758,7 @@ First, a few definitions for this section only.
 	Now suppose a caterpillar has nesting level $k \ge 1$.  We simply apply the exact same induction on size as before.  The only modification is that, instead of a barbell, we have a caterpillar with nesting level strictly less than $k$.  However, these caterpillars all evaluate as a polynomial again of the form $x^my^n \alpha_s$ or $x^my^n\alpha_t$, by the outer inductive hypothesis.  So applying equation \eqref{eq:barbell_break} in the same manner completes this induction as well.
 \end{proof}
 
-\subsection{Proof of the Pasture Theorem}
+\subsection{Proof of the Pasture Lemma}
 \begin{figure}[ht]
 	\centering
 	\begin{asy}
@@ -804,64 +799,223 @@ First, a few definitions for this section only.
 
 		label("$\to$", (7,0));
 	\end{asy}
-	\caption{In the first diagram, $\ul a = \ul b = 110010$.  In the second, $\ul a' = \ul b' = 110010111$.  Closing the pastures allows us to deduce the Pasture Theorem from the Bubble Lemma.}
+	\caption{In the first diagram, $\ul a = \ul b = 110010$.  In the second, $\ul a' = \ul b' = 110010111$.  Closing the pastures allows us to deduce the Pasture Lemma from the Bubble Lemma.}
 	\label{fig:pf_pasture}
 \end{figure}
-The bubble theorem and the pasture theorem are structurally very similar.  In fact, we will now show a somewhat surprising proof that the Pasture Theorem follows from the Bubble Lemma.
-\begin{proof}[Proof of Theorem \ref{thm:pasture}]
+The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, we will now show a somewhat surprising proof that the Pasture Lemma follows from the Bubble Lemma.
+\begin{proof}[Proof of Lemma \ref{thm:pasture}]
 	Again, let $T$ denote the top, with length $N$.  In the first case, suppose $T[N] \neq \AA_n[n]$; that is, the last characters of $T$ and $\AA_n$ differ.  Then it must be the case that the rightmost anchor is not part of a fence.
-	Now suppose the map arose from $\MM_{\AA_n}(\ul a, \ul b)$.  Let $\ul a'$ be the string formed by appending $N$ $1$'s to $\ul a$, and define $\ul b'$ similarly.  Now consider the map \[ \MM_{\AA_{n+N}} \left( \ul a', \ul b' \right). \]  See figure \ref{fig:pf_pasture} for an example.
+	Now suppose the map arose from $\MM_{\AA_n}(\ul a, \ul b)$.  Let $\ul a'$ be the string formed by appending $N$ $1$'s to $\ul a$, and define $\ul b'$ similarly.  Now consider the map \[ \MM_{\AA_{n+N}} \left( \ul a', \ul b' \right). \]  See Figure~\ref{fig:pf_pasture} for an example.
 
-	It is easy to verify that the top of this new map is zero.  Now what we have done is enclose the contents of each pasture into bubbles.  The Bubble Lemma tells us that the innermost bubble can have exactly one caterpillar, while the other bubbles must contain only a single caterpillar, which was once a fence.  This implies the Pasture Theorem in the first case.
+	It is easy to verify that the top of this new map is zero.  Now what we have done is enclose the contents of each pasture into bubbles.  The Bubble Lemma tells us that the innermost bubble can have exactly one caterpillar, while the other bubbles must contain only a single caterpillar, which was once a fence.  This implies the Pasture Lemma in the first case.
 
 	The case where $T[N] = \AA_n[n]$ is similar.  We simply append a zero followed by $N$ $1$'s and repeat the same procedure.  The only difference is that the innermost barbell was generated by the $0$ we appended, and thus was not part of the original diagram.
 \end{proof}
 
 
-\section{Computations for the Alternating Case}
-\label{sec:res_altcompute}
-We now turn to using the tools developed in section \ref{sec:res_altcase} in order to compute polynomials. First, we add some structure to these special cases.
+\section{Algebraic Computations for the Alternating Case}
+\label{sec:res_alt_compute}
+We now turn to using the tools developed in Section~\ref{sec:res_alt_restrict} in order to compute polynomials. First, we add some structure to these special cases.
 
-\begin{definition*}
-	We say that two strings $\ul{r_1}$ and $\ul{r_2}$ \emph{agree}, or \emph{agree in $c$} if their last characters are both $c$.
-\end{definition*}
-\begin{definition*}
-	For a binary string $\ul r$, let $\ul r'$ be the string formed by deleting the last bit of $\ul r$.
-\end{definition*}
-
-\begin{corollary}
+\subsection{Restrictions and Definitions for the Final Output}
+Let us now endow our maps with base $\AA_n$ with some additional structure.
+\begin{theorem}
 	For any binary strings $\ul a, \ul b \in \BB_n$, if $\MM_{\AA_n} (\ul a, \ul b)$ is nonzero and has top $T$, then for some nonnegative integers $m_x$, $m_y$, $m_s$, and $m_t$, we have 
 	\[
 		\MM_{\AA_n} (\ul a, \ul b) =
 		x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t} \cdot
 		\begin{cases}
-			1 & \text{if $T$ and $\AA_n$ agree} \\
-			Q_T & \text{otherwise}
-		\end{cases}.
+			1 & \text{if $T$ and $\AA_n$ have the same last character} \\
+			Q_T & \text{otherwise}.
+		\end{cases}
 	\]
-\end{corollary}
+	\label{thm:alt_struct}
+\end{theorem}
 \begin{proof}
-	This is an immediate consequence of the Caterpillar Theorem and the Pasture Theorem.  Everything in the first pasture is a product of monomials by the Caterpillar Theorem.  If $T$ and $\AA_n$ agree, then the last pasture is empty and hence we obtain the first case.  Otherwise, there is a single caterpillar of color opposite to $T$, and hence after evaluating that caterpillar, we obtain some monomial times a single barbell.  This generates the final $Q_T$ term.
+	This is an immediate consequence of the Caterpillar Lemma and the Pasture Lemma.  Everything in the first pasture is a product of monomials by the Caterpillar Lemma.  If $T$ and $\AA_n$ agree, then the last pasture is empty and hence we obtain the first case.  Otherwise, there is a single caterpillar of color opposite to $T$, and hence after evaluating that caterpillar, we obtain some monomial times a single barbell.  This generates the final $Q_T$ term.
 \end{proof}
 
-In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
+This motivates the following definition.
+\begin{definition*}
+	If a nonzero map $M$ with base $\AA_n$ is presented as in Theorem~\ref{thm:alt_struct}, then the term $x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t}$ will be called the \emph{fluff} of $M$, and the polynomial (either $1$ or $Q_T$) will be the \emph{face} of $M$. 
+\end{definition*}
+\begin{remark*}
+	According to Theorem~\ref{thm:alt_struct}, a nonzero map $\MM_{\AA_n}$ has face $1$ and only if its top has the same last character as $\AA_n$.
+\end{remark*}
+
+\subsection{A Partial Recursion}
+In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  
 
 \begin{proposition}
-	Let $n \ge 2$ be an integer.  Suppose $\ul a, \ul b \in \BB_n$ have the same top $T = \Top_{\AA_n} \ul a = \Top_{\AA_n} \ul b$, and further that $\ul a$ and $\ul b$ agree.  Suppose $M_1 = \MM_{\AA_{n-1}} (\ul a', \ul b') \neq 0$.  Then $M = \MM_{\AA_n} (\ul a, \ul b)$ is nonzero, and the following recursion holds.
+	Let $n \ge 2$ be an odd integer and consider two binary strings $\ul a, \ul b \in \BB_n$ such that $T = \Top_{\AA_n}(\ul a) = \Top_{\AA_n}(\ul b)$.  
+	Let $\ul a'$ and $\ul b'$ are the first $n-1$ bits of $\ul a$ and $\ul b$, respectively. 
+	Suppose $M_1 = \MM_{\AA_{n-1}} \left(\ul a', \ul b'\right)$ is a nonzero map with fluff $F$.
 	\begin{enumerate}[(i)]
-		\ii If $\AA_n$ and $T$ have the same last character $c$ (so $T \neq \varnothing$)
-		\begin{itemize}
-			\ii If $\ul a[n] = \ul b[n] = 1$, then $M = M_1$.
-			\ii If $\ul a[n] = \ul b[n] = 0$, then $M = -f / \alpha_k$ where $f$ is the monomial in $M_1$ with the largest factor of $\alpha_k$, with any quantum numbers
-		\end{itemize}
+		\ii If $\ul a[n] = \ul b[n] = 0$, then
+		\[ \MM_{\AA_n} (\ul a, \ul b)
+			=
+			\begin{cases}
+				M_1 \alpha_s & \text{if $T = \varnothing$} \\ % just another barbell
+				-xF & \text{if $T$ ends in $s$} \\ % closes a caterpillar like 0|
+				M_1 Q_T & \text{if $T$ ends in $t$}. \\ % just another barbell, but push it all the way through nonempty T
+			\end{cases}
+		\]
+		\ii If $\ul a[n] = \ul b[n] = 1$, then
+		\[
+			\MM \AA_n (\ul a, \ul b)
+			=
+			\begin{cases}
+				-x\alpha_sF & \text{if $T = \varnothing$} \\ % destructive 1, closes a caterpillar O
+				M_1 & \text{if $T$ ends in $s$} \\ % constructive 1
+				-xF Q_T & \text{if $T$ ends in $t$}. % destructive 1
+			\end{cases}
+		\]
 	\end{enumerate}
-	BLAH BLAH BLAH BLAH BLAH 
-	% TODO : figure out what the hell this is supposed to be
+	Analogous statements hold when $n$ is an even integer, with the roles of $x$ and $y$ interchanged, as well as the roles of $s$ and $t$.
 	\label{thm:recurse}
 \end{proposition}
 
+Notice that this recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
+
+\begin{proof}
+	We will only resolve the case where $n$ is odd; that is, $\AA_n$ terminates in $s$.  The other case is identical.
+	\begin{enumerate}[(i)]
+		\ii Suppose $\ul a[n] = \ul b[n] = 0$.  Note that the top of $M_1$ is also $T$.
+		\begin{itemize}
+			\ii If $T = \varnothing$, then $M_1$ also had top $\varnothing$.  Therefore, the addition of the $0$'s at the end simply generates an extra blue barbell.  So the resulting map is simply a multiple by $\alpha_s$.
+			\ii The case where $T$ ends in $t$ is analogous; we simply obtain a new barbell.  However, because $T \neq \emptyset$, the extra factor is $Q_T$ instead of simply $\alpha_t$. 
+			\begin{figure}[ht]
+				\centering
+				\begin{asy}
+					size(12cm);
+					real h = 0.7;
+					pen s = blue, t = red + dashed + 0.6;
+					pen dot_s = blue, dot_t = red;
+					int n = 4;
+
+					picture one;
+					draw(one, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+					draw(one, (1,0)--(1,h), t);
+					dot(one, (1,h), dot_t);
+					draw(one, (3,0)--(3,h), t);
+					dot(one, (3,h), dot_t);
+					draw(one,(2,0)--(2,3*h), s);
+					dot(one, (2, h/2), dot_s);
+
+					picture two;
+					draw(two, (0,0)--(0,h), s);
+					dot(two, (0,h), dot_s);
+					draw(two, (1,0)--(1,h), t);
+					dot(two, (1,h), dot_t);
+					draw(two, (3,0)--(3,h), t);
+					dot(two, (3,h), dot_t);
+					draw(two,(2,0)--(2,3*h), s);
+
+					add(one); add(reflect((0,0),(1,0))*two);
+					draw((-1,0)--(4,0));
+
+					int n = 5;
+
+					picture three;
+					draw(three, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+					draw(three, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+					draw(three, (1,0)--(1,h), t);
+					dot(three, (1,h), dot_t);
+					draw(three, (3,0)--(3,h), t);
+					dot(three, (3,h), dot_t);
+					draw(three,(4,0)--(4,3*h), s);
+					dot(three, (2, h/2), dot_s);
+					dot(three, (4, h/2), dot_s);
+
+					picture four;
+					draw(four, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+					draw(four, (0,0)--(0,h), s);
+					dot(four, (0,h), dot_s);
+					draw(four, (1,0)--(1,h), t);
+					dot(four, (1,h), dot_t);
+					draw(four, (3,0)--(3,h), t);
+					dot(four, (3,h), dot_t);
+					draw(four,(4,0)--(4,3*h), s);
+					dot(four, (4, h/2), dot_s);
+
+					add(shift((7,0)) * three); add(shift((7,0)) * reflect((0,0),(1,0))*four);
+					draw((7-1,0)--(7+5,0));
+					MP("\to", (5,0), (0,0));
+				\end{asy}
+				\caption{$\MM(1000, 0010)$ on left against $\MM(10000, 00100)$ on right.}
+				\label{fig:recurse_example_destr_zero}
+			\end{figure}
+			\ii Now suppose $T$ ends in $s$.  Then the addition of the $0$'s resulted in enclosing a caterpillar of $M_1$ in an attached bubble, as per Figure~\ref{fig:recurse_example_destr_zero}.  Breaking out of the additional blue loop nows adds a factor of $x$, but the red caterpillar is annihilated in the process; therefore, only the fluff remains, because there is nothing to push through the fences. 
+		\end{itemize}
+		\ii Now suppose that $\ul a[n] = \ul b[n] = 1$.
+		\begin{itemize}
+			\ii First, suppose $T$ ends in $s$.  Then the additional $1$'s added simply create a fence on the far right, because there is no ``up'' blue anchors to interact with.  Because this fence is already on the far right, it does not affect the product, hence $M = M_1$.
+			\begin{figure}[ht]
+				\centering
+				\begin{asy}
+					size(11cm);
+					real h = 0.7;
+					pen s = blue, t = red + dashed + 0.6;
+					pen dot_s = blue, dot_t = red;
+					int n = 4;
+
+					picture one;
+					draw(one, (0,0)--(0,h), s);
+					dot(one, (0,h), dot_s);
+					draw(one, (3,0)--(3,h), t);
+					dot(one, (3,h), dot_t);
+					draw(one,(1,0)--(1,3*h), t);
+					draw(one,(2,0)--(2,3*h), s);
+
+					picture two;
+					draw(two, (0,0)--(0,h), s);
+					dot(two, (0,h), dot_s);
+					draw(two, (3,0)--(3,h), t);
+					dot(two, (3,h), dot_t);
+					draw(two,(1,0)--(1,3*h), t);
+					draw(two,(2,0)--(2,3*h), s);
+
+					add(one); add(reflect((0,0),(1,0))*two);
+					draw((-1,0)--(4,0));
+
+					int n = 5;
+
+					picture three;
+					draw(three, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+					draw(three, (0,0)--(0,h), s);
+					dot(three, (0,h), dot_s);
+					draw(three, (3,0)--(3,h), t);
+					dot(three, (3,h), dot_t);
+					draw(three,(1,0)--(1,3*h), t);
+
+					picture four;
+					draw(four, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+					draw(four, (0,0)--(0,h), s);
+					dot(four, (0,h), dot_s);
+					draw(four, (3,0)--(3,h), t);
+					dot(four, (3,h), dot_t);
+					draw(four,(1,0)--(1,3*h), t);
+
+					add(shift((7,0)) * three); add(shift((7,0)) * reflect((0,0),(1,0)) * four);
+					draw((7-1,0)--(7+5,0));
+					MP("\to", (5,0), (0,0));
+				\end{asy}
+				\caption{$\MM(0110, 0110)$ on left against $\MM(01101, 01101)$ on right.}
+				\label{fig:recurse_example_destr_one}
+			\end{figure}
+			\ii Conversely, suppose that $T$ ends in $t$.   See Figure \ref{fig:recurse_example_destr_one} for an example.
+
+			In that case, $M_1$ must have had the top $T$ with an $s$ appended.  Once again, we find that the red caterpillar from $M_1$ is enclosed in a bubble. This time, however, the bubble is not attached.  Therefore, while we still obtain the extra factor of $x$ and the caterpillar is still removed, we remain with a blue barbell on the far right pasture.  So we must push this blue barbell through $T$.  This adds a factor of $Q_T$, and so we obtain the desired form $-xF Q_T$.
+			\ii The case where $T = \varnothing$ is analogous to the previous case; in a sense, we merely have a degenerate $Q_\varnothing = \alpha_s$.  Specifically, the blue barbell is already on the correct pasture, so we simply add a factor of $\alpha_s$.
+		\end{itemize}
+	\end{enumerate}
+	This exhausts all the cases in the proposition, hence we're done.
+\end{proof}
+
 \section{Conclusion}
-% The conclusion should be a brief summary of what you have done.  You wish to leave the reader with a clear impression of your ideas and what you have accomplished.  This section is typically extremely short and in the past tense.
+The overarching goal of the paper was to compute $\MM_{\ul r} (\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.  In this paper, we solved the case where $\ul r = \SS_n$ completely, and showed that the case where $\ul r = \AA_n$ is significantly restricted.  We also provide a partial recurrence for $\AA_n$.  One obvious next direction would be to attempt to complete the recursion for $\AA_n$ so that $\MM_{\AA_n} (\ul a, \ul b)$ can be determined completely.
+
+What about the original problem of arbitrary $\ul r$?  It was originally hoped that, by understanding $\AA_n$ and $\SS_n$, one could derive the general formula (perhaps by viewing strings of $s$'s in $\ul r$ as a single $s$ with a formula for $\SS_n$, and then aggregating all this information with a formula for $\AA_n$).  Unfortunately, the lemmata of Section~\ref{sec:res_alt_restrict} show that in fact, maps with base $\AA_n$ are quite restricted.  So, either the results of Section~\ref{sec:res_alt_compute} will have to be generalized significantly (in the context of maps outside those of base $\AA_n$), or an entirely new approach will be required.
 
 \section{Acknowledgments} 
 I wish to thank the MIT Math Department for organizing the Math RSI, and in particular the head mentor Dr. Tanya Khovanova (MIT) for providing individual discussion with me.
