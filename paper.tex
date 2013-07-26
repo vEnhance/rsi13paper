@@ -9,7 +9,7 @@ TODO: Expand on history, motivation, importance, etc. (meeting Ben on Monday)
 
 Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in section \ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
 
-Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:probstate}.  The results begin by solving the special case of one color completely in section \ref{sec:res_onecolor}.  In section \ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in sections \ref{sec:res_altcase} and \ref{sec:res_altrecurse}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
+Because the technical description of the problem statement is quite involved, we devote the entirety of section \ref{sec:prelim} to preliminaries and defer the actual problem statement to section \ref{sec:probstate}.  The results begin by solving the special case of one color completely in section \ref{sec:res_onecolor}.  In section \ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in sections \ref{sec:res_altcase} and \ref{sec:res_altcompute}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
 
 \section{Preliminaries and Definitions}
 \label{sec:prelim}
@@ -278,7 +278,7 @@ Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$
 	\label{fig:example_compose}
 \end{figure}
 
-Two maps $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ with identical tops may be composed by juxtaposing $\MM_{\ul r}(\ul a)$ with a flipped copy of $\MM_{\ul r}(\ul b)$; an example of such a composition is given in Figure~\ref{fig:example_compose}.  We will denote this product by $\MM_{\ul r}(\ul a, \ul b)$. % Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  
+Two maps $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ with identical tops may be composed by juxtaposing $\MM_{\ul r}(\ul a)$ with a flipped copy of $\MM_{\ul r}(\ul b)$; an example of such a composition is given in Figure~\ref{fig:example_compose}.  We will denote this product by $\MM_{\ul r}(\ul a, \ul b)$.  If the two half-maps are not compatible -- i.e. $\Top_{\ul r} \ul a \neq \Top_{\ul r} \ul b$ -- then we will simply treat the product as the zero map.  % Then given two binary strings $\ul a$ and $\ul b$, we will let $\MM_{\ul r}(\ul a, \ul b)$ denote the product of $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ if $\Top_{\ul r} \ul a = \Top_{\ul r} \ul b$, and $0$ otherwise.  
 
 Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
 
@@ -795,12 +795,32 @@ The bubble theorem and the pasture theorem are structurally very similar.  In fa
 \end{proof}
 
 
-\section{A Recursion for the Alternating Case}
-\label{sec:res_altrecurse}
+\section{Computations for the Alternating Case}
+\label{sec:res_altcompute}
+We now turn to using the tools developed in section \ref{sec:res_altcase} in order to compute polynomials. First, we add some structure to these special cases.
+
+\begin{corollary}
+	For any binary strings $\ul a$ and $\ul b$ of length $n$
+\end{corollary}<++>
+
 In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  This recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
 
+\begin{definition*}
+	We say that two strings $\ul{r_1}$ and $\ul{r_2}$ \emph{agree in $c$} if their last characters are both $c$.
+\end{definition*}
+\begin{definition*}
+	For a binary string $\ul r$, let $\ul r'$ be the string formed by deleting the last bit of $\ul r$.
+\end{definition*}
+
 \begin{proposition}
-	BLAH
+	Suppose $n \ge 1$ is an integer.  Let $\ul a$ and $\ul b$ be two binary strings of length $n$ which agree in the last bit, which have the same top $T = \Top_{\AA_n} \ul a = \Top_{\AA_n} \ul b$.  Suppose $M_1 = \MM_{\AA_{n-1}} (\ul a', \ul b') \neq 0$.  Then $M = \MM_{\AA_n} (\ul a, \ul b$) is nonzero, and the following recursion holds.
+	\begin{enumerate}[(i)]
+		\ii If $\AA_n$ and $T$ have the same last character $c$ (so $T \neq \varnothing$)
+		\begin{itemize}
+			\ii If $\ul a[n] = \ul[b] = 1$, then $M = M_1$.
+			\ii If $\ul a[n] = \ul[b] = 0$, then $M = -f / \alpha_k$ where $f$ is the monomial in $M_1$ with the largest factor of $\alpha_k$, with any quantum numbers
+		\end{itemize}<++>
+	\end{enumerate}<++>
 	\label{thm:recurse}
 \end{proposition}
 
