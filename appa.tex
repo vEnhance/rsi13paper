@@ -75,8 +75,6 @@ An example of such a diagram is shown in Figure~\ref{fig:example_diagram}.
 
 The elements of $\DD$ can be added by simply adding corresponding coefficients.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels on the bottom of the first coincide with those on the top of the second.  Otherwise, the product is $0$.
 
-In \cite{basispf}, Khovanov and Elias show that all such maps can be expressed as a linear combination of these diagrams.
-
 \subsection{Algebraic Context}
 The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by simply transcribing the tensor products to take -- for example, a map with bottom $stt$ and top $s$ represents a map from $R \stimes R \ttimes R \ttimes R$ to $R \stimes R$.  An unlabelled domain corresponds to $R$.
 
@@ -182,6 +180,7 @@ From the algebraic context given above, one can derive the following relationshi
 	\caption{An example of light leaves.}
 	\label{fig:lightleaf_example}
 \end{figure}
+We now present the algorithm for Libedinsky's light leaves, in the special case where $W$ is the infinite dihedral group.  A full construction for more general Coxeter groups is given in \cite{gr4all}.
 
 Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any binary string $\ul b$ of length $n$, we can construct a diagram based on a series of rules.
 
@@ -199,8 +198,6 @@ Each bit of $\ul b$ is read from left to right in order and designated either up
 	\end{itemize}
 \end{itemize}
 Finally, join any bits which are up at the end of the process to the opposite end.  A map which arises in such a manner is called a \emph{light leaf}.  An example of such a light leaf is shown in Figure~\ref{fig:lightleaf_example}.
-
-These light leaves are interesting because, in the seventh chapter of \cite{span}, it is shown that these light leaves form a ``basis'' in the sense that all maps may be expressed by compositions of these light leaves.
 
 \section{Proof of the One-Color Theorem}
 \label{sec:s_proof}
@@ -393,8 +390,8 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 	\begin{enumerate}[(i)]
 		\ii Suppose $\ul a[n] = \ul b[n] = 0$.  Note that the top of $M_1$ is also $T$.
 		\begin{itemize}
-			\ii If $T = \varnothing$, then $M_1$ also had top $\varnothing$.  Therefore, the addition of the $0$'s at the end simply generates an extra blue barbell.  So the resulting map is simply a multiple by $\alpha_s$.
-			\ii The case where $T$ ends in $t$ is analogous; we simply obtain a new barbell.  However, because $T \neq \emptyset$, the extra factor is $Q_T$ instead of simply $\alpha_t$. 
+			\ii If $T = \varnothing$, then $M_1$ also had top $\varnothing$.  Therefore, the addition of the $0$'s at the end simply generates an extra blue barbell.  So the resulting map is simply a multiple by $\alpha_s$; i.e. $M = \alpha_sM_1$.
+			\ii The case where $T$ ends in $t$ is analogous; we simply obtain a new barbell.  However, because $T \neq \varnothing$, the extra factor is $Q_T$ instead of simply $\alpha_t$.  Hence, $M = Q_TM_1$.
 			\begin{figure}[ht]
 				\centering
 				\begin{asy}
@@ -453,10 +450,10 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 					draw((7-1,0)--(7+5,0));
 					MP("\to", (5,0), (0,0));
 				\end{asy}
-				\caption{Enclosing a caterpillar in an attached component.}
+				\caption{$\MM(1000,0010)$ on the left, and $\MM(10000,00100)$ on right.}
 				\label{fig:recurse_example_destr_zero}
 			\end{figure}
-			\ii Now suppose $T$ ends in $s$.  Then the addition of the $0$'s resulted in enclosing a caterpillar of $M_1$ in an attached bubble, as per Figure~\ref{fig:recurse_example_destr_zero}.  Breaking out of the additional blue loop nows adds a factor of $x$, but the red caterpillar is annihilated in the process; therefore, only the fluff remains, because there is nothing to push through the fences. 
+			\ii Now suppose $T$ ends in $s$.  Then the addition of the $0$'s resulted in enclosing a caterpillar of $M_1$ in an attached bubble, as per Figure~\ref{fig:recurse_example_destr_zero}.  Breaking out of the additional blue loop nows adds a factor of $x$, but the red caterpillar is annihilated in the process; therefore, only the fluff remains, because there is nothing to push through the fences.  Hence, $M = -xF$.
 		\end{itemize}
 		\ii Now suppose that $\ul a[n] = \ul b[n] = 1$.
 		\begin{itemize}
@@ -511,13 +508,13 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 					draw((7-1,0)--(7+5,0));
 					MP("\to", (5,0), (0,0));
 				\end{asy}
-				\caption{Enclosing a caterpillar in a free component.}
+				\caption{$\MM(0110,0110)$ on the left, and $\MM(01101,01101)$ on right.}
 				\label{fig:recurse_example_destr_one}
 			\end{figure}
 			\ii Conversely, suppose that $T$ ends in $t$.   See Figure \ref{fig:recurse_example_destr_one} for an example.
 
-			In that case, $M_1$ must have had the top $T$ with an $s$ appended.  Once again, we find that the red caterpillar from $M_1$ is enclosed in a bubble. This time, however, the bubble is not attached.  Therefore, while we still obtain the extra factor of $x$ and the caterpillar is still removed, we remain with a blue barbell on the far right pasture.  So we must push this blue barbell through $T$.  This adds a factor of $Q_T$, and so we obtain the desired form $-xF Q_T$.
-			\ii The case where $T = \varnothing$ is analogous to the previous case; in a sense, we merely have a degenerate $Q_\varnothing = \alpha_s$.  Specifically, the blue barbell is already on the correct pasture, so we simply add a factor of $\alpha_s$.
+			In that case, $M_1$ must have had the top $T$ with an $s$ appended.  Once again, we find that the red caterpillar from $M_1$ is enclosed in a bubble. This time, however, the bubble is not attached.  Therefore, while we still obtain the extra factor of $x$ and the caterpillar is still removed, we remain with a blue barbell on the far right pasture.  So we must push this blue barbell through $T$.  This adds a factor of $Q_T$, and so we obtain the desired form $M = -xF Q_T$.
+			\ii The case where $T = \varnothing$ is analogous to the previous case; in a sense, we merely have a degenerate $Q_\varnothing = \alpha_s$.  Specifically, the blue barbell is already on the correct pasture, so we simply add a factor of $\alpha_s$.  Therefore, $M = -xF \alpha_s$.
 		\end{itemize}
 	\end{enumerate}
 	This exhausts all the cases in the proposition, hence we're done.

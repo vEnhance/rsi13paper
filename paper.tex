@@ -1,21 +1,26 @@
 % This is paper.tex
-
 \section{Introduction}
 \textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
-We study a class of maps between Bott-Samelson bimodules.  These maps are represented by certain types of diagrams, as described in Section~\ref{sec:prelim_map}.  The maps are composed by juxtaposition.
+We study a class of maps between Bott-Samelson bimodules.  
+% These maps are represented by certain types of diagrams, as described in Section~\ref{sec:prelim_map}.  The maps are composed by juxtaposition.  
+Bott-Samelson bimodules arise from the study of Soergel bimodules, as mentioned in \cite{gr4all}, in the sense that a description of the category of Bott-Samelson bimodules is sufficient to understand that of the Soergel bimodules. 
+However, Bott-Samelson bimodules admit a combinatorial description.  In particular, \cite{gr4all} gives a presentation for the category of Bott-Samelson bimodules in terms of planar diagrammatics (i.e. diagrams in the plane).
 
-TODO: Expand on history, motivation, importance, etc. (meeting Ben on Monday)
+This paper investigates some of the properties of these diagrammatics from a combinatorial perspective.   However, in this paper, we consider only the special case of an infinite dihedral group with generators $s$ and $t$ (as opposed to an arbitrary Coxeter group).
 
-Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in Section~\ref{sec:prelim_lightleave}.  Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  We describe the relationship between the final result of such a composition and the two binary strings being composed.
+Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in Section~\ref{sec:prelim_lightleave}.  
+These light leaves are interesting because they form a spanning set for the maps we are interest in, as shown in \cite{gr4all}.
+Since two diagrams may be composed, we may construct a new map given two binary strings by composing the results of two applications of the light leaves.  The goal of the project is to describe the relationship between the final result of such a composition and the two binary strings.
 
-Because the technical description of the problem statement is quite involved, we devote the entirety of Section~\ref{sec:prelim} to preliminaries and defer the actual problem statement to Section~\ref{sec:probstate}.  The results begin by solving the special case of one color completely in Section~\ref{sec:res_onecolor}.  In Section~\ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in Sections~\ref{sec:res_alt_restrict} and \ref{sec:res_alt_compute}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
+The technical description of the problem statement is quite involved.  Thusly, the preliminaries for the problem are given in Appendix~\ref{sec:prelim_background}, while the definitions used in this paper are recorded in Section~\ref{sec:prelim}.  The problem statement is given in Section~\ref{sec:probstate}.
+The results begin by solving the special case of one color completely in Section~\ref{sec:res_onecolor}.  In Section~\ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in Sections~\ref{sec:res_alt_restrict} and \ref{sec:res_alt_compute}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures is extremely limited, and provide a recursion based on these restrictions for special cases. 
 
 \section{Preliminaries and Definitions}
 \label{sec:prelim}
 In Appendix~\ref{sec:prelim_background}, we provide the background behind the Bott-Samelson bimodules, and the correspondence between these maps and certain diagrams.  We then introduce Libedinsky's light leaves, a basis by which maps can be constructed using binary strings.
 
-In Section~\ref{sec:prelim_def_notation}, we introduce several definitions which we use throughout the paper.  Next, in Section~\ref{sec:prelim_explain_poly_eval}, we describe how these maps can be represent as polynomials.  The actual problem statement is then deferred to \ref{sec:probstate}.
+In Section~\ref{sec:prelim_def_notation}, we introduce several of our definitions which we use throughout the paper.  Next, in Section~\ref{sec:prelim_explain_poly_eval}, we describe how these maps can be represented as polynomials.  The actual problem statement is then deferred to Section~\ref{sec:probstate}.
 \subsection{Definitions and Notations}
 \label{sec:prelim_def_notation}
 Take an infinite dihedral group $W=\left<s,t\mid s^2=t^2=1\right>$ and let $R = \RR[\alpha_s, \alpha_t]$ be the Coxeter ring as defined in Appendix~\ref{sec:prelim_background}, where $\alpha_s$ denotes reflection over the hyperplane normal to $s$.  
@@ -36,7 +41,7 @@ In general, a string of $s$'s and $t$'s will be referred to as an \emph{expressi
 
 Next, let $\BB_n$ denote the set of binary strings of length $n$.
 
-Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.
+Finally, given a string $\ul x$ (either a binary string or a string of $s$'s and $t$'s) we will denote the $i\th$ character as $\ul x[i]$.  In general, underline Roman letters denote strings.
 
 \subsubsection{Definitions for Maps and Diagram}
 Consider a string $\ul r$ of letters $s$ and $t$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the map (or its associated diagram; we will refer to maps and their associated diagrams interchangeably) formed by the light leaves, as prescribed in Appendix~\ref{sec:prelim_lightleave}.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Additionally, let $\Top_{\ul r}(\ul b)$ denote the top of the half-diagram $\MM_{\ul r}(\ul b)$.
@@ -161,7 +166,7 @@ Let us make a few convenient definitions for some recurring characters in our fu
 \end{figure}
 
 \begin{definition*}
-	A connected component which (i) is a tree, and (ii) does not touch the top or bottom boundaries is called a \emph{barbell}.
+	A connected component which (i) is acyclic, and (ii) does not touch the top or bottom boundaries is called a \emph{barbell}.
 \end{definition*}
 Notice that, by homotopy, every blue barbell is simply $\barbell{barbell_blue}$, which we will see later evaluates as $\alpha_s$.  Similarly, every red barbell is simply $\barbell{barbell_red} = \alpha_t$.
 
@@ -306,7 +311,7 @@ and its analogous form for $t$.  One can verify \eqref{eq:quantum} immediately f
 
 This motivates us to make the following definition, which will be used in Section~\ref{sec:res_alt_compute}.
 \begin{definition*}
-	For any reduced expression $\ul r$, we adopt the quantum polynomial $Q_{\ul r}$ by :
+	For any reduced expression $\ul r$, we define the quantum polynomial $Q_{\ul r}$ by :
 	\[
 		Q_{\AA_n} = 
 		\begin{cases}
@@ -366,7 +371,7 @@ First, we need a criteria to determine the top.  Fortunately, this is extremely 
 	Straightforward induction on $n$.  
 \end{proof}
 
-Subsequently, we make the following definition.
+Subsequently, we make the following definition for this section only.
 \begin{definition*}
 	For a binary string $\ul b$, define the \emph{partial-sum string} of $\ul b$, denoted $\ul b^\ast$, as follows:
 	\[
@@ -390,7 +395,8 @@ This lets us state our main result for this section.
 	\]
 	\label{thm:s_eval}
 \end{theorem}
-The proof is given in Appendix~\ref{sec:s_proof}; it is essentially only a matter of finding loops and counting connected components.
+The proof is essentially only a matter of finding loops and counting connected components.
+As such, it is deferred to in Appendix~\ref{sec:s_proof};
 
 \section{Counting Maps}
 \label{sec:res_count_maps}
@@ -423,7 +429,7 @@ The main idea of the proof is to reduce the problem to the case when $\ell = n$,
 \label{sec:res_alt_restrict}
 We now turn our attention to the case of $\ul r = \AA_n$.
 
-In this section we will show several results which show that the possible outputs of a map with base $\AA_n$ are extremely restricted.  The proofs are given in Appendix~\ref{sec:lemmata_proof}.
+We now present three results which show that the possible outputs of a map with base $\AA_n$ are extremely restricted.  
 \begin{lemma}[Bubble Lemma]
 	Consider a bubble in a full-diagram with base $\AA_n$.  The bubble holds exactly one caterpillar, whose color is opposite that of the bubble.
 	\label{thm:bubble}
@@ -440,7 +446,8 @@ In this section we will show several results which show that the possible output
 	\end{enumerate}
 	\label{thm:pasture}
 \end{lemma}
-These results show that the structure in maps with base $\AA_n$ is quite limited.  
+The Bubble Lemma is the key combinatorial observation, which hinges on the fact that any two anchors with the same color have a third anchor of the other color between them.  The other two lemmas follow almost directly from it.
+The details of the proofs are given in Appendix~\ref{sec:lemmata_proof}.
 
 \section{Algebraic Computations for the Alternating Case}
 \label{sec:res_alt_compute}
@@ -464,7 +471,7 @@ Let us now endow our maps with base $\AA_n$ with some additional structure.
 	This is an immediate consequence of the Caterpillar Lemma and the Pasture Lemma.  Everything in the first pasture is a product of monomials by the Caterpillar Lemma.  If $T$ and $\AA_n$ agree, then the last pasture is empty and hence we obtain the first case.  Otherwise, there is a single caterpillar of color opposite to $T$, and hence after evaluating that caterpillar, we obtain some monomial times a single barbell.  This generates the final $Q_T$ term.
 \end{proof}
 
-This motivates the following definition.
+This motivates the following definition, which is relevant for Proposition~\ref{thm:recurse}.
 \begin{definition*}
 	If a nonzero map $M$ with base $\AA_n$ is presented as in Theorem~\ref{thm:alt_struct}, then the term $x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t}$ will be called the \emph{fluff} of $M$, and the polynomial (either $1$ or $Q_T$) will be the \emph{face} of $M$. 
 \end{definition*}
@@ -473,7 +480,7 @@ This motivates the following definition.
 \end{remark*}
 
 \subsection{A Partial Recursion}
-In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  The proof is given in Appendix~\ref{sec:recurse_proof}.
+In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  
 
 \begin{proposition}
 	Let $n \ge 2$ be an odd integer and consider two binary strings $\ul a, \ul b \in \BB_n$ such that $T = \Top_{\AA_n}(\ul a) = \Top_{\AA_n}(\ul b)$.  
@@ -484,9 +491,9 @@ In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a,
 		\[ \MM_{\AA_n} (\ul a, \ul b)
 			=
 			\begin{cases}
-				M_1 \alpha_s & \text{if $T = \varnothing$} \\ % just another barbell
+				\alpha_s M_1 & \text{if $T = \varnothing$} \\ % just another barbell
 				-xF & \text{if $T$ ends in $s$} \\ % closes a caterpillar like 0|
-				M_1 Q_T & \text{if $T$ ends in $t$}. \\ % just another barbell, but push it all the way through nonempty T
+				 Q_T M_1 & \text{if $T$ ends in $t$}. \\ % just another barbell, but push it all the way through nonempty T
 			\end{cases}
 		\]
 		\ii If $\ul a[n] = \ul b[n] = 1$, then
@@ -503,6 +510,7 @@ In this section we present a limited recursion for computing $\MM_{\AA_n}(\ul a,
 	Analogous statements hold when $n$ is an even integer, with the roles of $x$ and $y$ interchanged, as well as the roles of $s$ and $t$.
 	\label{thm:recurse}
 \end{proposition}
+The recursion arises because, using the lemmata, we are able to see exactly what happens in the rightmost pasture if a pair of $1$'s or a pair of $0$'s is added.  In short, either a barbell or fence is added on the far right, or a caterpillar is enclosed in a bubble; each of these leads to one of the cases above.  The full computation is given in Appendix~\ref{sec:recurse_proof}.
 
 Notice that this recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)$.
 
@@ -511,6 +519,8 @@ Notice that this recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)
 The overarching goal of the paper was to compute $\MM_{\ul r} (\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.  In this paper, we solved the case where $\ul r = \SS_n$ completely, and showed that the case where $\ul r = \AA_n$ is significantly restricted.  We also provide a partial recurrence for $\AA_n$.  One obvious next direction would be to attempt to complete the recursion for $\AA_n$ so that $\MM_{\AA_n} (\ul a, \ul b)$ can be determined completely.
 
 What about the original problem of arbitrary $\ul r$?  It was originally hoped that, by understanding $\AA_n$ and $\SS_n$, one could derive the general formula (perhaps by viewing strings of $s$'s in $\ul r$ as a single $s$ with a formula for $\SS_n$, and then aggregating all this information with a formula for $\AA_n$).  Unfortunately, the lemmata of Section~\ref{sec:res_alt_restrict} show that in fact, maps with base $\AA_n$ are quite restricted.  So, either the results of Section~\ref{sec:res_alt_compute} will have to be generalized significantly (in the context of maps outside those of base $\AA_n$), or an entirely new approach will be required.
+
+Yet another possible direction is to search for similar results when the order of $st$ in $W$ is finite, or even if $W$ is an arbitrary Coxeter group.
 
 \section{Acknowledgments} 
 I wish to thank the MIT Math Department for organizing the Math RSI, and in particular the head mentor Dr. Tanya Khovanova, MIT, for providing individual discussion with me.
