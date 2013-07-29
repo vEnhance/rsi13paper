@@ -1,18 +1,16 @@
-% This is sec.tex
-%
-% This file is for appendices.  If you don't have any appendices, delete
-% the percent sign from the beginning of the next line.
-% \endinput
-
+% This is appa.tex
 \appendix
 
-% Add additional appendices by replicating the line below.
+%TODO restate all theorems
 
 \section{An Extended Background}
 \label{sec:prelim_background}
-Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in a real Euclidean space $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  In other words, $W$ is the infinite dihedral group with the presentation \[ W = \left<s,t \mid s^2=t^2=1\right>. \] 
+Let $V$ be a (real) Euclidean space endowed with a positive definite symmetric bilinear form $(\mu, \lambda)$.
+Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  
 
-If $V$ has a positive definite symmetric bilinear form $(\mu, \lambda)$, then for any $a \in V$, reflection over the hyperplane normal to $a$ can be written explicitly for each $v \in V$ as the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  
+In other words, $W$ is the infinite dihedral group with the presentation \[ W = \left<s,t \mid s^2=t^2=1\right>. \] 
+
+Then for any $a \in V$, reflection over the hyperplane normal to $a$ can be written explicitly for each $v \in V$ as the map \[ v \mapsto v - \frac{2(v,a)}{(a,a)} a. \]  
 In particular, if $W$ acts on $V$ by this reflection, $s(\alpha_s) = -\alpha_s$ and $t(\alpha_t) = -\alpha_t$.  Furthermore, using the above, we see that there exist fixed constants $x$ and $y$ such that
 \begin{align*}
 	s(\alpha_t) &= \alpha_t + x \alpha_s \\
@@ -33,14 +31,14 @@ We will consider maps between these bimodules that preserve left and right actio
 	\sigma(rx) = r\sigma(x) \quad\text{and}\quad \sigma(xr) = \sigma(x)r \quad\text{for every $r \in R$ and $x \in \text{Domain } \sigma$}.
 	\label{eq:respect}
 \end{equation}
-These maps can be represented using diagrammatics, as below.
+These maps may be represented diagrammatically.
 
 \subsection{Diagrammatics of Maps}
 \label{sec:prelim_map}
 \newcommand{\DD}{\mathcal D}
 These maps can be described in terms of diagrams.  We take a detour and first describe the appearance of such diagrams; in the subsequent section we will explain their algebraic meaning.  A reader who is not interested in this context can simply accept on faith the relations specified in Appendix~\ref{sec:prelim_genrel}.
 
-Consider a category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below (where the boxes are diagrams).  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
+Consider a category $\DD$ whose elements are linear combinations $\sum c_i \square$ of the diagrams described below (where the $\square$'s are diagrams).  The coefficients $c_i$ belong to the ring $\ZZ[x,y]$.
 
 The diagrams may be described as planar graphs, not necessarily connected, drawn in a rectangle, with the following properties.
 \begin{enumerate}[(i)]
@@ -78,12 +76,12 @@ An example of such a diagram is shown in Figure~\ref{fig:example_diagram}.
 The elements of $\DD$ can be added by simply adding corresponding coefficients in front of each diagram; no other relations exist.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels on the bottom of the first coincide with those on the top of the second.  By composition, we mean that the first diagram is vertically juxtaposed on top of the second diagram; see Figure~\ref{fig:example_compose} for an example.  Otherwise, the product is $0$.
 
 \subsection{Algebraic Context}
-The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by simply transcribing the tensor products to take -- for example, a map with bottom $stt$ and top $s$ represents a map from $R \stimes R \ttimes R \ttimes R$ to $R \stimes R$.  An unlabelled domain corresponds to $R$.
+The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by ``transcribing'' the tensor products to take -- for example, a map with bottom $stt$ and top $s$ represents a map with domain $R \stimes R \ttimes R \ttimes R$ and codomain $R \stimes R$.  An unlabelled domain corresponds to $R$.
 
-Let us hasten to introduce one final definition.
-\begin{definition*}
-	The \emph{Demazure operator} $\partial_s: R \to R$ is given by $\partial_s(f) = \frac{f - s(f)}{\alpha_s}$.
-\end{definition*}
+Let us introduce one final definition.
+\begin{definition}
+	The \emph{Demazure operator} $\partial_s: R \to R$ is given by \[ \partial_s(f) = \frac{f - s(f)}{\alpha_s}. \]
+\end{definition}
 
 With this, we can now describe the meanings of each type of vertex (for blue lines) in Table~\ref{tab:prim_maps}.  The corresponding equations hold for red in $t$.
 
@@ -104,19 +102,21 @@ With this, we can now describe the meanings of each type of vertex (for blue lin
 
 Note that the descriptions are sufficient to determine outputs for all values because these morphisms respect left and right actions, as prescribed in \eqref{eq:respect}.
 
-Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the map in Figure~\ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
+Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the diagram in Figure~\ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
 
 Henceforth, we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
 
 \subsection{Operations for Diagrammatics}
 \label{sec:prelim_genrel}
-From the algebraic context given above, one can derive the following relationships, which are here encoded completely graphically.  These rules are sufficient to compute the maps we are interested in.
+From the algebraic context given above, one can derive the following relationships, which are here described completely graphically.  These rules are sufficient to compute the maps we are interested in.  
+
+Unless multiple colors appear in an equation, blue represents a generic color.
 
 \setcounter{op}{-1}
 \begin{op}[Isotropy] If two diagrams can be continuously deformed into each other (in the topological sense), then they are equivalent.  \end{op}
-\begin{op}[Associativity] We have $\barbell{assoc_horiz} = \barbell{assoc_vert}$ and the similar equation for red.  \end{op}
-\begin{op}[Contraction] We have $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$ and the similar equation for red.  \end{op}
-\begin{op}[The Needle] We have $\barbell{needle} = 0$.  Similarly, the red needle yields zero.  \end{op}
+\begin{op}[Associativity] We have $\barbell{assoc_horiz} = \barbell{assoc_vert}$.  \end{op}
+\begin{op}[Contraction] We have $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.  \end{op}
+\begin{op}[The Needle] We have $\barbell{needle} = 0$.  \end{op}
 \begin{remark*} Using contraction and the above, one can show that the diagram $\barbell{zero}$ is zero as well. In fact, in general, \emph{any} map which contains a ``closed'' and empty region is the zero map.  \end{remark*}
 \begin{op}[Barbell-Forcing Rules]
 	We have the following three equalities:
@@ -186,20 +186,21 @@ We now present the algorithm for Libedinsky's light leaves, in the special case 
 
 Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any binary string $\ul b$ of length $n$, we can construct a diagram based on a series of rules.
 
-Each bit of $\ul b$ is read from left to right in order and designated either up or down.  We say that a bit $x$ is an \emph{open neighbor} of $y$ if $x$ is marked up, $x$ and $y$ have the same color, and there are no other bits marked up between $x$ and $y$.
+Each bit of $\ul b$ is read from left to right in order and designated either open or closed; the state of a bit can change more than once.  Initially all bits are closed.  We say that a bit $x$ is an \emph{open neighbor} of $y$ if $x$ is marked open, $x$ and $y$ have the same color, and there are no other bits marked open between $x$ and $y$.  Note that each bit will have at most one open neighbor.
+
 \begin{itemize}
 	\ii If the bit is a $1$:
 	\begin{itemize}
-		\ii If the current bit has an open neighbor, then draw an arc joining the two bits, and mark both bits as down.
-		\ii Otherwise, designate the current bit as up.
+		\ii If the current bit has an open neighbor, then draw an arc joining the two bits, and mark both bits as closed.
+		\ii Otherwise, designate the current bit as open.
 	\end{itemize}
 	\ii If the bit is $0$:
 	\begin{itemize}
-		\ii If the current bit has an open neighbor, then draw an arc joining the two bits, mark the previous bit as down, and the current bit as up.
+		\ii If the current bit has an open neighbor, then draw an arc joining the two bits, mark the previous bit as closed, and the current bit as open.
 		\ii Otherwise, create a ``stub'', i.e. a single vertex of degree one, and mark the current bit as down.
 	\end{itemize}
 \end{itemize}
-Finally, join any bits which are up at the end of the process to the upper boundary of the diagram.  A map which arises in such a manner is called a \emph{light leaf}.  An example of such a light leaf is shown in Figure~\ref{fig:lightleaf_example}.
+Finally, join any bits which are open at the end of the process to the upper boundary of the diagram.  A map which arises in such a manner is called a \emph{light leaf}.  An example of such a light leaf is shown in Figure~\ref{fig:lightleaf_example}.
 
 The \emph{top} of such a map is the expression which appears on the upper boundary; i.e. the bits which are still up at the end of the algorithm.  For example, the map in Figure~\ref{fig:lightleaf_example} has top $ts$.  Note that any top is a reduced expression.  
 
@@ -254,7 +255,7 @@ The \emph{top} of such a map is the expression which appears on the upper bounda
 
 	The key observation is that for $1 \le i \le n-1$, we have that $\ul b^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component in $\MM(\ul b)$.  This follows by construction.
 
-	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$ to obtain a full-map.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent common antennae, whence the composition of the entire map is zero because the two antennae combine to form an empty bubble.  Furthermore, it is easy to see that any bubbles must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
+	Let us now compose $M_a \defeq \MM(\ul a)$ and $M_b \defeq \MM(\ul b)$ to obtain a full-map.  Two components (one from $M_a$ and one from $M_b$) are said to \emph{feel} each other $k$ times if they have $k$ antennae in common.  Notice that if any two components feel each other at least twice, then there exist two adjacent common antennae, forcing the composition of the entire map to be zero because the two antennae combine to form an empty bubble.  Furthermore, it is evident that any bubbles must be formed in this manner.  In combination with the claim above, this implies the first case of the theorem.
 
 	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  It suffices to show that there are $n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast)$ barbells.  Notice that $\pi_1(\ul a^\ast) + \pi_1(\ul b^\ast)$ counts the number of edges between adjacent anchors ($i$ and $i+1$).  Because there are no cycles, deleting one of these edges increases the number of connected components by exactly one (since all the connected components are barbells).  If we delete all such edges, then we obtain $n$ barbells.  Therefore there must have been $n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast)$ barbells to begin with, as desired.
 \end{proof}
@@ -262,10 +263,10 @@ The \emph{top} of such a map is the expression which appears on the upper bounda
 \section{Proofs of Lemmata}
 \label{sec:lemmata_proof}
 \subsection{Proof of the Bubble Lemma}
-We begin with a proof of the Bubble Lemma\footnote{I should remark that attempting to construct counterexamples to the Bubble Lemma leads to a far better understanding than trying to read the following proof.}, which is the crux result of the alternating case.  Indeed, both of the subsequent lemmas are fairly straightforward consequences of this one.  
+We begin with a proof of the Bubble Lemma\footnote{I should remark that attempting to construct counterexamples to the Bubble Lemma leads to a far better understanding than trying to read the following proof.}, which is the fundamental lemma for the alternating case.  Indeed, both of the subsequent lemmas are fairly straightforward consequences of this one.  
 
 \begin{proof}[Proof of Lemma \ref{thm:bubble}]
-	Take a bubble $B$ and assume without loss of generality that it is blue.  It is easy to verify that all caterpillars held inside $B$ are red, otherwise this contradicts the construction of Libedinsky's light leaves.  Furthermore, it is evident that the bubble is nonempty; hence there is at least one red caterpillar in $B$.  We will show that there is exactly one.
+	Take a bubble $B$ and assume without loss of generality that it is blue.  By construction all caterpillars held inside $B$ must be red.  This implies that there must be at least one red caterpillar, because there is at least one red anchor inside $B$.
 
 	Define a pair of red anchors $u, v$, with $u$ to the left of $v$, to be \emph{quasi-connected} if (i) one can draw an arc from $u$ to $v$ contained entirely in one half-map which does not intersect blue lines, and (ii) there is no red anchor $w$ strictly between $u$ and $v$ for which one can draw a similar arc on the same half-map joining $w$ and $v$.
 
@@ -305,7 +306,7 @@ We begin with a proof of the Bubble Lemma\footnote{I should remark that attempti
 		\caption{Proving the bubble lemma with quasi-connected vertices.}
 		\label{fig:pf_bubble}
 	\end{figure}
-	Because the string is alternating, we can take a blue anchor $x$ immediately to the left of $v$.  Now, there must be some blue arc shielding $u$ and $v$ (since $u,v$ are inside a blue bubble).  By the light-leave construction, there must be some red arc $A$ covering $x$.  If this arc joins $u$ and $v$, then we are done.  
+	Because the string is alternating, we can take a blue anchor $x$ immediately to the left of $v$.  Now, there must be some blue arc shielding $u$ and $v$ (since $u,v$ are inside a blue bubble).  By construction, there must be some red arc $A$ covering $x$.  If this arc joins $u$ and $v$, then we are done.  
 	Otherwise, if it has endpoint $v$ then it must completely cover $u$ by condition (ii) of quasi-connectedness; if not, then it must completely cover $v$.  This leads us to two cases.
 	\begin{itemize}
 		\ii If the arc covers exactly one of $u$ or $v$, say $u$, then there must be a blue arc shielding $u$ from $A$.  But then this contradicts the quasi-connectedness, because now it is not possible to join $u$ and $v$ by an arc on this half-map.  This case is illustrated by the left half of Figure~\ref{fig:pf_bubble}.
@@ -320,9 +321,9 @@ We will now derive the Caterpillar Lemma as a consequence of the Bubble Lemma.
 It is worth intuitively explaining the main idea of the proof; the rest is book-keeping.  Essentially, because caterpillars may only hold a single other caterpillar, we may ``descend down'' until we find a caterpillar which contains barbells in its bubbles.  Now we break each of the bubbles of this caterpillar one at a time using the barbell forcing rule.  This generates several $x$ and $y$ terms, but the barbell disappears at each such move.  Hence, we break all cycles in the caterpillar, at which point it becomes a barbell (modulo the addition of new $x$ and $y$ terms).  Rinse and repeat.
 
 First, a few definitions for this section only.
-\begin{definition*}
+\begin{definition}
 	Consider a caterpillar $C$ in a full-diagram with base $\AA_n$.  Define the \emph{nesting level} of the caterpillar as the largest integer $n$ for which there exists caterpillars $C = C_0$, $C_1$, $C_2$, $\dots$, $C_n$ such that $C_i$ holds $C_{i+1}$ for each $i=0,1,\dots,n-1$.  Define the \emph{size} of the caterpillar to be the number of bubbles it contains.
-\end{definition*}
+\end{definition}
 
 \begin{proof}[Proof of Lemma \ref{thm:caterpillar}]
 	The proof is by double induction.  First we will consider caterpillars with nesting level $0$.  
@@ -385,7 +386,7 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 	Again, let $T$ denote the top, with length $N$.  In the first case, suppose $T[N] \neq \AA_n[n]$; that is, the last characters of $T$ and $\AA_n$ differ.  Then it must be the case that the rightmost anchor is not part of a fence.
 	Now suppose the map arose from $\MM_{\AA_n}(\ul a, \ul b)$.  Let $\ul a'$ be the string formed by appending $N$ $1$'s to $\ul a$, and define $\ul b'$ similarly.  Now consider the map \[ \MM_{\AA_{n+N}} \left( \ul a', \ul b' \right). \]  See Figure~\ref{fig:pf_pasture} for an example.
 
-	It is easy to verify that the top of this new map is zero.  Now what we have done is enclose the contents of each pasture into bubbles.  The Bubble Lemma tells us that the innermost bubble can have exactly one caterpillar, while the other bubbles must contain only a single caterpillar, which was once a fence.  This implies the Pasture Lemma in the first case.
+	Clearly the top of this new map is zero, say by \eqref{eq:top}.  Now what we have done is enclose the contents of each pasture into bubbles.  The Bubble Lemma tells us that the innermost bubble can have exactly one caterpillar, while the other bubbles must contain only a single caterpillar, which was once a fence.  This implies the Pasture Lemma in the first case.
 
 	The case where $T[N] = \AA_n[n]$ is similar.  We simply append a zero followed by $N$ $1$'s and repeat the same procedure.  The only difference is that the innermost barbell was generated by the $0$ we appended, and thus was not part of the original diagram.
 \end{proof}

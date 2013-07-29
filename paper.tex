@@ -44,7 +44,7 @@ Next, let $\BB_n$ denote the set of binary strings of length $n$.
 Finally, given a string $\ul x$ (either a binary string or an expression) we will denote the $i\th$ character as $\ul x[i]$.  In general, underlined Roman letters denote strings.
 
 \subsubsection{Definitions for Maps and Diagram}
-Consider an expression $\ul r$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the map (or its associated diagram; we will refer to maps and their associated diagrams interchangeably) formed by the light leaves, as prescribed in Appendix~\ref{sec:prelim_lightleave}.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams} should such a need arise.  Figure~\ref{fig:lightleaf_example} (in Appendix~\ref{sec:prelim_lightleave}) gives an example of such a half-map.
+Consider an expression $\ul r$.  Given a binary string $\ul b$, we will let $\MM_{\ul r}(\ul b)$ denote the map (or its associated diagram; we will refer to maps and their associated diagrams interchangeably) formed by the light leaves, as described in Appendix~\ref{sec:prelim_lightleave}.  We will refer to such structures as \emph{half-maps} or \emph{half-diagrams}.  Figure~\ref{fig:lightleaf_example} (in Appendix~\ref{sec:prelim_lightleave}) gives an example of such a half-map.
 
 Additionally, let $\Top_{\ul r}(\ul b)$ denote the \emph{top} of the half-diagram $\MM_{\ul r}(\ul b)$, as described in Appendix~\ref{sec:prelim_lightleave}.  
 Note that the top of any half-map is always a reduced expression.  In fact, one can verify that the top of a map is given explicitly by
@@ -52,7 +52,6 @@ Note that the top of any half-map is always a reduced expression.  In fact, one 
 	\Top_{\ul r}(\ul b) = \prod_{i=1}^n \left( \ul r[i] \right)^{\ul b[i]} \in W.
 	\label{eq:top}
 \end{equation}
-
 
 \begin{figure}[ht]
 	\centering
@@ -96,7 +95,7 @@ Note that the top of any half-map is always a reduced expression.  In fact, one 
 
 Two maps $\MM_{\ul r}(\ul a)$ and $\MM_{\ul r}(\ul b)$ with identical tops may be composed by juxtaposing $\MM_{\ul r}(\ul a)$ with a flipped copy of $\MM_{\ul r}(\ul b)$; an example of such a composition is given in Figure~\ref{fig:example_compose}.  We will denote this product by $\MM_{\ul r}(\ul a, \ul b)$.  If the two half-maps are not compatible (that is, $\Top_{\ul r}(\ul a) \neq \Top_{\ul r}(\ul b)$) then we will simply set $\MM_{\ul r}(\ul a, \ul b) = 0$.
 
-Such structures will analogously be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
+Such structures will be called \emph{full-maps} or \emph{full-diagrams} for clarity.  If $\ul r$ is clear from context, we will abbreviate $\MM_{\ul r}$ as simply $\MM$ and $\Top_{\ul r}$ as $\Top$.
 
 Recall that the light leaves are based off a sequence of vertices at the bottom boundary of a half-map.  We will call those vertices, whether on the bottom boundary of a half-map or the center of a full-map, the \emph{anchors} for that map, and the associated sequence of letters the \emph{base}.  
 
@@ -169,21 +168,21 @@ Let us make a few convenient definitions for some recurring characters in our fu
 		add(one); add(reflect((0,0),(1,0))*two);
 		draw((-1,0)--(10,0));
 	\end{asy}
-	\caption{Two blue barbells with a very twisted fence, which creates two pastures.}
+	\caption{Two red barbells with a very twisted fence, which creates two pastures.}
 	\label{fig:def_barbell_fence}
 \end{figure}
 
-\begin{definition*}
+\begin{definition}
 	A connected component which (i) is acyclic, and (ii) does not touch the top or bottom boundaries is called a \emph{barbell}.
-\end{definition*}
+\end{definition}
 Notice that, by combining homotopy and contraction (see Appendix~\ref{sec:prelim_genrel}), every blue barbell is simply $\barbell{barbell_blue}$.  Similarly, every red barbell is simply $\barbell{barbell_red}$.
 
-\begin{definition*}
+\begin{definition}
 	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}.
-\end{definition*}
-\begin{definition*}
+\end{definition}
+\begin{definition}
 	A component is called \emph{attached} if it is connected to a fence.  Otherwise, it is \emph{free}.  By convention, any attached components belong to the pasture to the left of the fence to which it is attached.
-\end{definition*}
+\end{definition}
 An example of a fence complete with two barbells is given in Figure~\ref{fig:def_barbell_fence}.
 
 Next, we name some recurrent characters in our work.
@@ -220,12 +219,12 @@ Next, we name some recurrent characters in our work.
 	\label{fig:def_bubble}
 \end{figure}
 
-\begin{definition*}
-	A \emph{bubble} is a bounded face alongside with any components contained within the face.  The \emph{color} of the bubble is the color of the edges which form the bounded face.  
-\end{definition*}
-\begin{definition*}
+\begin{definition}
+	A \emph{bubble} is a bounded face along with any components contained within the face.  The \emph{color} of the bubble is the color of the edges which form the bounded face.  
+\end{definition}
+\begin{definition}
 	We say that the bubble $B$ \emph{holds} a component $c$ if $c$ is inside $B$, but there is no other bubble $B'$ inside $B$ which contains $c$.  
-\end{definition*}
+\end{definition}
 
 An example of a bubble is given in Figure~\ref{fig:def_bubble}.
 
@@ -271,9 +270,9 @@ An example of a bubble is given in Figure~\ref{fig:def_bubble}.
 	\label{fig:def_caterpillar}
 \end{figure}
 
-\begin{definition*}
+\begin{definition}
 	A \emph{caterpillar} consists of a free component and the contents of any bubbles formed by its edges.  A caterpillar \emph{holds} a component if some bubble of the caterpillar holds it.
-\end{definition*}
+\end{definition}
 An example of a caterpillar is given in Figure~\ref{fig:def_caterpillar}.  Notice that any barbell or bubble is a special case of a caterpillar.
 
 
@@ -283,7 +282,7 @@ An example of a caterpillar is given in Figure~\ref{fig:def_caterpillar}.  Notic
 In order to study these maps as algebraic structures, we wish to consider full-maps as polynomials in $\RR[x,y][\alpha_s,\alpha_t]$.  Hence, we establish the following conventions:
 \begin{enumerate}
 	\ii The map $x \mapsto fx$ will be abbreviated as $f$ from this point forward.  
-	\par Note that, in particular, $\barbell{barbell_blue} = \alpha_s$ follows from a straightforward computation.  Furthermore, one can check that, say, $\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}\barbell{alpha_blue} = \alpha_s^2 \alpha_t$.  
+	\par In particular, the map $\barbell{barbell_blue}$ is $\alpha_s$.  This follows from a straightforward computation.  Furthermore, one can check that, say, $\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}\barbell{alpha_blue} = \alpha_s^2 \alpha_t$.  
 	Please note that $x \mapsto xf$ does not get a similar abbreviation.  So, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \alpha_s$.
 	\ii We will work \emph{modulo lower terms}.  That is, any map which contains a connected component that touches any boundary only once (total) is considered zero.  So, for example, we have $\barbell{break_blue} = 0$.
 \end{enumerate}
@@ -302,15 +301,15 @@ For reference, Appendix~\ref{sec:ststs_matrix} contains a complete table of all 
 
 \subsubsection{Quantum Numbers}
 \label{sec:quantum}
-A particularly nice sequence of polynomials involved can be defined recursively.  They are termed \emph{two-color quantum numbers}.
-\begin{definition*}[Quantum Numbers]
+A particularly nice sequence of polynomials can be defined recursively.  They are termed \emph{two-color quantum numbers}.
+\begin{definition}[Quantum Numbers]
 	For each integer $n \ge 0$, define two polynomials $[n]_x, [n]_y \in \ZZ[x,y]$ recursively by $[0]_x = [0]_y = 0$, $[1]_x = [1]_y = 1$, $[2]_x = x$, $[2]_y = y$, and
 	\begin{align*}
 		[2]_x[n]_y = [n+1]_x - [n-1]_x \\
 		[2]_y[n]_x = [n+1]_y - [n-1]_y
 	\end{align*}
 	Finally, $[-n]_x = -[n]_x$ and $[-n]_y = -[n]_y$ for each $n \ge 0$.
-\end{definition*}
+\end{definition}
 The quantities $[n]_x$ and $[n]_y$ are closely related.  In particular, $[2k+1]_x = [2k+1]_y$ and $[2]_x[2k]_y = [2]_y[2k]_x$ for all integers $k$.  This follows immediately by induction.
 
 The quantum numbers are relevant to the problem because of the identity
@@ -318,10 +317,10 @@ The quantum numbers are relevant to the problem because of the identity
 	s([n]_x\alpha_s + [n-1]_y\alpha_t) = [n]_x\alpha_s + [n+1]_y\alpha_t
 	\label{eq:quantum}
 \end{equation}
-and its analogous form for $t$.  One can verify \eqref{eq:quantum} immediately follows from definitions.  This gives us a robust way to express the results of action on $\alpha_s$ or $\alpha_t$ by elements of $W$.  For example, $ststst(\alpha_s) = ststst([1]_x\alpha_s + [0]_y\alpha_t) = [7]_x\alpha_s + [6]_y\alpha_t$.
+and its analogous form for $t$.  One can verify that \eqref{eq:quantum} immediately follows from definitions.  This gives us a robust way to express the results of action on $\alpha_s$ or $\alpha_t$ by elements of $W$.  For example, $ststst(\alpha_s) = ststst([1]_x\alpha_s + [0]_y\alpha_t) = [7]_x\alpha_s + [6]_y\alpha_t$.
 
 This motivates us to make the following definition, which will be used in Section~\ref{sec:res_alt_compute}.
-\begin{definition*}
+\begin{definition}
 	For any reduced expression $\ul r$, we define the quantum polynomial $Q_{\ul r}$ by :
 	\[
 		Q_{\AA_n} = 
@@ -338,7 +337,7 @@ This motivates us to make the following definition, which will be used in Sectio
 			[n+1]_x \alpha_s + [n]_y \alpha_t & \text{if $n$ is odd}.
 		\end{cases}
 	\]
-\end{definition*}
+\end{definition}
 
 The significance is that, if $\ul r$ is a reduced expression of length $n+1$, then \[ \MM_{\ul r} ( \underbrace{11\dots11}_{\text{$n$ 1's}}0, \underbrace{11\dots11}_{\text{$n$ 1's}}0 ) = Q_{\ul r}. \]
 An illustration of such a full-map is given in Figure~\ref{fig:push_quantum}.
@@ -382,11 +381,9 @@ This follows from \eqref{eq:barbell_break}.
 \label{sec:probstate}
 
 The motivation for this problem arises from the following definition.
-\begin{definition*}
+\begin{definition}
 	A map is \emph{idempotent} if multiplying it with itself returns the original map.
-\end{definition*}
-Colloquially, $m^2=m$ if and only if $m$ is idempotent.
-
+\end{definition}
 Fix an $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ will be an idempotent.  This motivates us to construct potential idempotents by taking two light leaves whose top sequences are identical, and composing $A$ upside-down with $B$, in the hope that $AB=1$.
 
 This motivates the main objective of study.
@@ -399,10 +396,10 @@ Here, we are interested in computing the polynomial which corresponds to this ma
 \label{sec:res_onecolor}
 In this section we provide a complete characterization for $\MM_{\SS_n}(\ul a, \ul b)$.  % The proof is effectively trivial, but requires some rather irritating details and definitions in order to be clear.
 
-First, we need a criteria to determine the top.  Fortunately, this is extremely easy.
-\begin{definition*}
+First, we need a criteria to determine the top.  Fortunately, this is not hard.
+\begin{definition}
 	For a binary string $\ul b$, let $\pi_1(\ul b)$ denote the number of $1$'s in $\ul b$.
-\end{definition*}
+\end{definition}
 \begin{proposition}
 	For any $\ul b \in \BB_n$, \[
 		\Top_{\SS_n}(\ul b) =
@@ -418,7 +415,7 @@ First, we need a criteria to determine the top.  Fortunately, this is extremely 
 \end{proof}
 
 Subsequently, we make the following definition for this section only.
-\begin{definition*}
+\begin{definition}
 	For a binary string $\ul b$, define the \emph{partial-sum string} of $\ul b$, denoted $\ul b^\ast$, as follows:
 	\[
 		\ul b^\ast [i] = 
@@ -427,7 +424,7 @@ Subsequently, we make the following definition for this section only.
 			0 & \text{otherwise}.
 		\end{cases}
 	\]
-\end{definition*}
+\end{definition}
 This lets us state our main result for this section. 
 \begin{theorem}
 	If $\ul a, \ul b \in \BB_n$ obey $\Top_{\SS_n}(\ul a) = \Top_{\SS_n}(\ul b)$, then
@@ -448,9 +445,9 @@ As such, it is deferred to Appendix~\ref{sec:s_proof}.
 \label{sec:res_count_maps}
 We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul T$ for each expression $\ul T$ and $\ul r$.  
 
-\begin{definition*}
+\begin{definition}
 	Let $R(\ul r)$ denote $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
-\end{definition*}
+\end{definition}
 For example, $R(sststttts) = ststs$.
 
 \begin{proposition}
@@ -468,9 +465,9 @@ The main idea of the proof is to reduce the problem to the case when $\ell = n$,
 \begin{proof}[Proof of Proposition \ref{thm:count_maps}]
 	First we will resolve the case where $\ul r = \AA_n$, so that $\ell = n$ and $2^{\ell-n} = 1$.  This follows by induction on $n$.  The main idea is that, for the binary strings of length $n$ giving a top $T$, we consider those that end with $1$ and those that end with $0$.  Using \eqref{eq:top}, we may then write the new quantity in terms of the number of strings of length $n-1$ with a different top.
 	% After deleting the last bit, the former type have a top which differs by one character according to $\AA_n[n]$, while the latter have the same top.
-	We simply check that in all eight cases, the binomial coefficients add up to give the new binomial coefficients (via Pascal's identity).  The computation is left to a diligent reader.
+	We simply check that in all eight cases, the binomial coefficients add up to give the new binomial coefficients (via Pascal's identity).  The computation is left to the reader.
 
-	To finish the case $\ell \neq n$, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there a $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition \ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$, but with some extra factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
+	To finish the case $\ell \neq n$, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there are $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition \ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$, but with some extra factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
 \end{proof}
 
 \section{Colorful Lemmata for the Alternating Case}
@@ -595,7 +592,7 @@ Included in Figure~\ref{fig:large_alt_example} is an example of a map with base 
 	\label{fig:large_alt_example}
 \end{figure}
 
-The Bubble Lemma is the key combinatorial observation, which hinges on the fact that any two anchors with the same color have a third anchor of the other color between them.  The other two lemmas follow almost directly from it.
+The Bubble Lemma is the key combinatorial observation, which hinges on the fact that any two anchors with the same color have a third anchor of the other color between them.  The other two lemmas follow directly from it.
 The details of the proofs are given in Appendix~\ref{sec:lemmata_proof}.
 
 \section{Algebraic Computations for the Alternating Case}
@@ -622,9 +619,9 @@ Here, $Q_T$ is the quantum polynomial defined in Section~\ref{sec:quantum}.
 \end{proof}
 
 This motivates the following definition, which is relevant for Proposition~\ref{thm:recurse}.
-\begin{definition*}
+\begin{definition}
 	If a nonzero map $M$ with base $\AA_n$ is presented as in Theorem~\ref{thm:alt_struct}, then the term $x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t}$ will be called the \emph{fluff} of $M$, and the polynomial (either $1$ or $Q_T$) will be called the \emph{face} of $M$. 
-\end{definition*}
+\end{definition}
 \begin{remark*}
 	According to Theorem~\ref{thm:alt_struct}, a nonzero map $\MM_{\AA_n}$ has face $1$ and only if its top has the same last character as $\AA_n$.
 \end{remark*}
@@ -673,13 +670,13 @@ What about the original problem of arbitrary $\ul r$?  It was originally hoped t
 Yet another possible direction is to search for similar results when the order of $st$ in $W$ is finite, or even if $W$ is an arbitrary Coxeter group.
 
 \section{Acknowledgments} 
-I wish to thank the MIT Math Department for organizing the Math RSI, and in particular the head mentor Dr. Tanya Khovanova, MIT, for providing individual discussion with me.
+I would like to thank my head mentor Dr. Tanya Khovanova, MIT, for providing individual discussion with me, and the MIT Math Department for making my project possible.
 I also wish to thank my tutor Mr. Antoni Rangachev, Northeastern University, for his invaluable advice in preparing both this paper and my final presentation.
 I also thank the Center for Excellence in Education and the Research Science Institute, as well as the Massachusetts Institute of Technology, for generously providing the facilities for the research.
 
-I would also like to thank my sponsors from RSI 2013:
+I would also like to thank my sponsors:
 \begin{inparaenum}[]
-	\ii Ms. Alexa Margalith, The Leonetti/O'Connell Family Foundation;
+	\ii Ms. Alexa Margalith, The Leonetti\slash O'Connell Family Foundation;
 	\ii Mr. Arvind Parthasarathi, YarcData;
 	\ii Mr. Samuel Chen and Ms. Kathy Chang;
 	\ii Dr. Robert E. Curry;
