@@ -2,19 +2,29 @@
 \section{Introduction}
 \textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
-We study a class of maps between Bott-Samelson bimodules.  
-Bott-Samelson bimodules arise from the study of Soergel bimodules, as mentioned in \cite{gr4all}, in the sense that a description of the category of maps between Bott-Samelson bimodules is sufficient to understand the corresponding category for the Soergel bimodules. 
-However, the morphisms of Bott-Samelson bimodules admit a combinatorial description.  In particular, \cite{gr4all} gives a presentation for the category of these morphisms in terms of planar diagrammatics (i.e. diagrams in the plane).
+The Hecke Algebra (or Iwahori-Hecke Algebra) $\HH$ of a Weyl group $W$ is an object of significant interest, studied in representation theory, algebraic number theory, and combinatorics.
 
-This paper investigates some of the properties of these diagrammatics from a combinatorial perspective.   However, in this paper, we consider only the special case of an infinite dihedral group with generators $s$ and $t$ (as opposed to an arbitrary Coxeter group).
+In 1979, Kazhdan and Lusztig \cite{ref:KaLu1,ref:KaLu2} gave a categorification of $\HH$, using a construction involving a complicated structure known as perverse sheaves on the flag variety.  The result became known as the Hecke category.
+% If $K = \RR$, the resulting basis of $\HH$ is understood, and called the Kazhdan-Lusztig basis.  However, if $K$ is a field of some other characteristic $p$, the basis is unknown.
+Soergel \cite{ref:Soe1,ref:Soe2} simplified this construction significantly in 1990 with an algebraic approach, using the aptly named Soergel bimodules.  The Soergel bimodules permit an easier understanding of the categorification of $\HH$; their advantage is that they are easier to define and are combinatorial in nature.
+Furthermore, Soergel's construction extends the Hecke category to apply for arbitrary Coxeter systems $W$.
 
-Given a sequence consisting of the letters $s$ and $t$ of length $n$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves, as detailed in Appendix~\ref{sec:prelim_lightleave}.  
-These light leaves are interesting because they form a spanning set for the maps we are interested in, as shown in \cite{gr4all}.
-The project deals with composing two maps formed in such a manner.
-The goal of the project is to describe the relationship between such a composition and the two original binary strings.
+For a full treatise, we refer the reader to \cite{ref:Humphreys}.
 
-The technical description of the problem statement is quite involved.  Thusly, the preliminaries for the problem are given in Appendix~\ref{sec:prelim_background}, while the definitions used in this paper are recorded in Section~\ref{sec:prelim}.  The problem statement is given in Section~\ref{sec:probstate}.
-The results begin by solving the special case of one color completely in Section~\ref{sec:res_onecolor}.  In Section~\ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in Sections~\ref{sec:res_alt_restrict} and \ref{sec:res_alt_compute}, where we investigate the case where the given string is $ststst\cdots$.  In particular, we show that the possible resulting structures are extremely limited, and provide a recursion based on these restrictions for that case.
+Soergel bimodules can be described as summands of another class of bimodules, known as the \emph{Bott-Samelson bimodules}.
+Now the morphisms of Bott-Samelson bimodules admit a combinatorial description.  In particular, \cite{ref:gr4all} gives a presentation for the category of these morphisms in terms of planar diagrammatics (i.e. diagrams in the plane).
+
+This paper investigates some of the properties of these diagrammatics from a combinatorial perspective.   However, in this paper, we consider only the special case of an infinite dihedral group with generators $s$ and $t$ (as opposed to an arbitrary Coxeter group $W$).
+
+Given a string of length $n$ composed of the letters $s$ and $t$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves.  The light leaves were derived by Libednisky in \cite{ref:Lib} and are detailed in Appendix~\ref{sec:prelim_lightleave}.  
+These light leaves are interesting because they form a basis for a certain span of maps, as shown in \cite{ref:gr4all}.
+We develop tools to understand the composition of two such maps given the original binary strings, with the eventual goal of deriving a combinatorial formula.
+%The project deals with composing two maps formed in such a manner.
+%The goal of the project is to describe the relationship between such a composition and the two original binary strings.
+
+The preliminaries for the problem -- namely, the light leaves and their algebraic meaning -- are given in Appendix~\ref{sec:prelim_background}.  A minimal set of definitions used in this paper are given in Section~\ref{sec:prelim}.  The problem statement in its full technicality is given in Section~\ref{sec:probstate}.
+
+The results begin by solving the special case of one color completely in Section~\ref{sec:res_onecolor}.  In Section~\ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most interesting results are in Sections~\ref{sec:res_alt_restrict} and \ref{sec:res_alt_compute}, where we investigate a special ``alternating'' case.  In particular, we show that the possible resulting structures are extremely limited, and provide a recursion based on these restrictions for that case.
 
 \section{Preliminaries and Definitions}
 \label{sec:prelim}
