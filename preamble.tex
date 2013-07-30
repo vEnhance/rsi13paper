@@ -11,8 +11,17 @@
 \usepackage{longtable}
 \usepackage{paralist}
 
+% Ubuntu, why the hell are you using 2009 TeX Live
+\usepackage{gettitlestring}
+\makeatletter
+\def\NR@gettitle#1{%
+	\GetTitleString{#1}%
+	\let\@currentlabelname\GetTitleStringResult
+}
+\makeatother
 \usepackage{thmtools}
 \usepackage{thm-restate}
+
 % Uncomment the following lines to hide all figures
 %\usepackage{comment}
 %\excludecomment{figure}
