@@ -1,5 +1,6 @@
 % This is paper.tex
 
+
 \section{Introduction}
 %\textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
@@ -184,7 +185,7 @@ Let us make a few convenient definitions for some recurring characters in our fu
 		\ii does not touch the top or bottom boundaries
 	\end{inparaenum} is called a \emph{barbell}.
 \end{definition}
-Notice that, by combining homotopy and contraction (see Appendix~\ref{sec:prelim_genrel}), every blue barbell is simply $\barbell{barbell_blue}$.  Similarly, every red barbell is simply $\barbell{barbell_red}$.
+Notice that, by combining homotopy and contraction (see Appendix~\ref{sec:prelim_genrel}), every blue barbell is simply $\barbell{\includegraphics{barbell/barbell_blue.pdf}}$.  Similarly, every red barbell is simply $\barbell{\includegraphics{barbell/barbell_red.pdf}}$.
 
 \begin{definition}
 	A \emph{fence} is a contiguous path which runs from the top of the boundary to the bottom of the boundary (i.e. paths between the labelled vertices).  The diagram is divided by these fences into \emph{pastures}.
@@ -288,9 +289,9 @@ Recall that every diagram represents a map using the generators and relations in
 In order to study these maps as algebraic structures, we wish to consider full-maps as polynomials in $\RR[x,y][\alpha_s,\alpha_t]$.  Hence, we establish the following conventions:
 \begin{enumerate}
 	\ii For any $f \in R$, the map $x \mapsto fx$ (i.e. multiplication on the left) will be abbreviated as $f$ from this point forward.  
-	\par In particular, the map $\barbell{barbell_blue}$ is $\alpha_s$.  This follows from a straightforward computation.  Furthermore, one can check that, for example, $\barbell{barbell_blue}\barbell{barbell_blue}\barbell{barbell_red}\barbell{alpha_blue} = \alpha_s^2 \alpha_t$.  
-	Note that $x \mapsto xf$ does not get a similar abbreviation.  So, $\barbell{alpha_blue}\barbell{barbell_blue} \neq \alpha_s$.
-	\ii We work \emph{modulo lower terms}.  That is, any map which contains a connected component that touches any boundary only once (total) is considered zero.  So, for example, we have $\barbell{break_blue} = 0$.
+	\par In particular, the map $\barbell{\includegraphics{barbell/barbell_blue.pdf}}$ is $\alpha_s$.  This follows from a straightforward computation.  Furthermore, one can check that, for example, $\barbell{\includegraphics{barbell/barbell_blue.pdf}}\barbell{\includegraphics{barbell/barbell_blue.pdf}}\barbell{\includegraphics{barbell/barbell_red.pdf}}\barbell{\includegraphics{barbell/alpha_blue.pdf}} = \alpha_s^2 \alpha_t$.  
+	Note that $x \mapsto xf$ does not get a similar abbreviation.  So, $\barbell{\includegraphics{barbell/alpha_blue.pdf}}\barbell{\includegraphics{barbell/barbell_blue.pdf}} \neq \alpha_s$.
+	\ii We work \emph{modulo lower terms}.  That is, any map which contains a connected component that touches any boundary only once (total) is considered zero.  So, for example, we have $\barbell{\includegraphics{barbell/break_blue.pdf}} = 0$.
 \end{enumerate}
 Henceforth, we refer to diagrams and their associated polynomials interchangeably.
 
@@ -298,7 +299,7 @@ One can verify that, using the barbell-forcing rules, we can recursively move al
 
 In fact, we can even show that, with this new convention, that the following identity holds for every $f$:
 \begin{equation}
-	\barbell{alpha_blue} f = \partial_s(f) \barbell{break_blue} + s(f) \barbell{alpha_blue}
+	\barbell{\includegraphics{barbell/alpha_blue.pdf}} f = \partial_s(f) \barbell{\includegraphics{barbell/break_blue.pdf}} + s(f) \barbell{\includegraphics{barbell/alpha_blue.pdf}}
 	\label{eq:barbell_break}
 \end{equation}
 where $\partial_s$ is the Demazure operator defined in Appendix~\ref{sec:prelim_genrel}.

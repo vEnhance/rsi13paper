@@ -88,11 +88,11 @@ With this, we can now describe the meanings of each type of vertex (for blue lin
 	\[
 	\begin{array}{rll}
 		\text{Map} & \text{Modules} & \text{Description} \\[1em]
-		\barbell{half_top} & R \stimes R \to R & 1 \mid 1 \mapsto 1 \\[1em]
-		\barbell{half_bot} & R \to R \stimes R & 1 \mapsto \half \left( 1 \mid \alpha_s + \alpha_s \mid 1 \right) \\[1em]
-		\barbell{tri_down} & R \stimes R \to R \stimes R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \mid 1 \\[1em]
-		\barbell{tri_up} & R \stimes R \stimes R \to R \stimes R & 1 \mid g \mid 1 \mapsto \partial_s(g) \mid 1 \\[1em]
-		\barbell{id} & R \stimes R \to R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \\[1em]
+		\barbell{\includegraphics{barbell/half_top.pdf}} & R \stimes R \to R & 1 \mid 1 \mapsto 1 \\[1em]
+		\barbell{\includegraphics{barbell/half_bot.pdf}} & R \to R \stimes R & 1 \mapsto \half \left( 1 \mid \alpha_s + \alpha_s \mid 1 \right) \\[1em]
+		\barbell{\includegraphics{barbell/tri_down.pdf}} & R \stimes R \to R \stimes R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \mid 1 \\[1em]
+		\barbell{\includegraphics{barbell/tri_up.pdf}} & R \stimes R \stimes R \to R \stimes R & 1 \mid g \mid 1 \mapsto \partial_s(g) \mid 1 \\[1em]
+		\barbell{\includegraphics{barbell/id.pdf}} & R \stimes R \to R \stimes R & 1 \mid 1 \mapsto 1 \mid 1 \\[1em]
 	\end{array}
 	\]
 	\caption{Describing the maps.}
@@ -106,7 +106,7 @@ Maps are composed by juxtaposition, and disjoint portions of the diagrams act in
 	The diagram in Figure~\ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
 \end{example*}
 
-Henceforth, we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
+Henceforth, we will make the convenient abbreviation of $\barbell{\includegraphics{barbell/tri_up_contract_before.pdf}}$ as $\barbell{\includegraphics{barbell/tri_up_contract_after.pdf}}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
 
 \subsection{Operations for Diagrammatics}
 \label{sec:prelim_genrel}
@@ -119,16 +119,16 @@ Unless multiple colors appear in an equation, blue represents a generic color.
 \begin{remark*}
 	The justification for the above operation is not obvious; see page 7 of \cite{ref:gr4all} for an explanation.
 \end{remark*}
-\begin{op}[Associativity] We have $\barbell{assoc_horiz} = \barbell{assoc_vert}$.  \end{op}
-\begin{op}[Contraction] We have $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.  \end{op}
-\begin{op}[The Needle] We have $\barbell{needle} = 0$.  \end{op}
-\begin{remark*} Using contraction and the above, one can show that the diagram $\barbell{zero}$ is zero as well. In fact, in general, \emph{any} map which contains a ``closed'' and empty region is the zero map.  \end{remark*}
+\begin{op}[Associativity] We have $\barbell{\includegraphics{barbell/assoc_horiz.pdf}} = \barbell{\includegraphics{barbell/assoc_vert.pdf}}$.  \end{op}
+\begin{op}[Contraction] We have $\barbell{\includegraphics{barbell/contract_left.pdf}} = \barbell{\includegraphics{barbell/contract_right.pdf}} = \barbell{\includegraphics{barbell/alpha_blue.pdf}}$.  \end{op}
+\begin{op}[The Needle] We have $\barbell{\includegraphics{barbell/needle.pdf}} = 0$.  \end{op}
+\begin{remark*} Using contraction and the above, one can show that the diagram $\barbell{\includegraphics{barbell/zero.pdf}}$ is zero as well. In fact, in general, \emph{any} map which contains a ``closed'' and empty region is the zero map.  \end{remark*}
 \begin{op}[Barbell-Forcing Rules]
 	We have the following three equalities:
 	\begin{enumerate}[(a)]
-		\ii $\barbell{barbell_blue}\barbell{alpha_blue} + \barbell{alpha_blue} \barbell{barbell_blue} = 2 \barbell{break_blue}$, and the similar equation for red.
-		\ii $\barbell{alpha_red}\barbell{barbell_blue} = -x\barbell{break_red} + \barbell{barbell_blue}\barbell{alpha_red} + x \barbell{barbell_red}\barbell{alpha_red}$.
-		\ii $\barbell{alpha_blue}\barbell{barbell_red} = -y\barbell{break_blue} + \barbell{barbell_red}\barbell{alpha_blue} + y \barbell{barbell_blue}\barbell{alpha_blue}$.
+		\ii $\barbell{\includegraphics{barbell/barbell_blue.pdf}}\barbell{\includegraphics{barbell/alpha_blue.pdf}} + \barbell{\includegraphics{barbell/alpha_blue.pdf}} \barbell{\includegraphics{barbell/barbell_blue.pdf}} = 2 \barbell{\includegraphics{barbell/break_blue.pdf}}$, and the similar equation for red.
+		\ii $\barbell{\includegraphics{barbell/alpha_red.pdf}}\barbell{\includegraphics{barbell/barbell_blue.pdf}} = -x\barbell{\includegraphics{barbell/break_red.pdf}} + \barbell{\includegraphics{barbell/barbell_blue.pdf}}\barbell{\includegraphics{barbell/alpha_red.pdf}} + x \barbell{\includegraphics{barbell/barbell_red.pdf}}\barbell{\includegraphics{barbell/alpha_red.pdf}}$.
+		\ii $\barbell{\includegraphics{barbell/alpha_blue.pdf}}\barbell{\includegraphics{barbell/barbell_red.pdf}} = -y\barbell{\includegraphics{barbell/break_blue.pdf}} + \barbell{\includegraphics{barbell/barbell_red.pdf}}\barbell{\includegraphics{barbell/alpha_blue.pdf}} + y \barbell{\includegraphics{barbell/barbell_blue.pdf}}\barbell{\includegraphics{barbell/alpha_blue.pdf}}$.
 	\end{enumerate}
 \end{op}
 

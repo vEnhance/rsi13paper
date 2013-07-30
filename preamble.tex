@@ -10,6 +10,43 @@
 
 \usepackage{longtable}
 \usepackage{paralist}
+\usepackage{comment}
+
+% Tricking papersubmit.
+\begin{comment}
+\include{aliasctr.sty}
+\include{gettitlestring.sty}
+\include{parseargs.sty}
+\include{thm-amsthm.sty}
+\include{thm-autoref.sty}
+\include{thm-beamer.sty}
+\include{thmdef-mdframed.sty}
+\include{thmdef-shaded.sty}
+\include{thmdef-thmbox.sty}
+\include{thm-kv.sty}
+\include{thm-listof.sty}
+\include{thm-llncs.sty}
+\include{thm-ntheorem.sty}
+\include{thm-patch.sty}
+\include{thm-restate.sty}
+\include{thmtools.sty}
+\include{unique.sty}
+\include{main-1.pdf}
+\include{main-2.pdf}
+\include{main-3.pdf}
+\include{main-4.pdf}
+\include{main-5.pdf}
+\include{main-6.pdf}
+\include{main-7.pdf}
+\include{main-8.pdf}
+\include{main-9.pdf}
+\include{main-10.pdf}
+\include{main-11.pdf}
+\include{main-12.pdf}
+\include{main-13.pdf}
+\include{main-14.pdf}
+\include{main-15.pdf}
+\end{comment}
 
 % Ubuntu, why the hell are you using 2009 TeX Live
 \usepackage{gettitlestring}
@@ -32,7 +69,7 @@
 \theoremstyle{definition}
 \newtheorem{op}{Operation}
 \newcommand{\dobarbell}[2]{
-	\vcenter{\hbox{\includegraphics[scale=#1]{barbell/#2.pdf}}}
+	\vcenter{\hbox{\scalebox{#1}{#2}}}
 }
 \newcommand{\barbell}[1]{
 	\mathchoice%
