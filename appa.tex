@@ -1,12 +1,10 @@
 % This is appa.tex
 \appendix
 
-%TODO restate all theorems
-
 \section{An Extended Background}
 \label{sec:prelim_background}
 Let $V$ be a (real) Euclidean space endowed with a positive definite symmetric bilinear form $(\mu, \lambda)$.
-Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We will assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  
+Let $W$ be a group with two generators $s$ and $t$ corresponding to reflecting over two hyperplanes in $V$, and let $\alpha_s$ and $\alpha_t$ be arbitrary vectors normal to these planes.  We assume that the angle formed by $\alpha_s$ and $\alpha_t$ is not a rational multiple of $\pi$, so that the order of $st$ in $W$ is infinite.  
 
 In other words, $W$ is the infinite dihedral group with the presentation \[ W = \left<s,t \mid s^2=t^2=1\right>. \] 
 
@@ -24,9 +22,9 @@ Let $R^s$ be the subring of $R$ which is invariant under $s$.  In other words,
 \[ R^s \defeq \left\{ r \in R \mid s(r) = r \right\}. \]
 Define $R^t$ similarly.  Then a \emph{Bott-Samelson bimodule} is a bimodule of the form
 \[ R \otimes_{R^{i_1}} R \otimes_{R^{i_2}} R \otimes_{R^{i_3}} \dots \otimes_{R^{i_n}} R, \]
-where each $i_j$ is either $s$ or $t$.   Elements of such a bimodule will be written in the form $f_0 \mid f_1 \mid \dots \mid f_n$, where $f_i \in R$.
+where each $i_j$ is either $s$ or $t$.   We write elements of such a bimodule in the form $f_0 \mid f_1 \mid \dots \mid f_n$, where $f_i \in R$.
 
-We will consider maps between these bimodules that preserve left and right actions; that is, we consider the maps $\sigma$ such that
+We consider maps between these bimodules that preserve left and right actions; that is, we consider the maps $\sigma$ such that
 \begin{equation}
 	\sigma(rx) = r\sigma(x) \quad\text{and}\quad \sigma(xr) = \sigma(x)r \quad\text{for every $r \in R$ and $x \in \text{Domain } \sigma$}.
 	\label{eq:respect}
@@ -76,6 +74,7 @@ An example of such a diagram is shown in Figure~\ref{fig:example_diagram}.
 The elements of $\DD$ can be added by simply adding corresponding coefficients in front of each diagram; no other relations exist.  Multiplication is defined as follows: the product of two diagrams is the composition of the diagrams if the labels on the bottom of the first coincide with those on the top of the second.  By composition, we mean that the first diagram is vertically juxtaposed on top of the second diagram; see Figure~\ref{fig:example_compose} for an example.  Otherwise, the product is $0$.
 
 \subsection{Algebraic Context}
+\label{sec:prelim_alg_context}
 The maps are conventionally read from bottom to top.  The labels on the upper and lower boundaries specify the domain and codomain of the map by ``transcribing'' the tensor products to take -- for example, a map with bottom $stt$ and top $s$ represents a map with domain $R \stimes R \ttimes R \ttimes R$ and codomain $R \stimes R$.  An unlabelled domain corresponds to $R$.
 
 Let us introduce one final definition.
@@ -102,7 +101,10 @@ With this, we can now describe the meanings of each type of vertex (for blue lin
 
 Note that the descriptions are sufficient to determine outputs for all values because these morphisms respect left and right actions, as prescribed in \eqref{eq:respect}.
 
-Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  For example, the diagram in Figure~\ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
+Maps are composed by juxtaposition, and disjoint portions of the diagrams act independently.  Therefore, by a combination of these structures, we can generate arbitrarily complicated maps.  
+\begin{example*}
+	The diagram in Figure~\ref{fig:example_diagram} represents a map \[ R \stimes R \ttimes R \stimes R \to R \stimes R \quad\text{by}\quad a \mid b \mid c \mid d \mapsto a \partial_s(bc) \mid d. \]
+\end{example*}
 
 Henceforth, we will make the convenient abbreviation of $\barbell{tri_up_contract_before}$ as $\barbell{tri_up_contract_after}$.  It will also be understood that edges need not be straight lines, but any topologically equivalent deformation shall represent the same graph.  With this understanding, any of the graphs described in the previous section can be viewed as compositions of the primitive structures we describe here.
 
@@ -113,7 +115,8 @@ From the algebraic context given above, one can derive the following relationshi
 Unless multiple colors appear in an equation, blue represents a generic color.
 
 \setcounter{op}{-1}
-\begin{op}[Isotropy] If two diagrams can be continuously deformed into each other (in the topological sense), then they are equivalent.  \end{op}
+\begin{op}[Isotropy] If two diagrams can be continuously deformed into each other (in the topological sense), then they are equivalent.  In other words, the maps are isotropy invariant  \end{op}
+The reasons for the above operation are not obvious; see page 7 of \cite{ref:gr4all} for an explanation.
 \begin{op}[Associativity] We have $\barbell{assoc_horiz} = \barbell{assoc_vert}$.  \end{op}
 \begin{op}[Contraction] We have $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.  \end{op}
 \begin{op}[The Needle] We have $\barbell{needle} = 0$.  \end{op}
@@ -184,7 +187,7 @@ Unless multiple colors appear in an equation, blue represents a generic color.
 \end{figure}
 We now present the algorithm for Libedinsky's light leaves, in the special case where $W$ is the infinite dihedral group.  A full construction for more general Coxeter groups is given in \cite{ref:gr4all}.
 
-Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any binary string $\ul b$ of length $n$, we can construct a diagram based on a series of rules.
+Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any binary string $\ul b$ of length $n$ we can construct a diagram based on a series of rules.
 
 Each bit of $\ul b$ is read from left to right in order and designated either open or closed; the state of a bit can change more than once.  Initially all bits are closed.  We say that a bit $x$ is an \emph{open neighbor} of $y$ if $x$ is marked open, $x$ and $y$ have the same color, and there are no other bits marked open between $x$ and $y$.  Note that each bit will have at most one open neighbor.
 
@@ -246,12 +249,11 @@ The \emph{top} of such a map is the expression which appears on the upper bounda
 	\label{fig:pf_trivial_theorem_example}
 \end{figure}
 
-\begin{proof}[Proof of Theorem \ref{thm:s_eval}]
+\onecolor*
+\begin{proof}[Proof of Theorem \ref{thm:onecolor}]
 	We will only consider the case where $\Top(\ul a) = \varnothing$, so that $\ul a^\ast[n] = \ul b^\ast[n] = 0$; the other case is essentially identical.  See Figure~\ref{fig:pf_trivial_theorem_example} for a example of such a map.
 
-	Number the anchors $1,2,\dots,n$ $1,2,\dots,n$ $1,2,\dots,n$ $1,2,\dots,n$ from left to right.
-
-	For a half-map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the anchors which it touches.  Note that the antennae of a component always form a single contiguous sequence of anchors.
+	Number the anchors $1,2,\dots,n$ from left to right.  For a half-map $\MM(\ul b)$, define the \emph{antennae} of a connected component to be the anchors which it touches.  Note that the antennae of a component always form a single contiguous sequence of anchors.
 
 	The key observation is that for $1 \le i \le n-1$, we have that $\ul b^\ast[i] = 1$ if and only if $i$ and $i+1$ are both antennae of some component in $\MM(\ul b)$.  This follows by construction.
 
@@ -260,11 +262,50 @@ The \emph{top} of such a map is the expression which appears on the upper bounda
 	On the other hand, suppose this product is nonzero, and consider a component from the top with $k$ antennae.  It suffices to show that there are $n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast)$ barbells.  Notice that $\pi_1(\ul a^\ast) + \pi_1(\ul b^\ast)$ counts the number of edges between adjacent anchors ($i$ and $i+1$).  Because there are no cycles, deleting one of these edges increases the number of connected components by exactly one (since all the connected components are barbells).  If we delete all such edges, then we obtain $n$ barbells.  Therefore there must have been $n - \pi_1(\ul a^\ast) - \pi_1(\ul b^\ast)$ barbells to begin with, as desired.
 \end{proof}
 
+\section{Computation for Map Counting}
+\label{sec:count_map_computation}
+\countmaps*
+The main idea of the proof was given earlier on page~\pageref{thm:count_maps}.  Here are the details.
+
+\begin{proof}[Proof of Proposition \ref{thm:count_maps}]
+	First we resolve the case where $\ul r = \AA_n$, so that $\ell = n$ and $2^{\ell-n} = 1$.  We proceed by induction on $n \ge 1$ and consider eight cases.  (The base case is trivial.) The strategy for each is that, for the binary strings of length $n$ and top $T$, we consider those binary strings which end with $1$ and those which end with $0$.  Using \eqref{eq:top}, we may then write the new quantity in terms of the number of strings of length $n-1$ with a different top.
+
+	When $n = 2k+1$, we have $\AA_n[n] = s$ and $n-1 = 2k$.  Let $\ul b'$ denote the first $n-1$ characters of $\ul b$.  Then,
+	\newcommand{\aoeu}[5]{The top #1 ends in #2.  So, if $\ul b[n] = 1$ then we have top #3 for $\ul b'$, and otherwise $\ul b'$ has the same top #4.  In total, we get #5.}
+	\begin{itemize}
+		\ii \aoeu{$\AA_{2m+1}$}{$s$}{$\AA_{2m} = \AA_{2(m-1)+2}$}{$\AA_{2m+1}$}%
+		{$\binom{n-2}{(m-1)+k} + \binom{n-2}{m+k} = \binom{n-1}{m+k}$}
+		\ii \aoeu{$\AA_{2m}$}{$t$}{$\AA_{2m+1}$}{$\AA_{2m} = \AA_{2(m-1)+2}$}%
+		{$\binom{n-2}{m+k} + \binom{n-2}{(m-1)+k} = \binom{n-1}{m+k}$}
+		\ii \aoeu{$\AA_{2m-1}'$}{$t$}{$\AA_{2m}'$}{$\AA_{2m-1}' = \AA_{2(m-1)+1}'$}%
+		{$\binom{n-2}{m+k} + \binom{n-2}{(m-1)+k} = \binom{n-1}{m+k}$}
+		\ii \aoeu{$\AA_{2m}'$}{$s$}{$\AA_{2m-1}' = \AA_{2(m-1)+1}'$}{$\AA_{2m}'$}%
+		{$\binom{n-2}{(m-1)+k} + \binom{n-2}{m+k} = \binom{n-1}{m+k}$}
+	\end{itemize}
+	The case where $n=2k$ is similar, but $n-1=2(k-1)+1$.  Now the last bit changes the top by $t$.
+	\begin{itemize}
+		\ii \aoeu{$\AA_{2m+1}$}{$s$}{$\AA_{2m+2} = \AA_{2(m+1)}$}{$\AA_{2m+1}$}%
+		{$\binom{n-2}{(m+1)+(k-1)} + \binom{n-2}{m+(k-1)} = \binom{n-1}{m+k}$}
+		\ii \aoeu{$\AA_{2m+2}$}{$t$}{$\AA_{2m+1}$}{$\AA_{2m+2} = \AA_{2(m+1)}$}%
+		{$\binom{n-2}{m+(k-1)} + \binom{n-2}{(m+1)+(k-1)} = \binom{n-1}{m+k}$}
+		\ii \aoeu{$\AA_{2m}'$}{$s$}{$\AA_{2m+1}' = \AA_{2(m+1)-1}'$}{$\AA_{2m}'$}%
+		{$\binom{n-2}{(m+1)+(k-1)} + \binom{n-2}{m+(k-1)} = \binom{n-1}{m+k}$}
+		\ii \aoeu{$\AA_{2m+1}'$}{$t$}{$\AA_{2m}'$}{$\AA_{2m+1}'=\AA_{2(m+1)-1}'$}%
+		{$\binom{n-2}{m+(k-1)} + \binom{n-2}{(m+1)+(k-1)} = \binom{n-1}{m+k}$}
+	\end{itemize}
+	This completes the inductive step.  Hence, the proposition is true for $\ell = n$.
+
+	To finish the case $\ell \neq n$, we note that we can treat each consecutive block of $s$'s of length $m$ as a single $s$, where there are $2^{m-1}$ ways to get a $1$ and $2^{m-1}$ ways to get a $0$.  (This follows from Proposition~\ref{prop:s_top}.)  This reduces to the previous case $\ul r = \AA_n$ multiplied by additional factors of $2$; aggregating all of them yields the factor of $2^{\ell-n}$, as desired.
+\end{proof}
+
+
+
 \section{Proofs of Lemmata}
 \label{sec:lemmata_proof}
 \subsection{Proof of the Bubble Lemma}
 We begin with a proof of the Bubble Lemma\footnote{I should remark that attempting to construct counterexamples to the Bubble Lemma leads to a far better understanding than trying to read the following proof.}, which is the fundamental lemma for the alternating case.  Indeed, both of the subsequent lemmas are fairly straightforward consequences of this one.  
 
+\bubble*
 \begin{proof}[Proof of Lemma \ref{thm:bubble}]
 	Take a bubble $B$ and assume without loss of generality that it is blue.  By construction all caterpillars held inside $B$ must be red.  This implies that there must be at least one red caterpillar, because there is at least one red anchor inside $B$.
 
@@ -317,6 +358,7 @@ We begin with a proof of the Bubble Lemma\footnote{I should remark that attempti
 
 \subsection{Proof of the Caterpillar Lemma}
 We will now derive the Caterpillar Lemma as a consequence of the Bubble Lemma.  
+\caterpillar*
 
 It is worth intuitively explaining the main idea of the proof; the rest is book-keeping.  Essentially, because caterpillars may only hold a single other caterpillar, we may ``descend down'' until we find a caterpillar which contains barbells in its bubbles.  Now we break each of the bubbles of this caterpillar one at a time using the barbell forcing rule.  This generates several $x$ and $y$ terms, but the barbell disappears at each such move.  Hence, we break all cycles in the caterpillar, at which point it becomes a barbell (modulo the addition of new $x$ and $y$ terms).  Rinse and repeat.
 
@@ -382,6 +424,8 @@ First, a few definitions for this section only.
 	\label{fig:pf_pasture}
 \end{figure}
 The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, we will now show a somewhat surprising proof that the Pasture Lemma follows from the Bubble Lemma.
+
+\pasture*
 \begin{proof}[Proof of Lemma \ref{thm:pasture}]
 	Again, let $T$ denote the top, with length $N$.  In the first case, suppose $T[N] \neq \AA_n[n]$; that is, the last characters of $T$ and $\AA_n$ differ.  Then it must be the case that the rightmost anchor is not part of a fence.
 	Now suppose the map arose from $\MM_{\AA_n}(\ul a, \ul b)$.  Let $\ul a'$ be the string formed by appending $N$ $1$'s to $\ul a$, and define $\ul b'$ similarly.  Now consider the map \[ \MM_{\AA_{n+N}} \left( \ul a', \ul b' \right). \]  See Figure~\ref{fig:pf_pasture} for an example.
@@ -395,6 +439,7 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 
 \section{Proof of the Alternating Recursion}
 \label{sec:recurse_proof}
+\recurse*
 \begin{proof}[Proof of Proposition \ref{thm:recurse}]
 	We will only resolve the case where $n$ is odd; that is, $\AA_n$ terminates in $s$.  The other case is identical.
 	\begin{enumerate}[(i)]
