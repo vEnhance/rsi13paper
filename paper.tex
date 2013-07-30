@@ -4,7 +4,6 @@
 %\textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
 The Hecke Algebra (or Iwahori-Hecke Algebra) is an object of significant interest, studied in representation theory, algebraic number theory, and combinatorics.  In 1979, Kazhdan and Lusztig \cite{ref:KaLu1,ref:KaLu2} gave a categorification of the Hecke algebra, using a somewhat complicated construction\footnote{The technique involved using something called \emph{perverse sheaves on the flag variety}.}.  The result became known as the Hecke category.
-% If $K = \RR$, the resulting basis of $\HH$ is understood, and called the Kazhdan-Lusztig basis.  However, if $K$ is a field of some other characteristic $p$, the basis is unknown.
 Soergel \cite{ref:Soe1,ref:Soe2} simplified this construction significantly in 1990 with an algebraic approach, using the aptly named Soergel bimodules.  The Soergel bimodules permit an easier understanding of this categorification; their advantage is that they are easier to define and are combinatorial in nature.
 % Furthermore, Soergel's construction extends the Hecke category to the case where $W$ is an arbitrary Coxeter group, as opposed to a Weyl group.
 
@@ -179,7 +178,11 @@ Let us make a few convenient definitions for some recurring characters in our fu
 \end{figure}
 
 \begin{definition}
-	A connected component which (i) is acyclic, and (ii) does not touch the top or bottom boundaries is called a \emph{barbell}.
+	A connected component which
+	\begin{inparaenum}[(i)]
+		\ii is acyclic, and 
+		\ii does not touch the top or bottom boundaries
+	\end{inparaenum} is called a \emph{barbell}.
 \end{definition}
 Notice that, by combining homotopy and contraction (see Appendix~\ref{sec:prelim_genrel}), every blue barbell is simply $\barbell{barbell_blue}$.  Similarly, every red barbell is simply $\barbell{barbell_red}$.
 
@@ -319,29 +322,14 @@ The quantities $[n]_x$ and $[n]_y$ are closely related.  In particular, $[2k+1]_
 
 Recall that the generators $s$ and $t$ of $W$ act on $R$ by the action given in Appendix~\ref{sec:prelim_background}.  The quantum numbers are relevant to the problem because of the identity
 \begin{equation}
-	s([n]_x\alpha_s + [n-1]_y\alpha_t) = [n]_x\alpha_s + [n+1]_y\alpha_t
+	s([n-1]_x\alpha_s + [n]_y\alpha_t) = [n]_x\alpha_s + [n+1]_y\alpha_t
 	\label{eq:quantum}
 \end{equation}
 and its analogous form for $t$.  One can verify that \eqref{eq:quantum} immediately follows from definitions.  This gives us a robust way to express the results of action on $\alpha_s$ or $\alpha_t$ by the elements of $W$.  For example, $ststst(\alpha_s) = ststst([1]_x\alpha_s + [0]_y\alpha_t) = [7]_x\alpha_s + [6]_y\alpha_t$.
 
 Now \eqref{eq:quantum} motivates us to make the following definition, which we use in Section~\ref{sec:res_alt_compute}.
 \begin{definition}
-	For any reduced expression $\ul r$, we define the quantum polynomial $Q_{\ul r}$ by:
-	\[
-		Q_{\AA_n} = 
-		\begin{cases}
-			[n+1]_x \alpha_s + [n]_y \alpha_t & \text{if $n$ is odd} \\
-			[n]_x \alpha_s + [n+1]_y \alpha_t & \text{if $n$ is even}
-		\end{cases}
-	\]
-	when $\ul r = \AA_n$, and otherwise,
-	\[
-		Q_{\AA_n'} =
-		\begin{cases}
-			[n]_x \alpha_s + [n+1]_y \alpha_t & \text{if $n$ is even} \\
-			[n+1]_x \alpha_s + [n]_y \alpha_t & \text{if $n$ is odd}.
-		\end{cases}
-	\]
+	For any reduced expression $\ul r$, we define the quantum polynomial $Q_{\ul r}$ by $Q_{\AA_n} = [n+1]_x \alpha_s + [n]_y \alpha_t$ when $\ul r = \AA_n$, and otherwise, $Q_{\AA_n'} = [n]_x \alpha_s + [n+1]_y \alpha_t$.
 \end{definition}
 
 The significance is that, if $\ul r$ is a reduced expression of length $n+1$, then \[ \MM_{\ul r} ( \underbrace{11\dots11}_{\text{$n$ 1's}}0, \underbrace{11\dots11}_{\text{$n$ 1's}}0 ) = Q_{\ul r}. \]
@@ -385,9 +373,9 @@ This follows from \eqref{eq:barbell_break}.
 \begin{definition}
 	A map is \emph{idempotent} if multiplying it with itself returns the original map.  Two idempotents are \emph{orthogonal} if their product is zero.
 \end{definition}
-If we can find two half-maps $A$ and $B$ (with the same top and base) for which $AB$ is the identity, then $(BA)^2=BABA=BA$ is an idempotent.  More generally, however, if $AB = c$ for some scalar $c \neq 0$, then \[ \left( \frac{BA}{c} \right)\left( \frac{BA}{c} \right) = \frac{BABA}{c^2} = \frac{BA}{c} \] is also an idempotent.  In other words, any two maps with nonzero product can be used to construct an idempotent.
+If we can find two half-maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ is an idempotent.  More generally, however, if $AB = c$ for some scalar $c \neq 0$, then \[ \left( \frac{BA}{c} \right)\left( \frac{BA}{c} \right) = \frac{BABA}{c^2} = \frac{BA}{c} \] is also an idempotent.  In other words, any two maps with nonzero product can be used to construct an idempotent.
 
-However, if we are interested in finding sets of \emph{pairwise orthogonal} idempotents, then this becomes a linear algebra problem in which we require a matrix of all possible products.  The construction of such a set of idempotents is closely related to the decomposition of these bimodules, which in turn gives information about the Soergel bimodules\footnote{Actually, the Soergel bimodules may be defined as the images of idempotents in the endomorphism rings of the Bott-Samelson bimodules.}.
+However, if we are interested in finding sets of \emph{pairwise orthogonal} idempotents, then this becomes a linear algebra problem in which we require a matrix of all products.  The construction of such a set of idempotents is closely related to the decomposition of these bimodules, which in turn gives information about the Soergel bimodules\footnote{Actually, the Soergel bimodules may be defined as the images of idempotents in the endomorphism rings of the Bott-Samelson bimodules.}.
 
 This motivates the main objective of our study.
 \begin{ques*}
@@ -463,14 +451,14 @@ For example, $R(sststttts) = ststs$.
 \end{restatable}
 If $\ul r$ begins with the character $t$, then one can simply reverse the roles of $s$ and $t$ in the above theorem to obtain an analogous formula.
 
-The proof proceeds in two steps.  The first is to resolve the case $\ell = n$.  We do so by using induction on $n$, and applying \eqref{eq:top}.  By splitting into the case where $\ul b[n] = 1$ and $\ul b[n] = 0$, we get two binomial coefficients; the computation is to verify that by Pascal's identity they sum to the desired coefficient.
+The proof proceeds in two steps.  The first is to resolve the case $\ell = n$.  We do so by using induction on $n$, and applying \eqref{eq:top}.  By splitting into the case where $\ul b[n] = 1$ and $\ul b[n] = 0$, we get two binomial coefficients; the computation is to verify that we can then apply Pascal's identity.
 The second step is to reduce the case where $\ell \neq n$ to the previous step using Proposition~\ref{prop:s_top}.  We give the proof in Appendix~\ref{sec:count_map_computation}, on page~\pageref{sec:count_map_computation}.
 
 \section{Colorful Lemmata for the Alternating Case}
 \label{sec:res_alt_restrict}
 We now turn our attention to the case of $\ul r = \AA_n$.
 
-Below we present three results which show that the possible outputs of a map with base $\AA_n$ are structurally very limited.
+Below we present three results which show that the possible outputs of a map with base $\AA_n$ all take certain forms.
 \begin{restatable}[Bubble Lemma]{lemma}{bubble}
 	Consider a bubble in a full-diagram with base $\AA_n$.  The bubble holds exactly one caterpillar, whose color is opposite that of the bubble.
 	\label{thm:bubble}
@@ -587,7 +575,7 @@ Included in Figure~\ref{fig:large_alt_example} is an example of a map with base 
 \end{figure}
 
 The Bubble Lemma is the key combinatorial observation, which hinges on the fact that any two anchors with the same color have a third anchor of the other color between them.  The other two lemmas follow directly from it.
-The details of the proofs are given in Appendix~\ref{sec:lemmata_proof}, on page~\pageref{sec:lemmata_proof}.
+The proofs are given in Appendix~\ref{sec:lemmata_proof}, on page~\pageref{sec:lemmata_proof}.
 
 \section{Algebraic Computations for the Alternating Case}
 \label{sec:res_alt_compute}
@@ -617,7 +605,7 @@ Theorem~\ref{thm:alt_struct} motivates the following definition, which is releva
 	If a nonzero map $M$ with base $\AA_n$ is presented as in Theorem~\ref{thm:alt_struct}, then we call the term $x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t}$ the \emph{fluff} of $M$, and call the polynomial (either $1$ or $Q_{\ul w}$) the \emph{face} of $M$. 
 \end{definition}
 \begin{remark*}
-	According to Theorem~\ref{thm:alt_struct}, a nonzero map $\MM_{\AA_n}$ has face $1$ and only if its top has the same last character as $\AA_n$.
+	According to Theorem~\ref{thm:alt_struct}, a nonzero map $\MM_{\AA_n}$ has face $1$ if and only if its top has the same last character as $\AA_n$.
 \end{remark*}
 
 \subsection{A Partial Recursion}
@@ -659,7 +647,7 @@ Notice that this recursion is sufficient to calculate $\MM_{\AA_n}(\ul b, \ul b)
 \section{Conclusion}
 The overarching goal of the paper was to compute $\MM_{\ul r} (\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.  In this paper, we solved the case where $\ul r = \SS_n$ completely, and showed that outputs in the case $\ul r = \AA_n$ are substantially constrained.  We also provide a partial recurrence for $\AA_n$.  An obvious next direction would be to attempt to complete the recursion for $\AA_n$ so that $\MM_{\AA_n} (\ul a, \ul b)$ can be determined completely.
 
-What about the original problem of arbitrary $\ul r$?  It was originally hoped that, by understanding $\AA_n$ and $\SS_n$, one could derive the general formula (perhaps by viewing strings of $s$'s in $\ul r$ as a single $s$ with a formula for $\SS_n$, and then aggregating all this information with a formula for $\AA_n$).  Unfortunately, the lemmata of Section~\ref{sec:res_alt_restrict} show that in fact, maps with base $\AA_n$ are quite restricted.  So, either the results of Section~\ref{sec:res_alt_compute} will have to be generalized significantly (in the context of maps outside those of base $\AA_n$), or an entirely new approach will be required.
+What about the original problem of arbitrary $\ul r$?  It was originally hoped that, by understanding $\AA_n$ and $\SS_n$, one could derive the general formula (perhaps by viewing strings of $s$'s in $\ul r$ as a single $s$ with a formula for $\SS_n$, and then aggregating all this information with a formula for $\AA_n$).  Unfortunately, the lemmata of Section~\ref{sec:res_alt_restrict} show that in fact, maps with base $\AA_n$ have very special properties.  So, either the results of Section~\ref{sec:res_alt_compute} will have to be generalized significantly (in the context of maps outside those with base $\AA_n$), or an entirely new approach will be required.
 
 Yet another possible direction is to search for similar results when the order of $st$ in $W$ is finite, or even if $W$ is an arbitrary Coxeter group.
 

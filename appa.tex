@@ -187,7 +187,7 @@ Unless multiple colors appear in an equation, blue represents a generic color.
 \end{figure}
 We now present the algorithm for Libedinsky's light leaves, in the special case where $W$ is the infinite dihedral group.  A full construction for more general Coxeter groups is given in \cite{ref:gr4all}.
 
-Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.  Then for any binary string $\ul b$ of length $n$ we can construct a diagram based on a series of rules.
+Fix an expression $\ul r$ of length $n$.  Then for any binary string $\ul b$ of length $n$ we can construct a diagram based on a series of rules.
 
 Each bit of $\ul b$ is read from left to right in order and designated either open or closed; the state of a bit can change more than once.  Initially all bits are closed.  We say that a bit $x$ is an \emph{open neighbor} of $y$ if $x$ is marked open, $x$ and $y$ have the same color, and there are no other bits marked open between $x$ and $y$.  Note that each bit will have at most one open neighbor.
 
@@ -308,7 +308,11 @@ We begin with a proof of the Bubble Lemma\footnote{I should remark that attempti
 \begin{proof}[Proof of Lemma \ref{thm:bubble}]
 	Take a bubble $B$ and assume without loss of generality that it is blue.  By construction all caterpillars held inside $B$ must be red.  This implies that there must be at least one red caterpillar, because there is at least one red anchor inside $B$.
 
-	Define a pair of red anchors $u, v$, with $u$ to the left of $v$, to be \emph{quasi-connected} if (i) one can draw an arc from $u$ to $v$ contained entirely in one half-map which does not intersect blue lines, and (ii) there is no red anchor $w$ strictly between $u$ and $v$ for which one can draw a similar arc on the same half-map joining $w$ and $v$.
+	Define a pair of red anchors $u, v$, with $u$ to the left of $v$, to be \emph{quasi-connected} if
+	\begin{inparaenum}[(i)]
+		\ii one can draw an arc from $u$ to $v$ contained entirely in one half-map which does not intersect blue lines, and
+		\ii there is no red anchor $w$ strictly between $u$ and $v$ for which one can draw a similar arc on the same half-map joining $w$ and $v$.
+	\end{inparaenum}
 
 	Now we claim that \textbf{any quasi-connected pair of red anchors is actually joined by a red arc}.  To prove this, take such a quasi-connected pair $u$ and $v$.  Now we'll focus only on the half-map in which the prescribed arc is drawn.  We thus may state that an arc \emph{shields} any anchors which lie between its endpoints.
 	

@@ -1,7 +1,8 @@
 unitsize(3.14mm);
 
 pen the_blue = blue;
-pen the_red = linetype(new real[] {0.4,1.8}) + red;
+// pen the_red = linetype(new real[] {0.4,1.8}) + red;
+pen the_red = red;
 
 currentpen = the_blue;
 draw((0.3,1)^^(-0.3,-1),white);
