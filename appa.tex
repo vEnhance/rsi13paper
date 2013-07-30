@@ -55,11 +55,11 @@ The vertices on the boundary are by convention not explicitly shown, but are non
 	draw( (xmax,ymax)--(xmax,-ymax)--(-xmax,-ymax)--(-xmax,ymax)--cycle );
 	pair apex = (0,2);
 	path arc = (5,-5)..(2,0)..apex..(-2,0)..(-5,-5);
-	draw(arc, blue);
-	dot(apex, blue);
-	draw(apex--(0,ymax), blue);
-	draw(-apex--(0,-ymax), red + dashed + 0.6);
-	dot(-apex, red);
+	draw(arc, s);
+	dot(apex, dot_s);
+	draw(apex--(0,ymax), s);
+	draw(-apex--(0,-ymax), t);
+	dot(-apex, dot_t);
 	label("$s$", (0,ymax), dir(90));
 	label("$t$", (0,-ymax), dir(270));
 	label("$s$", (-5,-ymax), dir(270));
@@ -116,7 +116,9 @@ Unless multiple colors appear in an equation, blue represents a generic color.
 
 \setcounter{op}{-1}
 \begin{op}[Isotropy] If two diagrams can be continuously deformed into each other (in the topological sense), then they are equivalent.  In other words, the maps are isotropy invariant  \end{op}
-The reasons for the above operation are not obvious; see page 7 of \cite{ref:gr4all} for an explanation.
+\begin{remark*}
+	The justification for the above operation is not obvious; see page 7 of \cite{ref:gr4all} for an explanation.
+\end{remark*}
 \begin{op}[Associativity] We have $\barbell{assoc_horiz} = \barbell{assoc_vert}$.  \end{op}
 \begin{op}[Contraction] We have $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.  \end{op}
 \begin{op}[The Needle] We have $\barbell{needle} = 0$.  \end{op}
