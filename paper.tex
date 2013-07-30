@@ -9,7 +9,7 @@ In 1979, Kazhdan and Lusztig \cite{ref:KaLu1,ref:KaLu2} gave a categorification 
 Soergel \cite{ref:Soe1,ref:Soe2} simplified this construction significantly in 1990 with an algebraic approach, using the aptly named Soergel bimodules.  The Soergel bimodules permit an easier understanding of the categorification of $\HH$; their advantage is that they are easier to define and are combinatorial in nature.
 Furthermore, Soergel's construction extends the Hecke category to apply for arbitrary Coxeter systems $W$.
 
-For a full treatise, we refer the reader to \cite{ref:Humphreys}.
+For a full treatise on the topic, we refer the reader to \cite{ref:Humphreys}.
 
 Soergel bimodules can be described as summands of another class of bimodules, known as the \emph{Bott-Samelson bimodules}.
 Now the morphisms of Bott-Samelson bimodules admit a combinatorial description.  In particular, \cite{ref:gr4all} gives a presentation for the category of these morphisms in terms of planar diagrammatics (i.e. diagrams in the plane).
@@ -389,12 +389,12 @@ This follows from \eqref{eq:barbell_break}.
 
 \section{Problem Statement}
 \label{sec:probstate}
-
-The motivation for this problem arises from the following definition.
 \begin{definition}
-	A map is \emph{idempotent} if multiplying it with itself returns the original map.
+	A map is \emph{idempotent} if multiplying it with itself returns the original map.  Two idempotents are orthogonal if their product is zero.
 \end{definition}
-Fix an $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ will be an idempotent.  This motivates us to construct potential idempotents by taking two light leaves whose top sequences are identical, and composing $A$ upside-down with $B$, in the hope that $AB=1$.
+Fix an expression $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ will be an idempotent.  More generally, however, if $AB = c$ for some scalar $c$, then \[ \left( \frac{BA}{c} \right)\left( \frac{BA}{c} \right) = \frac{BABA}{c^2} = \frac{BA}{c} \] is also an idempotent.  In other words, any two maps with nonzero product can be used to construct an idempotent.
+
+However, if we are interested in finding sets of pairwise orthogonal idempotents, then this becomes a linear algebra problem in which we require a matrix of all possible products.  The construction of such a set of idempotents is closely related to the decomposition of these bimodules, which in turn gives information about the Soergel bimodules\footnote{Actually, the Soergel bimodules may be defined as the images of idempotents in the endomorphism rings of the Bott-Samelson bimodules.}.
 
 This motivates the main objective of study.
 \begin{ques*}
