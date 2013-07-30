@@ -1,39 +1,34 @@
 % This is paper.tex
 
-% TODO restate all theorems in appendix
-% TODO rewrite summary
-
 \section{Introduction}
 \textbf{Note:} If possible, this document should be printed in color.  However, I have left blue lines as solid and red lines as dashed for readability.
 
-The Hecke Algebra (or Iwahori-Hecke Algebra) $\HH$ of a Weyl group $W$ is an object of significant interest, studied in representation theory, algebraic number theory, and combinatorics.
-
-In 1979, Kazhdan and Lusztig \cite{ref:KaLu1,ref:KaLu2} gave a categorification of $\HH$, using a somewhat complicated construction\footnote{The technique involved using something called \emph{perverse sheaves on the flag variety}.}.  The result became known as the Hecke category.
+The Hecke Algebra (or Iwahori-Hecke Algebra) is an object of significant interest, studied in representation theory, algebraic number theory, and combinatorics.  In 1979, Kazhdan and Lusztig \cite{ref:KaLu1,ref:KaLu2} gave a categorification of the Hecke algebra, using a somewhat complicated construction\footnote{The technique involved using something called \emph{perverse sheaves on the flag variety}.}.  The result became known as the Hecke category.
 % If $K = \RR$, the resulting basis of $\HH$ is understood, and called the Kazhdan-Lusztig basis.  However, if $K$ is a field of some other characteristic $p$, the basis is unknown.
-Soergel \cite{ref:Soe1,ref:Soe2} simplified this construction significantly in 1990 with an algebraic approach, using the aptly named Soergel bimodules.  The Soergel bimodules permit an easier understanding of the categorification of $\HH$; their advantage is that they are easier to define and are combinatorial in nature.
-Furthermore, Soergel's construction extends the Hecke category to the case where $W$ is an arbitrary Coxeter group, as opposed to a Weyl group.
+Soergel \cite{ref:Soe1,ref:Soe2} simplified this construction significantly in 1990 with an algebraic approach, using the aptly named Soergel bimodules.  The Soergel bimodules permit an easier understanding of this categorification; their advantage is that they are easier to define and are combinatorial in nature.
+% Furthermore, Soergel's construction extends the Hecke category to the case where $W$ is an arbitrary Coxeter group, as opposed to a Weyl group.
 
 For a full treatise on the topic, we refer the reader to Humphreys \cite{ref:Humphreys}.
 
-Soergel bimodules can be described as summands of another class of bimodules, known as the \emph{Bott-Samelson bimodules}.
-Now the morphisms of Bott-Samelson bimodules admit a combinatorial description.  In particular, Elias and Williamson \cite{ref:gr4all}, building off earlier works such as Elias and Khovanov \cite{ref:EKh}, give a presentation for the category of these morphisms in terms of colored planar diagrammatics (i.e. colored planar graphs). 
+Soergel bimodules can be described in terms of another class of bimodules, known as the \emph{Bott-Samelson bimodules}.
+Now the morphisms of Bott-Samelson bimodules admit a combinatorial description.  In particular, Elias and Williamson \cite{ref:gr4all}, building off earlier works such as Elias and Khovanov \cite{ref:EKh}, give a presentation for the category of these morphisms in terms of colored planar diagrammatics (i.e. colored diagrams). 
 
-This paper investigates some of the properties of these diagrammatics from a combinatorial perspective.   In this paper, we consider only the special case where $W$ is an infinite dihedral group with generators $s$ and $t$ (as opposed to an arbitrary Coxeter group $W$).
+This paper investigates some of the properties of these diagrammatics from a combinatorial perspective.   In this paper, we consider only the special case where the underlying group $W$ of the Hecke algebra is an infinite dihedral group with generators $s$ and $t$ (as opposed to an arbitrary Coxeter group $W$).
 
 Given a string of length $n$ composed of the letters $s$ and $t$, as well as a binary string of length $n$, one can construct such a diagram using an algorithm known as Libedinsky's light leaves.  The light leaves were derived by Libedinsky in \cite{ref:Lib} and are detailed in Appendix~\ref{sec:prelim_lightleave}.  
 These light leaves are interesting because they form a basis for a certain span of these maps, as shown in \cite{ref:gr4all}.
-We develop tools to understand the composition of two such maps given the original binary strings, with the eventual goal of deriving a combinatorial formula.
+In this paper, we develop tools to understand the composition of two such maps given the original binary strings, with the eventual goal of deriving a combinatorial formula.
 %The project deals with composing two maps formed in such a manner.
 %The goal of the project is to describe the relationship between such a composition and the two original binary strings.
 
-Appendix~\ref{sec:prelim_background} contains the preliminaries for the problem -- namely, the light leaves and the relation between the diagrams and maps.  A minimal set of definitions used in this paper is given in Section~\ref{sec:prelim}.  
+Appendix~\ref{sec:prelim_background} contains the preliminaries for the problem; it describes the light leaves and defines the relation between diagrams and maps.  A minimal set of definitions used in this paper is given in Section~\ref{sec:prelim}.  
 In Section~\ref{sec:probstate}, the problem statement is given in its full technicality.
 
 The results begin by solving the special case of one color completely in Section~\ref{sec:res_onecolor}.  In Section~\ref{sec:res_count_maps}, we also present a formula for the number of maps between two given bimodules.  The most important results of this paper are presented in Sections~\ref{sec:res_alt_restrict} and \ref{sec:res_alt_compute}, where we investigate a special ``alternating'' case.  In particular, we show that the possible resulting structures are extremely limited, and provide a recursion based on these restrictions for that case.
 
 \section{Preliminaries and Definitions}
 \label{sec:prelim}
-In Appendix~\ref{sec:prelim_background}, we provide the background behind the Bott-Samelson bimodules, and the correspondence between these maps and certain diagrams.  We then introduce Libedinsky's light leaves, a basis by which maps can be constructed using binary strings.
+In Appendix~\ref{sec:prelim_background}, we provide the background behind the Bott-Samelson bimodules, and the correspondence between our maps and diagrams.  We then introduce Libedinsky's light leaves, a basis by which maps can be constructed using binary strings.
 
 In Section~\ref{sec:prelim_def_notation} we introduce several of our definitions which we use throughout the paper.  Next, in Section~\ref{sec:prelim_explain_poly_eval}, we describe how these maps can be represented as polynomials.  The actual problem statement is then deferred to Section~\ref{sec:probstate}.
 \subsection{Definitions and Notations}
@@ -339,7 +334,7 @@ Recall that the generators $s$ and $t$ of $W$ act on $R$ by the action given in 
 \end{equation}
 and its analogous form for $t$.  One can verify that \eqref{eq:quantum} immediately follows from definitions.  This gives us a robust way to express the results of action on $\alpha_s$ or $\alpha_t$ by the elements of $W$.  For example, $ststst(\alpha_s) = ststst([1]_x\alpha_s + [0]_y\alpha_t) = [7]_x\alpha_s + [6]_y\alpha_t$.
 
-This motivates us to make the following definition, which we use in Section~\ref{sec:res_alt_compute}.
+Now \eqref{eq:quantum} motivates us to make the following definition, which we use in Section~\ref{sec:res_alt_compute}.
 \begin{definition}
 	For any reduced expression $\ul r$, we define the quantum polynomial $Q_{\ul r}$ by:
 	\[
@@ -400,9 +395,9 @@ This follows from \eqref{eq:barbell_break}.
 \section{Problem Statement}
 \label{sec:probstate}
 \begin{definition}
-	A map is \emph{idempotent} if multiplying it with itself returns the original map.  Two idempotents are orthogonal if their product is zero.
+	A map is \emph{idempotent} if multiplying it with itself returns the original map.  Two idempotents are \emph{orthogonal} if their product is zero.
 \end{definition}
-Fix an expression $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ is an idempotent.  More generally, however, if $AB = c$ for some scalar $c$, then \[ \left( \frac{BA}{c} \right)\left( \frac{BA}{c} \right) = \frac{BABA}{c^2} = \frac{BA}{c} \] is also an idempotent.  In other words, any two maps with nonzero product can be used to construct an idempotent.
+Fix an expression $\ul r$.  If we can find two maps $A$ and $B$ for which $AB$ is the identity, then $(BA)^2=BABA=BA$ is an idempotent.  More generally, however, if $AB = c$ for some scalar $c \neq 0$, then \[ \left( \frac{BA}{c} \right)\left( \frac{BA}{c} \right) = \frac{BABA}{c^2} = \frac{BA}{c} \] is also an idempotent.  In other words, any two maps with nonzero product can be used to construct an idempotent.
 
 However, if we are interested in finding sets of pairwise orthogonal idempotents, then this becomes a linear algebra problem in which we require a matrix of all possible products.  The construction of such a set of idempotents is closely related to the decomposition of these bimodules, which in turn gives information about the Soergel bimodules\footnote{Actually, the Soergel bimodules may be defined as the images of idempotents in the endomorphism rings of the Bott-Samelson bimodules.}.
 
@@ -410,7 +405,7 @@ This motivates the main objective of our study.
 \begin{ques*}
 	For a fixed $\ul r$ and two binary sequences $\ul a$ and $\ul b$ with $\Top_{\ul r}(\ul a) = \Top_{\ul r}(\ul b)$, find a formula for $\MM_{\ul r}(\ul a, \ul b)$ in terms of $\ul r$, $\ul a$, and $\ul b$.
 \end{ques*}
-In this paper, we are interested in computing the polynomial which corresponds to this map.
+In this paper, we wish to compute the polynomial which corresponds to the map.
 
 \section{A Complete Characterization of the One-Color Case}
 \label{sec:res_onecolor}
@@ -431,7 +426,7 @@ First, we need a criteria to determine the top of such compositions.
 	\label{prop:s_top}
 \end{proposition}
 \begin{proof}
-	Straightforward induction on $n$.  
+	This is a direct application of \eqref{eq:top}.
 \end{proof}
 
 Subsequently, we make the following definition for this section only.
@@ -463,11 +458,11 @@ As such, it is deferred to Appendix~\ref{sec:s_proof}, on page \pageref{sec:s_pr
 
 \section{Counting Maps}
 \label{sec:res_count_maps}
-We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul T$ for each expression $\ul T$ and $\ul r$.  
+We give a formula for the number of binary strings $\ul b$ such that $\Top_{\ul r}(\ul b) = \ul w$ for each expression $\ul w$ and $\ul r$.  
 
-\begin{definition}
+\begin{restatable}{definition}{defredcountmaps}
 	Let $R(\ul r)$ denote $\ul r$ with any consecutive blocks of $s$'s replaced by a single $s$, and similarly for $t$.
-\end{definition}
+\end{restatable}
 For example, $R(sststttts) = ststs$.
 
 \begin{restatable}{proposition}{countmaps}
@@ -497,10 +492,10 @@ Below we present three results which show that the possible outputs of a map wit
 	\label{thm:caterpillar}
 \end{restatable}
 \begin{restatable}[Pasture Lemma]{lemma}{pasture}
-	Consider a full-diagram with $N+1$ pastures (numbered $0$, $1$, \dots, $N$) with base $\AA_n$ and top $T$.  Suppose further that $N \ge 1$ (or equivalently, $T \neq \varnothing$).  Then
+	Consider a full-diagram with $N+1$ pastures (numbered $0$, $1$, \dots, $N$) with base $\AA_n$ and top $\ul w$.  Suppose further that $N \ge 1$ (or equivalently, $\ul w \neq \varnothing$).  Then
 	\begin{enumerate}[(i)]
 		\ii Pastures $1$ through $N-1$ are either empty or contain an attached component.
-		\ii Pasture $N$ is empty if $T[N] = \AA_n[n]$, and contains a single caterpillar otherwise.  The caterpillar is blue if $\AA_n[n]$ is $s$, and red otherwise.
+		\ii Pasture $N$ is empty if $\ul w[N] = \AA_n[n]$, and contains a single caterpillar otherwise.  The caterpillar is blue if $\AA_n[n]$ is $s$, and red otherwise.
 	\end{enumerate}
 	\label{thm:pasture}
 \end{restatable}
@@ -615,25 +610,25 @@ We now turn to using the tools developed in Section~\ref{sec:res_alt_restrict} i
 \subsection{Restrictions and Definitions for the Final Output}
 Let us now endow our maps with base $\AA_n$ with some additional structure.
 \begin{theorem}
-	For any binary strings $\ul a, \ul b \in \BB_n$, if $\MM_{\AA_n} (\ul a, \ul b)$ is nonzero and has top $T$, then for some nonnegative integers $m_x$, $m_y$, $m_s$, and $m_t$, we have 
+	For any binary strings $\ul a, \ul b \in \BB_n$, if $\MM_{\AA_n} (\ul a, \ul b)$ is nonzero and has top $\ul w$, then for some nonnegative integers $m_x$, $m_y$, $m_s$, and $m_t$, we have 
 	\[
 		\MM_{\AA_n} (\ul a, \ul b) =
 		x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t} \cdot
 		\begin{cases}
-			1 & \text{if $T$ and $\AA_n$ have the same last character} \\
-			Q_T & \text{otherwise}.
+			1 & \text{if $\ul w$ and $\AA_n$ have the same last character} \\
+			Q_{\ul w} & \text{otherwise}.
 		\end{cases}
 	\]
 	\label{thm:alt_struct}
 \end{theorem}
-Here, $Q_T$ is the quantum polynomial defined in Section~\ref{sec:quantum}.
+Here, $Q_{\ul w}$ is the quantum polynomial defined in Section~\ref{sec:quantum}.
 \begin{proof}
-	This is an immediate consequence of the Caterpillar Lemma and the Pasture Lemma.  Everything in the first pasture is a product of monomials by the Caterpillar Lemma.  If $T$ and $\AA_n$ agree, then the last pasture is empty and hence we obtain the first case.  Otherwise, there is a single caterpillar of color opposite to $T$, and hence after evaluating that caterpillar, we obtain some monomial times a single barbell.  This generates the final $Q_T$ term after the barbell is pushed through all the fences; the broken fences are all zero because they are lower terms.
+	This is an immediate consequence of the Caterpillar Lemma and the Pasture Lemma.  Everything in the first pasture is a product of monomials by the Caterpillar Lemma.  If $\ul w$ and $\AA_n$ agree, then the last pasture is empty and hence we obtain the first case.  Otherwise, there is a single caterpillar of color opposite to $\ul w$, and hence after evaluating that caterpillar, we obtain some monomial times a single barbell.  This generates the final $Q_{\ul w}$ term after the barbell is pushed through all the fences; the broken fences are all zero because they are lower terms.
 \end{proof}
 
 Theorem~\ref{thm:alt_struct} motivates the following definition, which is relevant for Proposition~\ref{thm:recurse}.
 \begin{definition}
-	If a nonzero map $M$ with base $\AA_n$ is presented as in Theorem~\ref{thm:alt_struct}, then we call the term $x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t}$ the \emph{fluff} of $M$, and call the polynomial (either $1$ or $Q_T$) the \emph{face} of $M$. 
+	If a nonzero map $M$ with base $\AA_n$ is presented as in Theorem~\ref{thm:alt_struct}, then we call the term $x^{m_x}y^{m_y}\alpha_s^{m_s}\alpha_t^{m_t}$ the \emph{fluff} of $M$, and call the polynomial (either $1$ or $Q_{\ul w}$) the \emph{face} of $M$. 
 \end{definition}
 \begin{remark*}
 	According to Theorem~\ref{thm:alt_struct}, a nonzero map $\MM_{\AA_n}$ has face $1$ and only if its top has the same last character as $\AA_n$.
@@ -643,7 +638,7 @@ Theorem~\ref{thm:alt_struct} motivates the following definition, which is releva
 In this section we present a partial recursion for computing $\MM_{\AA_n}(\ul a, \ul b)$.  
 
 \begin{restatable}{proposition}{recurse}
-	Let $n \ge 2$ be an odd integer and consider two binary strings $\ul a, \ul b \in \BB_n$ such that $T = \Top_{\AA_n}(\ul a) = \Top_{\AA_n}(\ul b)$.  
+	Let $n \ge 2$ be an odd integer and consider two binary strings $\ul a, \ul b \in \BB_n$ such that $\ul w = \Top_{\AA_n}(\ul a) = \Top_{\AA_n}(\ul b)$.  
 	Let $\ul a'$ and $\ul b'$ be the first $n-1$ bits of $\ul a$ and $\ul b$, respectively. 
 	Suppose $M_1 = \MM_{\AA_{n-1}} \left(\ul a', \ul b'\right)$ is a nonzero map with fluff $F$.
 	\begin{enumerate}[(i)]
@@ -651,9 +646,9 @@ In this section we present a partial recursion for computing $\MM_{\AA_n}(\ul a,
 		\[ \MM_{\AA_n} (\ul a, \ul b)
 			=
 			\begin{cases}
-				\alpha_s M_1 & \text{if $T = \varnothing$} \\ % just another barbell
-				-xF & \text{if $T$ ends in $s$} \\ % closes a caterpillar like 0|
-				 Q_T M_1 & \text{if $T$ ends in $t$}. \\ % just another barbell, but push it all the way through nonempty T
+				\alpha_s M_1 & \text{if $\ul w = \varnothing$} \\ % just another barbell
+				-xF & \text{if $\ul w$ ends in $s$} \\ % closes a caterpillar like 0|
+				Q_{\ul w} M_1 & \text{if $\ul w$ ends in $t$}. \\ % just another barbell, but push it all the way through nonempty w
 			\end{cases}
 		\]
 		\ii If $\ul a[n] = \ul b[n] = 1$, then
@@ -661,9 +656,9 @@ In this section we present a partial recursion for computing $\MM_{\AA_n}(\ul a,
 			\MM_{\AA_n} (\ul a, \ul b)
 			=
 			\begin{cases}
-				-x\alpha_sF & \text{if $T = \varnothing$} \\ % destructive 1, closes a caterpillar O
-				M_1 & \text{if $T$ ends in $s$} \\ % constructive 1
-				-xF Q_T & \text{if $T$ ends in $t$}. % destructive 1
+				-x\alpha_sF & \text{if $\ul w = \varnothing$} \\ % destructive 1, closes a caterpillar O
+				M_1 & \text{if $\ul w$ ends in $s$} \\ % constructive 1
+				-xF Q_{\ul w} & \text{if $\ul w$ ends in $t$}. % destructive 1
 			\end{cases}
 		\]
 	\end{enumerate}
