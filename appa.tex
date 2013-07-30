@@ -137,8 +137,6 @@ The reasons for the above operation are not obvious; see page 7 of \cite{ref:gr4
 	\begin{asy}
 	size(10cm);
 	real h = 0.7;
-	pen s = blue, t = dashed + red + 0.6;
-	int n = 14;
 	draw(currentpicture, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
 	draw(currentpicture, (2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
 	draw(currentpicture, (5,0)--(5,h/2)..((5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
@@ -215,8 +213,6 @@ The \emph{top} of such a map is the expression which appears on the upper bounda
 	\begin{asy}
 		size(7cm);
 		real h = 0.7;
-		pen s = blue, t = red + dashed + 0.6;
-		pen dot_s = blue, dot_t = red;
 		int n = 8;
 		draw(currentpicture, (0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
 		draw(currentpicture, (1,0)--(1,h/2)..((1+2)/2.0,h*1)..(2,h/2)--(2,0), s);
@@ -318,8 +314,6 @@ We begin with a proof of the Bubble Lemma\footnote{I should remark that attempti
 		\centering
 		\begin{asy}
 			size(6cm);
-			pen s = blue, t = red + dashed + 0.6;
-			pen dot_s = blue, dot_t = red;
 			for (int i=0; i<=8; i+=2) { dot( (i,0), dot_s ); }
 			for (int i=1; i<=8; i+=2) { dot( (i,0), dot_t ); }
 			draw((0,0)..(1,2)..(3,4)..(5,3)..(6,5)..(7,2)..(8,0), s);
@@ -333,8 +327,6 @@ We begin with a proof of the Bubble Lemma\footnote{I should remark that attempti
 		\hspace{2em}
 		\begin{asy}
 			size(6cm);
-			pen s = blue, t = red + dashed + 0.6;
-			pen dot_s = blue, dot_t = red;
 			for (int i=0; i<=8; i+=2) { dot( (i,0), dot_s ); }
 			for (int i=1; i<=8; i+=2) { dot( (i,0), dot_t ); }
 			draw((0,0)..(1,2)..(3,4)..(5,3)..(6,5)..(7,2)..(8,0), s);
@@ -386,8 +378,6 @@ First, a few definitions for this section only.
 	\begin{asy}
 		size(11cm);
 		real h = 0.7;
-		pen s = blue, t = red + dashed + 0.6;
-		pen dot_s = blue, dot_t = red;
 		int n = 6;
 
 		picture before;
@@ -453,8 +443,6 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 				\begin{asy}
 					size(12cm);
 					real h = 0.7;
-					pen s = blue, t = red + dashed + 0.6;
-					pen dot_s = blue, dot_t = red;
 					int n = 4;
 
 					picture one;
@@ -519,8 +507,6 @@ The Bubble Lemma and the Pasture Lemma are structurally very similar.  In fact, 
 				\begin{asy}
 					size(11cm);
 					real h = 0.7;
-					pen s = blue, t = red + dashed + 0.6;
-					pen dot_s = blue, dot_t = red;
 					int n = 4;
 
 					picture one;
