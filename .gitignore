@@ -1,5 +1,8 @@
 *
 !*.tex
+!anime
+!anime/*.tex
+!anime/*-*.pdf
 !barbell
 !barbell/*.asy
 !barbell/*.pdf

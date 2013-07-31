@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{asymptote}
+\begin{asydef}
+	size(5cm);
+	real h = 0.7;
+	pen s = blue, t = red;
+	pen dot_s = blue, dot_t = red;
+	int n = 7;
+
+	label(currentpicture, "1", (0,-1.5h), dir(90));
+	label(currentpicture, "s", (0,-0.8*h), dir(90));
+	label(currentpicture, "1", (1,-1.5h), dir(90));
+	label(currentpicture, "t", (1,-0.8*h), dir(90));
+	label(currentpicture, "1", (2,-1.5h), dir(90));
+	label(currentpicture, "s", (2,-0.8*h), dir(90));
+	label(currentpicture, "0", (3,-1.5h), dir(90));
+	label(currentpicture, "t", (3,-0.8*h), dir(90));
+	label(currentpicture, "1", (4,-1.5h), dir(90));
+	label(currentpicture, "s", (4,-0.8*h), dir(90));
+	label(currentpicture, "0", (5,-1.5h), dir(90));
+	label(currentpicture, "t", (5,-0.8*h), dir(90));
+	label(currentpicture, "0", (6,-1.5h), dir(90));
+	label(currentpicture, "s", (6,-0.8*h), dir(90));
+	dot((0,5*h), white);
+\end{asydef}
+
+\begin{document}
+\begin{asy}
+	// Do nothing
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture,(0,0)--(0,5*h), s);
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture,(0,0)--(0,5*h), s);
+	draw(currentpicture,(1,0)--(1,5*h), t);
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture,(0,0)--(0,5*h), s);
+	draw(currentpicture,(1,0)--(1,5*h), t);
+	draw(currentpicture,(2,0)--(2,5*h), s);
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture, (3,0)--(3,h), t);
+	dot(currentpicture, (3,h), dot_t);
+	draw(currentpicture,(0,0)--(0,5*h), s);
+	draw(currentpicture,(1,0)--(1,5*h), t);
+	draw(currentpicture,(2,0)--(2,5*h), s);
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+	draw(currentpicture, (3,0)--(3,h), t);
+	dot(currentpicture, (3,h), dot_t);
+	draw(currentpicture,(0,0)--(0,5*h), s);
+	draw(currentpicture,(1,0)--(1,5*h), t);
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+	draw(currentpicture, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+	draw(currentpicture, (3,0)--(3,h), t);
+	dot(currentpicture, (3,h), dot_t);
+	draw(currentpicture,(0,0)--(0,5*h), s);
+	draw(currentpicture,(5,0)--(5,5*h), t);
+	dot(currentpicture, (5, h/2), dot_t);
+\end{asy}
+
+\begin{asy}
+	draw(currentpicture, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+	draw(currentpicture, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+	draw(currentpicture, (3,0)--(3,h), t);
+	dot(currentpicture, (3,h), dot_t);
+	draw(currentpicture, (6,0)--(6,h), s);
+	dot(currentpicture, (6,h), dot_s);
+	draw(currentpicture,(0,0)--(0,5*h), s);
+	draw(currentpicture,(5,0)--(5,5*h), t);
+	dot(currentpicture, (5, h/2), dot_t);
+\end{asy}
+\end{document}

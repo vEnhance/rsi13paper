@@ -1,0 +1,69 @@
+\documentclass[11pt]{article}
+\usepackage{asymptote}
+
+\begin{asydef}
+size(5cm);
+real h = 0.7;
+pen s = blue, t = red + 0.6;
+pen dot_s = blue, dot_t = red;
+int n = 6;
+
+label("1", (0,-1.5h), dir(90));
+label("s", (0,-0.8*h), dir(90));
+label("1", (1,-1.5h), dir(90));
+label("s", (1,-0.8*h), dir(90));
+label("1", (2,-1.5h), dir(90));
+label("s", (2,-0.8*h), dir(90));
+label("0", (3,-1.5h), dir(90));
+label("s", (3,-0.8*h), dir(90));
+label("1", (4,-1.5h), dir(90));
+label("s", (4,-0.8*h), dir(90));
+label("0", (5,-1.5h), dir(90));
+label("s", (5,-0.8*h), dir(90));
+
+
+dot((0,3*h), white);
+\end{asydef}
+
+\begin{document}
+\begin{asy}
+	// Do nothing
+\end{asy}
+
+\begin{asy}
+	draw((0,0)--(0,3*h), s);
+\end{asy}
+
+\begin{asy}
+	draw((0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+\end{asy}
+
+\begin{asy}
+	draw((0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+	draw((2,0)--(2,3*h), s);
+\end{asy}
+
+\begin{asy}
+	draw((0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+	draw((2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+	draw((3,0)--(3,3*h), s);
+	dot((3, h/2), dot_s);
+\end{asy}
+
+\begin{asy}
+	draw((0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+	draw((2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+	draw((3,0)--(3,h/2)..((3+4)/2.0,h*1)..(4,h/2)--(4,0), s);
+	dot((3, h/2), dot_s);
+\end{asy}
+
+\begin{asy}
+	draw((0,0)--(0,h/2)..((0+1)/2.0,h*1)..(1,h/2)--(1,0), s);
+	draw((2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
+	draw((3,0)--(3,h/2)..((3+4)/2.0,h*1)..(4,h/2)--(4,0), s);
+	draw((5,0)--(5,h), s);
+	dot((5,h), dot_s);
+	dot((3, h/2), dot_s);
+\end{asy}
+
+\end{document}

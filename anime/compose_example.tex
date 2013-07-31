@@ -1,0 +1,108 @@
+\documentclass[10pt]{article}
+
+\usepackage{asymptote}
+\begin{asydef}
+size(10cm);
+real h = 0.7;
+pen s = blue, t = red;
+pen dot_s = blue, dot_t = red;
+int n = 27;
+
+picture one;
+draw(one, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+draw(one, (5,0)--(5,h/2)..((5+7)/2.0,h*2)..(7,h/2)--(7,0), t);
+draw(one, (7,0)--(7,h/2)..((7+9)/2.0,h*2)..(9,h/2)--(9,0), t);
+draw(one, (12,0)--(12,h/2)..((12+14)/2.0,h*2)..(14,h/2)--(14,0), s);
+draw(one, (11,0)--(11,h/2)..((11+15)/2.0,h*4)..(15,h/2)--(15,0), t);
+draw(one, (17,0)--(17,h/2)..((17+19)/2.0,h*2)..(19,h/2)--(19,0), t);
+draw(one, (21,0)--(21,h/2)..((21+23)/2.0,h*2)..(23,h/2)--(23,0), t);
+draw(one, (23,0)--(23,h/2)..((23+25)/2.0,h*2)..(25,h/2)--(25,0), t);
+draw(one, (20,0)--(20,h/2)..((20+26)/2.0,h*6)..(26,h/2)--(26,0), s);
+draw(one, (1,0)--(1,h), t);
+dot(one, (1,h), dot_t);
+draw(one, (3,0)--(3,h), t);
+dot(one, (3,h), dot_t);
+draw(one, (6,0)--(6,h), s);
+dot(one, (6,h), dot_s);
+draw(one, (8,0)--(8,h), s);
+dot(one, (8,h), dot_s);
+draw(one, (13,0)--(13,h), t);
+dot(one, (13,h), dot_t);
+draw(one, (18,0)--(18,h), s);
+dot(one, (18,h), dot_s);
+draw(one, (22,0)--(22,h), s);
+dot(one, (22,h), dot_s);
+draw(one, (24,0)--(24,h), s);
+dot(one, (24,h), dot_s);
+draw(one,(4,0)--(4,7*h), s);
+draw(one,(9,0)--(9,7*h), t);
+draw(one,(10,0)--(10,7*h), s);
+draw(one,(15,0)--(15,7*h), t);
+draw(one,(16,0)--(16,7*h), s);
+draw(one,(19,0)--(19,7*h), t);
+dot(one, (7, h/2), dot_t);
+dot(one, (23, h/2), dot_t);
+dot(one, (9, h/2), dot_t);
+dot(one, (15, h/2), dot_t);
+dot(one, (19, h/2), dot_t);
+
+picture two;
+draw(two, (5,0)--(5,h/2)..((5+7)/2.0,h*2)..(7,h/2)--(7,0), t);
+draw(two, (7,0)--(7,h/2)..((7+9)/2.0,h*2)..(9,h/2)--(9,0), t);
+draw(two, (12,0)--(12,h/2)..((12+14)/2.0,h*2)..(14,h/2)--(14,0), s);
+draw(two, (14,0)--(14,h/2)..((14+16)/2.0,h*2)..(16,h/2)--(16,0), s);
+draw(two, (17,0)--(17,h/2)..((17+19)/2.0,h*2)..(19,h/2)--(19,0), t);
+draw(two, (21,0)--(21,h/2)..((21+23)/2.0,h*2)..(23,h/2)--(23,0), t);
+draw(two, (23,0)--(23,h/2)..((23+25)/2.0,h*2)..(25,h/2)--(25,0), t);
+draw(two, (20,0)--(20,h/2)..((20+26)/2.0,h*6)..(26,h/2)--(26,0), s);
+draw(two, (0,0)--(0,h), s);
+dot(two, (0,h), dot_s);
+draw(two, (1,0)--(1,h), t);
+dot(two, (1,h), dot_t);
+draw(two, (2,0)--(2,h), s);
+dot(two, (2,h), dot_s);
+draw(two, (3,0)--(3,h), t);
+dot(two, (3,h), dot_t);
+draw(two, (6,0)--(6,h), s);
+dot(two, (6,h), dot_s);
+draw(two, (8,0)--(8,h), s);
+dot(two, (8,h), dot_s);
+draw(two, (13,0)--(13,h), t);
+dot(two, (13,h), dot_t);
+draw(two, (15,0)--(15,h), t);
+dot(two, (15,h), dot_t);
+draw(two, (18,0)--(18,h), s);
+dot(two, (18,h), dot_s);
+draw(two, (22,0)--(22,h), s);
+dot(two, (22,h), dot_s);
+draw(two, (24,0)--(24,h), s);
+dot(two, (24,h), dot_s);
+draw(two,(4,0)--(4,7*h), s);
+draw(two,(9,0)--(9,7*h), t);
+draw(two,(10,0)--(10,7*h), s);
+draw(two,(11,0)--(11,7*h), t);
+draw(two,(16,0)--(16,7*h), s);
+draw(two,(19,0)--(19,7*h), t);
+dot(two, (7, h/2), dot_t);
+dot(two, (14, h/2), dot_s);
+dot(two, (23, h/2), dot_t);
+dot(two, (9, h/2), dot_t);
+dot(two, (16, h/2), dot_s);
+dot(two, (19, h/2), dot_t);
+
+\end{asydef}
+\begin{document}
+
+\begin{asy}
+add(one); 
+\end{asy}
+
+\begin{asy}
+add(one); add(shift((0,-9*h))*two);
+\end{asy}
+
+\begin{asy}
+add(one); add(reflect((0,0),(1,0))*two);
+draw((-1,0)--(27,0));
+\end{asy}
+\end{document}
