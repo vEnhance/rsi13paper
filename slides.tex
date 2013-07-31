@@ -1,112 +1,19 @@
-% This is slides.tex. Compile me using ``make slides.pdf''.
-
 \documentclass[pdf]{beamer}
-\mode<presentation>{}                % change the theme here
 
-%% preamble {{{1
 \usepackage{rsislidepacks}
 \usepackage{colortbl}
-\title[Maps in $\mathcal B_{\text{BS}}$]{Diagrammatic Computation of Morphisms Between Bott-Samelson Bimodules via Libedinsky's Light Leaves}
-\subtitle[RSI 2013]{Research Science Institute 2013}
-\author[Evan Chen]{Evan Chen \\ Under the Direction of \\ Francisco Unda \\ Massachusetts Institute of Technology}
-
-\usetheme{UNLTheme}
-\setbeamercovered{dynamic}
-
 \usepackage{enumerate}
 \usepackage{hyperref}
 \usepackage{asymptote}
+\usetheme{UNLTheme}
+\setbeamercovered{dynamic}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
 
-% For code
-\usepackage{listings}
-\lstset{basicstyle=\ttfamily,
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny,
-	keywordstyle=\bfseries,
-	title=\lstname,
-	showstringspaces=false,
-	frame=single}
-
-
-% Small commands
-\newcommand{\myqed}{\textsc{Q.e.d.}}
-\newcommand{\cbrt}[1]{\sqrt[3]{#1}}
-\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand{\ceiling}[1]{\left\lceil #1 \right\rceil}
-\newcommand{\mailto}[1]{\href{mailto:#1}{#1}}
-\renewcommand{\iff}{\Leftrightarrow}
-\renewcommand{\implies}{\Rightarrow}
-\newcommand{\hrulebar}{
-  \par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
-  \par\nointerlineskip \vspace{\baselineskip}
-}
-\def\half{\frac{1}{2}}
-
-%More commands and math operators
-\DeclareMathOperator{\cis}{cis}
-\DeclareMathOperator{\lcm}{lcm}
-
-%Convenient Environments
-\newenvironment{soln}{\begin{proof}[Solution]}{\end{proof}}
-\newenvironment{parlist}{\begin{inparaenum}[(i)]}{\end{inparaenum}}
-\newenvironment{gobble}{\setbox\z@\vbox\bgroup}{\egroup}
-
-%Inequalities
-\newcommand{\cycsum}{\sum_{\text{cyc}}}
-\newcommand{\symsum}{\sum_{\text{sym}}}
-\newcommand{\cycprod}{\prod_{\text{cyc}}}
-\newcommand{\symprod}{\prod_{\text{sym}}}
-
-%From H113 "Introduction to Abstract Algebra" at UC Berkeley
-\def\CC{\mathbb C}
-\def\FF{\mathbb F}
-\def\NN{\mathbb N}
-\def\QQ{\mathbb Q}
-\def\RR{\mathbb R}
-\def\ZZ{\mathbb Z}
-\newcommand{\normal}{\trianglelefteq}
-\newcommand{\charin}{\text{ char }}
-\DeclareMathOperator{\sign}{sign}
-\DeclareMathOperator{\Aut}{Aut}
-\DeclareMathOperator{\Inn}{Inn}
-\DeclareMathOperator{\Syl}{Syl}
-
-%From Kiran Kedlaya's "Geometry Unbound"
-\def\abs#1{\lvert #1 \rvert}
-\def\norm#1{\lVert #1 \rVert}
-\def\dang{\measuredangle} %% Directed angle
-\def\line#1{\overleftrightarrow{#1}}
-\def\ray#1{\overrightarrow{#1}} 
-\def\seg#1{\overline{#1}}
-\def\arc#1{\wideparen{#1}}
-
-%From M275 "Topology" at SJSU
-\newcommand{\id}{\text{id}}
-\newcommand{\taking}[1]{\stackrel{#1}{\longrightarrow}}
-\newcommand{\inv}{^{-1}}
-
-%From M170 "Introduction to Graph Theory" at SJSU
-\DeclareMathOperator{\diam}{diam}
-\DeclareMathOperator{\ord}{ord}
-\newcommand{\defeq}{\stackrel{\text{def}}{=}}
-
-%From the USAMO .tex filse
-\def\st{^{\text{st}}}
-\def\nd{^{\text{nd}}}
-\def\rd{^{\text{rd}}}
-\def\th{^{\text{th}}}
-\def\dg{^\circ}
-\def\be{\begin{enumerate}}
-\def\bee{\begin{enumerate} \ii}
-\def\ee{\end{enumerate}}
-\def\bi{\begin{itemize}}
-\def\bii{\begin{itemize} \ii}
-\def\ei{\end{itemize}}
 \def\ii{\item}
+\def\ul#1{\underline{#1}}
 
-%Asy commands
 \begin{asydef}
 	import olympiad;
 	import cse5;
@@ -115,328 +22,213 @@
 	pathfontpen = black;
 	anglepen = black;
 	anglefontpen = black;
+
+	pen s = blue, t = red;
+	pen dot_s = blue, dot_t = red;
 \end{asydef}
 
-% }}}
-% RSI Specific macros
-\theoremstyle{definition}
-\newtheorem{op}{Operation}
-\newcommand{\dobarbell}[2]{
-	\vcenter{\hbox{%
-		\includegraphics[scale=#1]{barbell/#2.pdf}
-	}}
-}
-\newcommand{\barbell}[1]{
-	\mathchoice%
-	{\dobarbell{1.6}{#1}}
-	{\dobarbell{1.2}{#1}}
-	{\dobarbell{0.9}{#1}}
-	{\dobarbell{0.9}{#1}}
-}
-
-\def\DD{\mathcal D}
-\def\ul#1{\underline{#1}}
 \begin{document}
+\title[Bott-Samelson Bimodules]{Diagrammatic Computation of Morphisms Between Bott-Samelson Bimodules via Libedinsky's Light Leaves}
+\subtitle[RSI 2013]{Research Science Institute 2013}
+\author[Evan Chen]{Evan Chen \\ Under the Direction of Francisco Unda, MIT \\ Project Provided by Ben Elias, MIT\vspace{-2em}}
+\date{\today}
 
 \begin{frame}
 	\maketitle
 \end{frame}
 
-
 \begin{frame}[fragile]
-	\frametitle{Description of the Diagrams}
-	This project involves computations of certain maps which can be represented with diagrams.
+	\frametitle{Background}
+	
+	% Define block styles
+	\tikzstyle{block} = [rectangle, draw, fill=blue!20, text width=5em, text centered, rounded corners, minimum height=4em]
+	\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm, text width=6em, text centered, minimum height=2em]
+	\tikzstyle{line} = [draw, -latex']
+    
+	\begin{tikzpicture}[node distance = 4.5cm, auto]
+		% Place nodes
+		\node [cloud] (Hecke) at (0,6) {Hecke algebra};
+		\node [block] (Soergel) at (0,3) {Soergel bimodules};
+		\node [block] (KL) at (5,3) {Kazhdan-Lusztig};
+		\node [block] (BS) at (0,0) {Bott-Samelson bimodule};
+		\node [cloud] (leaf) at (5,0) {Libedinsky's light leaves};
+		% Draw edges
+		\path [line] (Hecke) -- node [near end] {categorified by} (Soergel);
+		\path [line] (Hecke) -- node [near start] {categorified by} (KL);
+		\path [line] (Soergel) -- node {described by} (BS);
+		\path [line] (leaf) -- node [text width=5em] {constructs morphisms} (BS);
+	\end{tikzpicture}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Description of the Diagrams}
-	Diagrams are \alert{planar graphs} such that:
-	\begin{enumerate}
-		\ii Vertices may lie on top/bottom boundaries but not on sides.
-		\ii Each vertex has degree $1$ or $3$.
-		\ii Connected components colored either $s$ (blue) or $t$ (red).
-		\ii Graphs may be deformed continuously.
-	\end{enumerate}
-	% At each end, the vertices give a sequence of $s$ (blue) and $t$ (red).
-	% The vertices on the boundary are by convention not explicitly shown, but are nonetheless labelled $s$ or $t$ for blue or red, respectively.
+	\frametitle{Diagrammatics}
+	The maps (morphisms) between Bott-Samelson bimodules can be represented by \alert{diagrams}.
 	\begin{figure}[ht]
 		\centering
 		\begin{asy}
-		size(2.718cm);
+		size(4cm);
 		real xmax=7;
 		real ymax=5;
 		draw( (xmax,ymax)--(xmax,-ymax)--(-xmax,-ymax)--(-xmax,ymax)--cycle );
 		pair apex = (0,2);
 		path arc = (5,-5)..(2,0)..apex..(-2,0)..(-5,-5);
-		draw(arc, blue);
-		dot(apex, blue);
-		draw(apex--(0,ymax), blue);
-		draw(-apex--(0,-ymax), red);
-		dot(-apex, red);
+		draw(arc, s);
+		dot(apex, dot_s);
+		draw(apex--(0,ymax), s);
+		draw(-apex--(0,-ymax), t);
+		dot(-apex, dot_t);
 		label("$s$", (0,ymax), dir(90));
 		label("$t$", (0,-ymax), dir(270));
 		label("$s$", (-5,-ymax), dir(270));
 		label("$s$", (5,-ymax), dir(270));
 		\end{asy}
-		\caption{An example of a diagram.}
-	\end{figure}
-\end{frame}
-
-%\begin{frame}
-%	\frametitle{Permitted Operations on the Graphs}
-%	\begin{enumerate}
-%		\addtocounter{enumi}{-1}
-%		\ii (Isotropy) Diagrams can be continuously deformed.
-%		\ii (Associativity) $\barbell{assoc_horiz} = \barbell{assoc_vert}$.
-%		\ii (Contraction) $\barbell{contract_left} = \barbell{contract_right} = \barbell{alpha_blue}$.
-%		\ii (The Needle) $\barbell{needle} = \barbell{zero} = 0$.
-%		\ii (Barbell-Forcing)
-%		\begin{enumerate}[(a)]
-%			\ii $\barbell{barbell_blue}\barbell{alpha_blue} + \barbell{alpha_blue} \barbell{barbell_blue} = 2 \barbell{break_blue}$, and the similar equation for red.
-%			\ii $\barbell{alpha_red}\barbell{barbell_blue} = -x\barbell{break_red} + \barbell{barbell_blue}\barbell{alpha_red} + x \barbell{barbell_red}\barbell{alpha_blue}$.
-%			\ii $\barbell{alpha_blue}\barbell{barbell_red} = -y\barbell{break_blue} + \barbell{barbell_red}\barbell{alpha_blue} + y \barbell{barbell_blue}\barbell{alpha_red}$.
-%		\end{enumerate}
-%	\end{enumerate}
-%\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Light Leaves}
-	\begin{itemize}
-		\ii Fix an expression $\ul r$ of $s$'s and $t$'s with length $n$.
-		\ii Take any binary string $\ul b$ of length $n$.
-		\ii Each choice of $\ul b$ will correspond to a diagram, based on a certain set of rules.
-	\end{itemize}
-	\begin{figure}[ht]
-		\centering
-		\begin{asy}
-		size(10cm);
-		real h = 0.7;
-		pen s = blue, t = red;
-		int n = 14;
-		draw(currentpicture, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
-		draw(currentpicture, (2,0)--(2,h/2)..((2+3)/2.0,h*1)..(3,h/2)--(3,0), s);
-		draw(currentpicture, (5,0)--(5,h/2)..((5+6)/2.0,h*1)..(6,h/2)--(6,0), s);
-		draw(currentpicture, (4,0)--(4,h/2)..((4+8)/2.0,h*4)..(8,h/2)--(8,0), t);
-		draw(currentpicture, (8,0)--(8,h/2)..((8+9)/2.0,h*1)..(9,h/2)--(9,0), t);
-		draw(currentpicture, (11,0)--(11,h/2)..((11+13)/2.0,h*2)..(13,h/2)--(13,0), t);
-		draw(currentpicture, (1,0)--(1,h), t);dot(currentpicture, (1,h), t);
-		draw(currentpicture, (7,0)--(7,h), s);dot(currentpicture, (7,h), s);
-		draw(currentpicture, (12,0)--(12,h), s);dot(currentpicture, (12,h), s);
-		draw(currentpicture,(9,0)--(9,5*h), t);
-		draw(currentpicture,(10,0)--(10,5*h), s);
-		dot(currentpicture, (2, h/2), s);
-		dot(currentpicture, (8, h/2), t);
-		dot(currentpicture, (9, h/2), t);
-		label(currentpicture, "1", (0,-1.5h), dir(90));
-		label(currentpicture, "s", (0,-0.8*h), dir(90));
-		label(currentpicture, "0", (1,-1.5h), dir(90));
-		label(currentpicture, "t", (1,-0.8*h), dir(90));
-		label(currentpicture, "0", (2,-1.5h), dir(90));
-		label(currentpicture, "s", (2,-0.8*h), dir(90));
-		label(currentpicture, "1", (3,-1.5h), dir(90));
-		label(currentpicture, "s", (3,-0.8*h), dir(90));
-		label(currentpicture, "1", (4,-1.5h), dir(90));
-		label(currentpicture, "t", (4,-0.8*h), dir(90));
-		label(currentpicture, "1", (5,-1.5h), dir(90));
-		label(currentpicture, "s", (5,-0.8*h), dir(90));
-		label(currentpicture, "1", (6,-1.5h), dir(90));
-		label(currentpicture, "s", (6,-0.8*h), dir(90));
-		label(currentpicture, "0", (7,-1.5h), dir(90));
-		label(currentpicture, "s", (7,-0.8*h), dir(90));
-		label(currentpicture, "0", (8,-1.5h), dir(90));
-		label(currentpicture, "t", (8,-0.8*h), dir(90));
-		label(currentpicture, "0", (9,-1.5h), dir(90));
-		label(currentpicture, "t", (9,-0.8*h), dir(90));
-		label(currentpicture, "1", (10,-1.5h), dir(90));
-		label(currentpicture, "s", (10,-0.8*h), dir(90));
-		label(currentpicture, "1", (11,-1.5h), dir(90));
-		label(currentpicture, "t", (11,-0.8*h), dir(90));
-		label(currentpicture, "0", (12,-1.5h), dir(90));
-		label(currentpicture, "s", (12,-0.8*h), dir(90));
-		label(currentpicture, "1", (13,-1.5h), dir(90));
-		label(currentpicture, "t", (13,-0.8*h), dir(90));
-		\end{asy}
-		\caption{An example of light leaves}
-	\end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
-	\frametitle{Problem Statement}
-	Two maps can be composed by placing one on top of the other.  Then, operations may be applied to simplify the diagram.
-
-	The goal of the project is to \alert{compute the product} (or otherwise deduce information about it) using \alert{only the binary strings}.
-	\begin{figure}[ht]
-		\centering
-		\begin{asy}
-		size(4cm);
-		real h = 0.7;
-		pen s = blue, t = red;
-		int n = 7;
-
-		picture one;
-		draw(one, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
-		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), t);
-		draw(one, (1,0)--(1,h), t);
-		dot(one, (1,h), t);
-		draw(one, (2,0)--(2,h), t);
-		dot(one, (2,h), t);
-		draw(one, (5,0)--(5,h), s);
-		dot(one, (5,h), s);
-		draw(one,(6,0)--(6,4*h), t);
-		dot(one, (6, h/2), t);
-
-		picture two;
-		draw(two, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
-		draw(two, (1,0)--(1,h), t);
-		dot(two, (1,h), t);
-		draw(two, (2,0)--(2,h), t);
-		dot(two, (2,h), t);
-		draw(two, (4,0)--(4,h), t);
-		dot(two, (4,h), t);
-		draw(two, (5,0)--(5,h), s);
-		dot(two, (5,h), s);
-		draw(two,(6,0)--(6,4*h), t);
-
-		add(one); add(reflect((0,0),(1,0))*two);
-		draw((-1,0)--(7,0));
-		\end{asy}
-		\caption{An example of composing two maps.}
+		\caption{An example of a possible diagram.}
+		\label{fig:example_diagram}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Special Case}
+	\frametitle{Libedinsky's Light Leaves}
+	\begin{itemize}
+		\ii Expression $\ul r$ with letters $s$ and $t$.
+		\ii Binary string $\ul b$.
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\only<1>{\includegraphics{anime/onecolor_example-1.pdf}}%
+		\only<2>{\includegraphics{anime/onecolor_example-2.pdf}}%
+		\only<3>{\includegraphics{anime/onecolor_example-3.pdf}}%
+		\only<4>{\includegraphics{anime/onecolor_example-4.pdf}}%
+		\only<5>{\includegraphics{anime/onecolor_example-5.pdf}}%
+		\only<6>{\includegraphics{anime/onecolor_example-6.pdf}}%
+		\only<7>{\includegraphics{anime/onecolor_example-7.pdf}}%
+		\only<8>{\includegraphics{anime/twocolor_example-1.pdf}}%
+		\only<9>{\includegraphics{anime/twocolor_example-2.pdf}}%
+		\only<10>{\includegraphics{anime/twocolor_example-3.pdf}}%
+		\only<11>{\includegraphics{anime/twocolor_example-4.pdf}}%
+		\only<12>{\includegraphics{anime/twocolor_example-5.pdf}}%
+		\only<13>{\includegraphics{anime/twocolor_example-6.pdf}}%
+		\only<14>{\includegraphics{anime/twocolor_example-7.pdf}}%
+		\only<15>{\includegraphics{anime/twocolor_example-8.pdf}}%
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Composition and Problem Statement}
+	\begin{figure}[ht]
+		\centering
+		\only<1>{\includegraphics{anime/compose_example-1.pdf}}%
+		\only<2>{\includegraphics{anime/compose_example-2.pdf}}%
+		\only<3-4>{\includegraphics{anime/compose_example-3.pdf}}%
+	\end{figure}
+	\visible<4>{\alert{Goal}: compute new map based on the binary strings $\ul b_1$, $\ul b_2$, and string $\ul r$.}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Results}
 	\begin{enumerate}
-		\ii $\ul r = \underbrace{s\dots s}_{\text{$n$ $s$'s}}$.
-		\pause \par This case turns out to be trivial.
-		\pause
+		\ii $\ul r = \underbrace{s\dots s}_{\text{$n$ $s$'s}}$. \pause $\checkmark$ \pause
 		\ii $\ul r = \underbrace{stst\dots}_{\text{$n$ characters}}$.
-		\par This case has some interesting properties but is not as trivial.
 	\end{enumerate}
 \end{frame}
 
 
 \begin{frame}[fragile]
-	\frametitle{Barbells, Fences and Pastures}
-	\begin{definition}
-		\begin{itemize}
-			\ii A \emph{barbell} is a tree not touching the boundaries.
-			\ii A \emph{fence} is a contiguous path which from top to bottom.
-			\ii The diagram is divided by these fences into \emph{pastures}.
-		\end{itemize}
-	\end{definition}
+	\frametitle{Definitions}
+%	\begin{definition}
+%		\begin{itemize}
+%			\ii \emph{Barbell}: acyclic component.
+%			\ii \emph{Bubble}: bounded face.
+%			\ii \emph{Caterpillar}: connected collection of bubbles.
+%			\ii \emph{Fence}: dividing line.
+%			\ii \emph{Pasture}: regions delimited by fences.
+%		\end{itemize}
+%	\end{definition}
+
 	\begin{figure}[ht]
 		\centering
 		\begin{asy}
-			size(3cm);
+			size(10cm);
 			real h = 0.7;
-			pen s = blue, t = red + dashed + 0.6;
-			pen dot_s = blue, dot_t = red;
-			int n = 10;
+			int n = 16;
 
 			picture one;
-			draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
-			draw(one, (3,0)--(3,h/2)..((3+7)/2.0,h*4)..(7,h/2)--(7,0), t);
-			draw(one, (2,0)--(2,h/2)..((2+8)/2.0,h*6)..(8,h/2)--(8,0), s);
-			draw(one, (1,0)--(1,h/2)..((1+9)/2.0,h*8)..(9,h/2)--(9,0), t);
+			draw(one, (0,0)--(0,h/2)..((0+2)/2.0,h*2)..(2,h/2)--(2,0), s);
+			draw(one, (3,0)--(3,h/2)..((3+6)/2.0,h*3)..(6,h/2)--(6,0), s);
+			draw(one, (9,0)--(9,h/2)..((9+11)/2.0,h*2)..(11,h/2)--(11,0), t);
+			draw(one, (11,0)--(11,h/2)..((11+13)/2.0,h*2)..(13,h/2)--(13,0), t);
+			draw(one, (13,0)--(13,h/2)..((13+15)/2.0,h*2)..(15,h/2)--(15,0), t);
+			draw(one, (1,0)--(1,h), t);
+			dot(one, (1,h), dot_t);
+			draw(one, (4,0)--(4,h), t);
+			dot(one, (4,h), dot_t);
 			draw(one, (5,0)--(5,h), t);
 			dot(one, (5,h), dot_t);
-			draw(one,(0,0)--(0,9*h), s);
+			draw(one, (10,0)--(10,h), s);
+			dot(one, (10,h), dot_s);
+			draw(one, (12,0)--(12,h), s);
+			dot(one, (12,h), dot_s);
+			draw(one, (14,0)--(14,h), s);
+			dot(one, (14,h), dot_s);
+			draw(one,(7,0)--(7,4*h), t);
+			draw(one,(8,0)--(8,4*h), s);
+			dot(one, (11, h/2), dot_t);
+			dot(one, (13, h/2), dot_t);
 
 			picture two;
-			draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
-			draw(two, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
-			draw(two, (0,0)--(0,h/2)..((0+6)/2.0,h*6)..(6,h/2)--(6,0), s);
-			draw(two, (3,0)--(3,h), t);
-			dot(two, (3,h), dot_t);
-			draw(two, (7,0)--(7,h), t);
-			dot(two, (7,h), dot_t);
-			draw(two, (9,0)--(9,h), t);
-			dot(two, (9,h), dot_t);
-			draw(two,(8,0)--(8,7*h), s);
+			draw(two, (3,0)--(3,h/2)..((3+6)/2.0,h*3)..(6,h/2)--(6,0), s);
+			draw(two, (9,0)--(9,h/2)..((9+11)/2.0,h*2)..(11,h/2)--(11,0), t);
+			draw(two, (11,0)--(11,h/2)..((11+13)/2.0,h*2)..(13,h/2)--(13,0), t);
+			draw(two, (13,0)--(13,h/2)..((13+15)/2.0,h*2)..(15,h/2)--(15,0), t);
+			draw(two, (0,0)--(0,h), s);
+			dot(two, (0,h), dot_s);
+			draw(two, (1,0)--(1,h), t);
+			dot(two, (1,h), dot_t);
+			draw(two, (2,0)--(2,h), s);
+			dot(two, (2,h), dot_s);
+			draw(two, (4,0)--(4,h), t);
+			dot(two, (4,h), dot_t);
+			draw(two, (5,0)--(5,h), t);
+			dot(two, (5,h), dot_t);
+			draw(two, (10,0)--(10,h), s);
+			dot(two, (10,h), dot_s);
+			draw(two, (12,0)--(12,h), s);
+			dot(two, (12,h), dot_s);
+			draw(two, (14,0)--(14,h), s);
+			dot(two, (14,h), dot_s);
+			draw(two,(7,0)--(7,4*h), t);
+			draw(two,(8,0)--(8,4*h), s);
+			dot(two, (11, h/2), dot_t);
+			dot(two, (13, h/2), dot_t);
 
 			add(one); add(reflect((0,0),(1,0))*two);
-			draw((-1,0)--(10,0));
+			draw((-1,0)--(16,0));
+
+			label("Pastures", (7.5,6*h));
+			draw((7,5.5*h)--(4,4*h), EndArrow);
+			draw((7.5,5.5*h)--(7.5,4*h), EndArrow);
+			draw((8,5.5*h)--(11,4*h), EndArrow);
+			label("Bubble", (4.5,-3*h), dir(-90));
+			label("Fences", (7.5,-4*h), dir(-90));
+			label("Barbells", (1, 4*h));
+			draw((1,3.5*h)--(1,2.5*h), EndArrow);
+			label("Caterpillar", (12,-2*h), dir(-90));
 		\end{asy}
-		\caption{Two blue barbells with a very twisted fence, which creates two pastures.}
 	\end{figure}
 \end{frame}
 
 \begin{frame}[fragile]
-	\frametitle{Bubbles and Caterpillars}
-	\begin{definition}
-		\begin{itemize}
-			\ii A \emph{bubble} is a bounded face in a diagram.
-			\ii A \emph{caterpillar} is a connected set of bubbles.
-		\end{itemize}
-	\end{definition}
-
-\begin{figure}[ht]
-	\centering
-	\begin{asy}
-		size(8cm);
-		real h = 0.7;
-		pen s = blue, t = red + dashed + 0.6;
-		pen dot_s = blue, dot_t = red;
-		int n = 11;
-
-		picture one;
-		draw(one, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
-		draw(one, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
-		draw(one, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
-		draw(one, (8,0)--(8,h/2)..((8+10)/2.0,h*2)..(10,h/2)--(10,0), s);
-		draw(one, (1,0)--(1,h), t);
-		dot(one, (1,h), dot_t);
-		draw(one, (2,0)--(2,h), t);
-		dot(one, (2,h), dot_t);
-		draw(one, (5,0)--(5,h), t);
-		dot(one, (5,h), dot_t);
-		draw(one, (7,0)--(7,h), t);
-		dot(one, (7,h), dot_t);
-		draw(one, (9,0)--(9,h), t);
-		dot(one, (9,h), dot_t);
-		dot(one, (6, h/2), dot_s);
-		dot(one, (8, h/2), dot_s);
-
-		picture two;
-		draw(two, (0,0)--(0,h/2)..((0+3)/2.0,h*3)..(3,h/2)--(3,0), s);
-		draw(two, (4,0)--(4,h/2)..((4+6)/2.0,h*2)..(6,h/2)--(6,0), s);
-		draw(two, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
-		draw(two, (8,0)--(8,h/2)..((8+10)/2.0,h*2)..(10,h/2)--(10,0), s);
-		draw(two, (1,0)--(1,h), t);
-		dot(two, (1,h), dot_t);
-		draw(two, (2,0)--(2,h), t);
-		dot(two, (2,h), dot_t);
-		draw(two, (5,0)--(5,h), t);
-		dot(two, (5,h), dot_t);
-		draw(two, (7,0)--(7,h), t);
-		dot(two, (7,h), dot_t);
-		draw(two, (9,0)--(9,h), t);
-		dot(two, (9,h), dot_t);
-		dot(two, (6, h/2), dot_s);
-		dot(two, (8, h/2), dot_s);
-
-		add(one); add(reflect((0,0),(1,0))*two);
-		draw((-1,0)--(11,0));
-	\end{asy}
-	\caption{A blue bubble with two red barbells, and a caterpillar with three bubbles.}
-\end{figure}
-\end{frame}
-
-\begin{frame}[fragile]
 	\frametitle{Bubble Lemma}
-	Suppose $\ul r = stst\dots$.
-
 	\begin{lemma}[Bubble Lemma]
-		Every bubble contains either a single caterpillar or a single barbell.
+		If $\ul r = stst\dots$, then
+		every bubble contains either a single caterpillar or a single barbell.
 	\end{lemma}
 	\begin{figure}[ht]
 		\centering
 		\begin{asy}
 		size(3cm);
 		real h = 0.7;
-		pen s = blue, t = red + dashed + 0.6;
-		pen dot_s = blue, dot_t = red;
 		int n = 7;
 
 		picture one;
@@ -466,69 +258,74 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}[fragile]
-	\frametitle{Pasture Theorem}
-	\begin{theorem}[Pasture Theorem]
-		 If pastures are labelled $0, 1, \dots, N$ then:
-		\begin{itemize}
-			\ii Pastures $1$ through $N-1$ must contain caterpillars attached to fences.
-			\ii Pasture $N$ is either empty or contains a single caterpillar.
-		\end{itemize}
-	\end{theorem}
-	\begin{figure}[ht]
-		\centering
-		\begin{asy}
-			size(3cm);
-real h = 0.7;
-pen s = blue, t = red + dashed + 0.6;
-pen dot_s = blue, dot_t = red;
-int n = 9;
-
-picture one;
-draw(one, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
-draw(one, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
-draw(one, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
-draw(one, (3,0)--(3,h), t);
-dot(one, (3,h), dot_t);
-draw(one, (7,0)--(7,h), t);
-dot(one, (7,h), dot_t);
-draw(one,(0,0)--(0,5*h), s);
-draw(one,(5,0)--(5,5*h), t);
-dot(one, (5, h/2), dot_t);
-
-picture two;
-draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
-draw(two, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
-draw(two, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
-draw(two, (3,0)--(3,h), t);
-dot(two, (3,h), dot_t);
-draw(two, (7,0)--(7,h), t);
-dot(two, (7,h), dot_t);
-draw(two,(0,0)--(0,5*h), s);
-draw(two,(5,0)--(5,5*h), t);
-dot(two, (5, h/2), dot_t);
-
-add(one); add(reflect((0,0),(1,0))*two);
-draw((-1,0)--(9,0));
-		\end{asy}
-		\caption{An attached caterpillar and a single caterpillar (each are singletons.)}
-	\end{figure}
-\end{frame}
-
 \begin{frame}
-	\frametitle{Implications}
-	\[ \text{Bubble Lemma} + \text{Pasture Theorem} = \quad :{)} \]
+	\frametitle{Other Lemmas}
+	\begin{lemma}[Caterpillar Lemma]
+		Technical result about the possible values of a caterpillar.
+	\end{lemma}
+	\pause
+	\begin{lemma}[Pasture Lemma]
+		Caterpillars appear only in the leftmost and rightmost pastures.
+	\end{lemma}
+	\pause
+	\[ \text{Lemmata} \implies \text{Algebraic Results} \implies \text{:)} \]
 \end{frame}
+
+%\begin{frame}[fragile]
+%	\frametitle{Pasture Theorem}
+%	\begin{theorem}[Pasture Theorem]
+%		 If pastures are labelled $0, 1, \dots, N$ then:
+%		\begin{itemize}
+%			\ii Pastures $1$ through $N-1$ must contain caterpillars attached to fences.
+%			\ii Pasture $N$ is either empty or contains a single caterpillar.
+%		\end{itemize}
+%	\end{theorem}
+%	\begin{figure}[ht]
+%		\centering
+%		\begin{asy}
+%			size(3cm);
+%			real h = 0.7;
+%			int n = 9;
+%
+%			picture one;
+%			draw(one, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+%			draw(one, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+%			draw(one, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
+%			draw(one, (3,0)--(3,h), t);
+%			dot(one, (3,h), dot_t);
+%			draw(one, (7,0)--(7,h), t);
+%			dot(one, (7,h), dot_t);
+%			draw(one,(0,0)--(0,5*h), s);
+%			draw(one,(5,0)--(5,5*h), t);
+%			dot(one, (5, h/2), dot_t);
+%
+%			picture two;
+%			draw(two, (2,0)--(2,h/2)..((2+4)/2.0,h*2)..(4,h/2)--(4,0), s);
+%			draw(two, (1,0)--(1,h/2)..((1+5)/2.0,h*4)..(5,h/2)--(5,0), t);
+%			draw(two, (6,0)--(6,h/2)..((6+8)/2.0,h*2)..(8,h/2)--(8,0), s);
+%			draw(two, (3,0)--(3,h), t);
+%			dot(two, (3,h), dot_t);
+%			draw(two, (7,0)--(7,h), t);
+%			dot(two, (7,h), dot_t);
+%			draw(two,(0,0)--(0,5*h), s);
+%			draw(two,(5,0)--(5,5*h), t);
+%			dot(two, (5, h/2), dot_t);
+%
+%			add(one); add(reflect((0,0),(1,0))*two);
+%			draw((-1,0)--(9,0));
+%		\end{asy}
+%		\caption{An attached caterpillar and a single caterpillar (each are singletons.)}
+%	\end{figure}
+%\end{frame}
 
 \begin{frame}
 	\frametitle{Acknowledgements}
-	Thank you to the following individuals and organizations:
 	\begin{itemize}
-		\ii Mr. Francisco Unda for daily mentorship.
-		\ii Prof. Ben Elias for providing the project and meeting to discuss it.
-		\ii Dr. Tanya Khovanova and MIT Math for organizing Math RSI.
-		\ii CEE and MIT for hosting the RSI 2013.
-		\ii Antoni Rangachev for his advice both in this paper and presentation.
+		\ii \alert{Mr. Francisco Unda}, MIT and \alert{Dr. Ben Elias}, MIT
+		\ii \alert{Dr. Tanya Khovanova}, MIT
+		\ii \alert{Antoni Rangachev}, Northeastern University
+		\ii \alert{Sponsors}: Ms. Alexa Margalith, The Leonetti/O'Connell Family Foundation; Mr. Arvind Parthasarathi, YarcData; Mr. Samuel Chen and Ms. Kathy Chang; Dr. Robert E. Curry; Mr. and Mrs. William Hellman; Mr. Rondal Hohauser; Ms. Chienlan Hsu-Hoffman; Mr. and Mrs. George Keiter
+		\ii \alert{CEE} \alert{MIT}, and the \alert{MIT Math Department}, for hosting the \alert{RSI 2013}.
 	\end{itemize}
 \end{frame}
 
